@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { getProject } from "@/content/projects";
+import { pageCanonicalHead } from "@/lib/site-seo";
 import "@/components/reveal-gallery.css";
 
 export const Route = createFileRoute("/projects/$slug")({
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/projects/$slug")({
   head: ({ loaderData }) =>
     loaderData
       ? {
+          ...pageCanonicalHead(`/projects/${loaderData.project.id}`),
           meta: [
             { title: `${loaderData.project.name} | USSCALLISTER` },
             { name: "description", content: loaderData.project.note },

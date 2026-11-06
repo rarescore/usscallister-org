@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FolioBar } from "@/components/article";
 import { CoverflowCarousel } from "@/components/coverflow-carousel";
+import { pageCanonicalHead } from "@/lib/site-seo";
 
 export const Route = createFileRoute("/projects/")({
   head: () => ({
+    ...pageCanonicalHead("/projects"),
     meta: [
       { title: "Projects | USSCALLISTER" },
       {

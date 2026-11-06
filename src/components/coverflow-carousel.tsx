@@ -115,7 +115,7 @@ export function CoverflowCarousel({ showCaption = true }: { showCaption?: boolea
     <section className="coverflow" id="index" ref={rootRef} aria-label="Recent projects of 2026">
       <header className="stage-head">
         <p>Selected work</p>
-        <h2>Recent projects of 2026</h2>
+        <h1>Recent projects of 2026</h1>
       </header>
 
       <div className="stage-rail" aria-live="polite">
