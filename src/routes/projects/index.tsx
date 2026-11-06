@@ -1,0 +1,39 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { FolioBar } from "@/components/article";
+import { CoverflowCarousel } from "@/components/coverflow-carousel";
+
+export const Route = createFileRoute("/projects/")({
+  head: () => ({
+    meta: [
+      { title: "Projects | USSCALLISTER" },
+      {
+        name: "description",
+        content:
+          "Selected USSCALLISTER projects: websites for a clinic, roofing, cleaning, plumbing, and product studios in Los Angeles.",
+      },
+      {
+        name: "keywords",
+        content:
+          "USSCALLISTER projects, Los Angeles web design, Canby Community Clinic, Citium Roofing, Extreme Quality Clean, RareScore, My Plumbing Inc, Extreme Plumbing & Rooter",
+      },
+      { name: "robots", content: "index, follow" },
+      { property: "og:title", content: "Projects | USSCALLISTER" },
+      {
+        property: "og:description",
+        content: "Selected studio projects from USSCALLISTER in Los Angeles.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "USSCALLISTER" },
+    ],
+  }),
+  component: ProjectsIndex,
+});
+
+function ProjectsIndex() {
+  return (
+    <main className="folio">
+      <FolioBar here="Projects" />
+      <CoverflowCarousel showCaption />
+    </main>
+  );
+}
