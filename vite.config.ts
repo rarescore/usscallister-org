@@ -170,7 +170,11 @@ export default defineConfig(({ command, isPreview }) => ({
     ...(command === "build" || isPreview
       ? [
           nitro({
-            preset: "vercel",
+            // Netlify's UI publishes dist/client. Nitro's Netlify preset
+            // otherwise writes static files to dist/, so the deploy fails
+            // with "Deploy directory 'dist/client' does not exist".
+            preset: process.env.NETLIFY === "true" ? "netlify" : "vercel",
+            ...(process.env.NETLIFY === "true" ? { output: { publicDir: "./dist/client" } } : {}),
             // Auto-registers server/middleware/* (the PWA install page +
             // manifest + head-tag middleware). Nitro v3 defaults serverDir to
             // false, so removing this silently unwires /?install=1 on deploys.
