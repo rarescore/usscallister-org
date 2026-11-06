@@ -22,7 +22,7 @@
   text-transform: uppercase;
 }
 
-.coverflow .stage-head h2 {
+.coverflow .stage-head h1 {
   margin: 10px 0 0;
   font-size: clamp(40px, 5.6vw, 88px);
   font-weight: 500;
@@ -152,7 +152,7 @@
     gap: 18px;
   }
 
-  .coverflow .stage-head h2 {
+  .coverflow .stage-head h1 {
     font-size: 40px;
   }
 

@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FolioBar } from "@/components/article";
+import { pageCanonicalHead } from "@/lib/site-seo";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
+    ...pageCanonicalHead("/privacy"),
     meta: [
       { title: "Privacy policy | USSCALLISTER" },
       {

@@ -91,7 +91,7 @@ export function StudioPage() {
       </a>
       <aside className={away ? "panel is-away" : "panel"}>
         <div className="panel-top">
-          <p className="name">USSCALLISTER</p>
+          <h1 className="name">USSCALLISTER</h1>
         </div>
         <nav className="nav" aria-label="Studio">
           <a href="#home" onPointerEnter={playNav} onClick={() => go("home")}>

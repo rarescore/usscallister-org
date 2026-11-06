@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { FolioBar } from "@/components/article";
+import { pageCanonicalHead } from "@/lib/site-seo";
 import { sendStudioNote } from "@/lib/send-note";
 
 export const Route = createFileRoute("/newsletter")({
   head: () => ({
+    ...pageCanonicalHead("/newsletter"),
     meta: [
       { title: "Newsletter | USSCALLISTER" },
       {
