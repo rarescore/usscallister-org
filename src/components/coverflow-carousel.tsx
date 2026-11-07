@@ -122,21 +122,22 @@ export function CoverflowCarousel({ showCaption = true }: { showCaption?: boolea
         {PROJECTS.map((project, i) => {
           const delta = i - index;
           const distance = Math.abs(delta);
-          const hidden = distance > 2;
-          const scale = distance === 0 ? 1 : distance === 1 ? 0.5 : 0.36;
+          const hidden = distance > 1;
+          const scale = distance === 0 ? 1 : 0.42;
           return (
             <button
               key={project.id}
               type="button"
               className={delta === 0 ? "stage-card is-active" : "stage-card"}
               style={{
-                ["--tx" as string]: String(delta * 72),
+                ["--tx" as string]: String(delta * 58),
                 ["--sc" as string]: String(scale),
-                opacity: hidden ? 0 : distance === 0 ? 1 : 0.9,
+                opacity: hidden ? 0 : distance === 0 ? 1 : 0.35,
                 zIndex: 10 - distance,
                 visibility: hidden ? "hidden" : "visible",
                 transitionTimingFunction: EASE,
-              }}
+              }
+              }
               aria-current={delta === 0 ? "true" : undefined}
               aria-label={project.name}
               tabIndex={delta === 0 ? 0 : -1}
@@ -146,7 +147,8 @@ export function CoverflowCarousel({ showCaption = true }: { showCaption?: boolea
                   return;
                 }
                 setIndex(i);
-              }}
+              }
+              }
             >
               <img src={project.image} alt="" draggable={false} />
             </button>
@@ -160,13 +162,14 @@ export function CoverflowCarousel({ showCaption = true }: { showCaption?: boolea
             {String(index + 1).padStart(2, "0")}
             <span> / {String(PROJECTS.length).padStart(2, "0")}</span>
           </p>
-          <h3>{active.name}</h3>
-          <p className="stage-meta">
-            {active.cat}
-            <span>{active.host}</span>
-          </p>
+          <div className="stage-copy">
+            <h3>{active.name}</h3>
+            <p className="stage-meta">
+              {active.cat}
+              <span>{active.host}</span>
+            </p>
+          </div>
           <div className="stage-links">
-            <a href={`/projects/${active.id}`}>Case study</a>
             <a href={active.href} target="_blank" rel="noreferrer">
               Visit site
             </a>
