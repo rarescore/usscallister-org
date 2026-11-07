@@ -41,7 +41,7 @@
   top: 50% !important;
   left: 50% !important;
   display: block !important;
-  width: min(58vw, 820px);
+  width: min(64vw, 900px);
   margin: 0 !important;
   aspect-ratio: 16 / 10;
   padding: 0;
@@ -90,7 +90,7 @@
   color: rgba(244, 241, 234, 0.4);
 }
 
-.coverflow .stage-caption h3 {
+.stage-copy h3 {
   margin: 0;
   font-size: clamp(28px, 3vw, 44px);
   font-weight: 500;
@@ -99,7 +99,6 @@
 }
 
 .stage-meta {
-  grid-column: 2;
   display: flex;
   gap: 16px;
   margin: 8px 0 0;
@@ -111,8 +110,6 @@
 
 .coverflow .stage-links {
   position: static;
-  grid-column: 3;
-  grid-row: 1 / span 2;
   display: flex;
   gap: 10px;
   align-self: end;
@@ -162,7 +159,7 @@
     top: 50% !important;
     left: 50% !important;
     display: block !important;
-    width: min(78vw, 420px) !important;
+    width: min(82vw, 420px) !important;
     margin: 0 !important;
     transform: translate(-50%, -50%) translateX(calc(var(--tx) * 1%)) scale(var(--sc)) !important;
   }
