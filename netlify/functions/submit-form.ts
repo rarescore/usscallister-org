@@ -35,11 +35,11 @@ export default async (req: Request) => {
     const ok = response.ok && payload?.success === true;
 
     if (!ok) {
-      return new Response(JSON.stringify({ error: payload?.message || "Web3Forms failed" }), { status: 502 });
+      return new Response(JSON.stringify({ error: payload?.message || "Web3Forms failed", payload, status: response.status }), { status: 502 });
     }
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (err) {
-    return new Response(JSON.stringify({ error: "Failed to send" }), { status: 500 });
+    return new Response(JSON.stringify({ error: String(err) }), { status: 500 });
   }
 };
