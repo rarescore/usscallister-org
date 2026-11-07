@@ -17,32 +17,25 @@ export default async (req: Request) => {
         ? `Please add this address to the USSCALLISTER newsletter.\n\n${email}`
         : `${name || ""}\n${email}\n${phone || ""}\n\n${brief || ""}`;
 
-    // Try FormSubmit first (server-side, longer timeout)
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 12000);
-
-    const response = await fetch("https://formsubmit.co/ajax/usscallisterllc@gmail.com", {
+    const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      signal: controller.signal,
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
+        access_key: "d557e72f-ae6b-4b5e-8c6d-cba65ec3b60f",
         name: name || "Newsletter",
         email,
         phone: phone || "",
         message,
-        _subject: subject,
-        _template: "table",
-        _captcha: "false",
-        _replyto: email,
+        subject,
+        from_name: "USSCALLISTER Website",
       }),
     });
 
-    clearTimeout(timeout);
     const payload = await response.json().catch(() => null);
-    const ok = response.ok && (payload?.success === true || payload?.success === "true");
+    const ok = response.ok && payload?.success === true;
 
     if (!ok) {
-      return new Response(JSON.stringify({ error: payload?.message || "FormSubmit failed" }), { status: 502 });
+      return new Response(JSON.stringify({ error: payload?.message || "Web3Forms failed" }), { status: 502 });
     }
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
