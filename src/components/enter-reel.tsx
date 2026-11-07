@@ -21,11 +21,10 @@ export function EnterReel({ formNote, onSubmit }: EnterReelProps) {
       >
         <source src="/media/close.mp4" type="video/mp4" />
       </video>
-      <div className="close-shade" />
-      <div className="close-grid">
+      <div className="close-shade close-shade-heavy" />
+      <div className="close-grid close-grid-stacked">
         <div className="close-copy">
           <p>Contact</p>
-          <h2>Our website connects you with the universe.</h2>
           <p className="close-lead">
             It starts with a simple message. Tell us what you want to build, and we will take it from there.
           </p>
@@ -37,8 +36,6 @@ export function EnterReel({ formNote, onSubmit }: EnterReelProps) {
             </p>
           ) : (
             <>
-              <h2>Get in touch with us</h2>
-              <p className="close-form-note">Name, a way to reach you, and what you want made.</p>
               <input className="trap" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" />
               <div className="close-row">
                 <label>
