@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Netlify Forms</title>
+</head>
+<body>
+  <!-- Static forms so Netlify detects them at build time. Never shown to users. -->
+  <form name="contact" netlify netlify-honeypot="company" hidden>
+    <input type="text" name="name">
+    <input type="email" name="email">
+    <input type="tel" name="phone">
+    <textarea name="brief"></textarea>
+    <input type="text" name="company">
+  </form>
+
+  <form name="newsletter" netlify netlify-honeypot="company" hidden>
+    <input type="email" name="email">
+    <input type="text" name="company">
+  </form>
+</body>
+</html>
