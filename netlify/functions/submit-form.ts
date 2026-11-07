@@ -1,3 +1,4 @@
+// v2 - debug
 export default async (req: Request) => {
   if (req.method !== "POST") {
     return new Response("Method not allowed", { status: 405 });
@@ -31,11 +32,19 @@ export default async (req: Request) => {
       }),
     });
 
-    const payload = await response.json().catch(() => null);
+    const raw = await response.text();
+    let payload: any = null;
+    try { payload = JSON.parse(raw); } catch {}
+
     const ok = response.ok && payload?.success === true;
 
     if (!ok) {
-      return new Response(JSON.stringify({ error: payload?.message || "Web3Forms failed", payload, status: response.status }), { status: 502 });
+      return new Response(JSON.stringify({
+        error: payload?.message || "Web3Forms failed",
+        status: response.status,
+        payload,
+        raw: raw.slice(0, 500)
+      }), { status: 502 });
     }
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
