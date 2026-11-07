@@ -143,7 +143,7 @@ export function CoverflowCarousel({ showCaption = true }: { showCaption?: boolea
               tabIndex={delta === 0 ? 0 : -1}
               onClick={() => {
                 if (delta === 0) {
-                  window.location.href = `/projects/${project.id}`;
+                  window.open(project.href, "_blank", "noreferrer");
                   return;
                 }
                 setIndex(i);
