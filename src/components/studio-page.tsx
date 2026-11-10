@@ -13,6 +13,8 @@ const PRINCIPLES = [
   "We build for the person who almost left.",
 ];
 
+const HERO_MARK = "Los Angeles".split(" ");
+
 export function StudioPage() {
   const heroVideo = useRef<HTMLVideoElement>(null);
   const [clock, setClock] = useState("");
@@ -115,7 +117,7 @@ export function StudioPage() {
       <a className="skip" href="#index">
         Skip to projects
       </a>
-      <aside className={away ? "panel is-away" : "panel"}>
+      <aside className={away ? "panel is-away" : "panel"} style={{"-webkit-backdrop-filter": "blur(24px) saturate(1.4)", backdropFilter: "blur(24px) saturate(1.4)"} as CSSProperties}>
         <div className="panel-top">
           <h1 className="name">USSCALLISTER</h1>
         </div>
@@ -129,15 +131,15 @@ export function StudioPage() {
           <a href="#info" onPointerEnter={playNav} onClick={() => go("info")}>
             Info
           </a>
-          <Link to="/journal" onPointerEnter={playNav}>
+          <Link to="/journal" onPointerEnter={playNav}">
             Journal
           </Link>
-          <Link to="/contact" onPointerEnter={playNav}>
+          <Link to="/contact" onPointerEnter={playNav}">
             Contact
           </Link>
         </nav>
         <p className="meta">
-          <a href="mailto:usscallisterllc@gmail.com" onPointerEnter={playNav}>
+          <a href="mailto:usscallisterllc@gmail.com" onPointerEnter={playNav}">
             usscallisterllc@gmail.com
           </a>
         </p>
@@ -188,8 +190,19 @@ export function StudioPage() {
             </svg>
             Replay
           </button>
-          <span>Los Angeles</span>
-          <time suppressHydrationWarning>{clock}</time>
+          <span className="hero-mark-text">
+            {HERO_MARK.map((word, i) => (
+              <span key={word} className="split-word" style={{"--i": i} as CSSProperties}>
+                {word}
+              </span>
+            ))}
+          </span>
+          <time suppressHydrationWarning className="split-word" style={{"--i": HERO_MARK.length} as CSSProperties}>
+            {clock}
+          </time>
+        </div>
+        <div className="hero-bottom">
+          <p className="hero-tagline">Independent creative studio</p>
         </div>
       </section>
 
