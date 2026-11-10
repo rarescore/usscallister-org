@@ -404,7 +404,7 @@
   background: #fff;
   color: inherit;
   font: inherit;
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: 0;
   text-transform: none;
   padding: 12px 12px 11px;
@@ -641,7 +641,13 @@
   .close-row {
     grid-template-columns: 1fr;
   }
-  .close-grid { width: min(100% - 36px, 560px); padding: 96px 0 48px; gap: 28px; }
+  .close {
+    min-height: 0;
+    height: auto;
+    overflow: visible;
+    align-items: flex-start;
+  }
+  .close-grid { width: min(100% - 36px, 560px); padding: 72px 0 64px; gap: 28px; }
   .close-copy { padding-bottom: 0; }
   .close-copy h2 { max-width: none; font-size: 42px; }
   .site-foot-inner { width: min(100% - 36px, 640px); padding: 48px 0 28px; }
@@ -762,6 +768,7 @@
   max-width: 640px;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 72px;
 }
 
 .contact-sheet h1,
@@ -799,6 +806,7 @@
   box-shadow: none;
   outline: none;
   background: transparent;
+  font-size: 16px;
 }
 
 .contact-form textarea {

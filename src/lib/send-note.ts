@@ -10,14 +10,22 @@ type Note = {
 export async function sendStudioNote(input: Note) {
   if (input.trap) return;
 
-  const response = await fetch("/.netlify/functions/submit-form", {
+  const body = new URLSearchParams();
+  body.set("form-name", input.kind === "newsletter" ? "newsletter" : "contact");
+  body.set("email", input.email);
+  if (input.kind === "project") {
+    body.set("name", input.name ?? "");
+    body.set("phone", input.phone ?? "");
+    body.set("brief", input.brief ?? "");
+  }
+
+  const response = await fetch("/netlify-forms.html", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(input),
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: body.toString(),
   });
 
   if (!response.ok) {
-    const err = await response.json().catch(() => ({}));
-    throw new Error(err.error || "Could not send.");
+    throw new Error("Could not send.");
   }
 }
