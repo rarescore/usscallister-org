@@ -34,7 +34,8 @@ function ContactPage() {
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const data = new FormData(form);
     const name = String(data.get("name") || "").trim();
     const email = String(data.get("email") || "").trim();
     const phone = String(data.get("phone") || "").trim();
@@ -48,7 +49,7 @@ function ContactPage() {
     try {
       await sendStudioNote({ kind: "project", name, email, phone, brief, trap });
       setNote("Message has been sent.");
-      event.currentTarget.reset();
+      form.reset();
     } catch {
       setNote("Could not send. Write to usscallisterllc@gmail.com.");
     }
