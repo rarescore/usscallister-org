@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 const WORK = [
@@ -34,13 +33,6 @@ export const Route = createFileRoute("/landing")({
 });
 
 function LandingPage() {
-  const [done, setDone] = useState(false);
-
-  useEffect(() => {
-    const sent = new URLSearchParams(window.location.search).get("submitted");
-    if (sent === "1") setDone(true);
-  }, []);
-
   return (
     <main className="lp">
       <style>{css}</style>
@@ -58,16 +50,13 @@ function LandingPage() {
         <div className="lp-col">
           <h1>Your website's new. It's still not working.</h1>
           <p className="lp-sub">Most sites look finished and still lose the call.</p>
-          {done ? (
-            <p className="lp-confirm">We'll text you within one business day.</p>
-          ) : (
-            <form
-              className="lp-form"
-              name="landing-leads"
-              method="POST"
-              action="/landing?submitted=1"
-              netlify=""
-            >
+          <form
+            className="lp-form"
+            name="landing-leads"
+            method="POST"
+            action="/landing-thanks.html"
+            netlify=""
+          >
               <input type="hidden" name="form-name" value="landing-leads" />
               <label className="lp-sr" htmlFor="lp-name">
                 Name
@@ -103,7 +92,6 @@ function LandingPage() {
               />
               <button type="submit">Build my website</button>
             </form>
-          )}
           <div className="lp-work">
             {WORK.map((item) => (
               <a key={item.label} className="lp-card" href={item.href} target="_blank" rel="noreferrer">
