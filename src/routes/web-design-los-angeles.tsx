@@ -29,6 +29,31 @@ function LosAngelesPage() {
             <li>Responsive interfaces, purposeful motion, and usable inquiry paths.</li>
             <li>Search foundations: page topics, metadata, internal links, and crawlable content.</li>
           </ul>
+          <h2>Industries in Los Angeles</h2>
+          <ul>
+            <li>
+              <Link to="/web-design-medical-clinics">Web design for medical clinics</Link>, including the{" "}
+              <Link to="/projects/$id" params={{ id: "canby" }}>Canby Community Clinic</Link> case study.
+            </li>
+            <li>
+              <Link to="/web-design-roofing-contractors">Roofing website design</Link> for contractors such as{" "}
+              <Link to="/projects/$id" params={{ id: "citium" }}>Citium Roofing</Link> in Glendale and Los Angeles.
+            </li>
+            <li>
+              <Link to="/web-design-plumbing-contractors">Plumber website design</Link> in the San Fernando Valley, including{" "}
+              <Link to="/projects/$id" params={{ id: "plumbing" }}>My Plumbing Inc</Link> and{" "}
+              <Link to="/projects/$id" params={{ id: "rooter" }}>Extreme Plumbing & Rooter</Link>.
+            </li>
+            <li>
+              <Link to="/web-design-airbnb-cleaning">Airbnb cleaning websites</Link>, including{" "}
+              <Link to="/projects/$id" params={{ id: "clean" }}>Extreme Quality Clean</Link>.
+            </li>
+          </ul>
+          <h2>How a project starts</h2>
+          <p>
+            We start with the audience and the action the site has to earn: a call, a booking, or a brief. Research
+            comes before layout. The phone number on this site is 818-913-6158, and new work is taken from Los Angeles.
+          </p>
           <h2>Projects in the city</h2>
           <p>
             <a href="https://puravidacc.org">Canby Community Clinic</a> is a Reseda clinic site.{" "}

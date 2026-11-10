@@ -268,6 +268,14 @@ export function StudioPage() {
                 <a ref={infoButtonRef} className="call-us info-reveal" href="tel:8189136158">
                   Call us
                 </a>
+                <p className="info-services">
+                  Web design in Los Angeles for{" "}
+                  <Link to="/web-design-medical-clinics">medical clinics</Link>,{" "}
+                  <Link to="/web-design-roofing-contractors">roofing</Link>,{" "}
+                  <Link to="/web-design-plumbing-contractors">plumbing</Link>, and{" "}
+                  <Link to="/web-design-airbnb-cleaning">cleaning</Link> companies.{" "}
+                  <Link to="/projects">See the projects</Link> or <Link to="/contact">start a brief</Link>.
+                </p>
               </div>
               <SiteCheck />
             </div>

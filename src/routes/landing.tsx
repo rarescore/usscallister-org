@@ -95,7 +95,7 @@ function LandingPage() {
           <div className="lp-work">
             {WORK.map((item) => (
               <a key={item.label} className="lp-card" href={item.href} target="_blank" rel="noreferrer">
-                <img src={item.image} alt="" />
+                <img src={item.image} alt={`${item.label} website`} />
                 <span>{item.label}</span>
               </a>
             ))}

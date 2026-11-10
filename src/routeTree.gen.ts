@@ -27,6 +27,7 @@ import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as JournalIndexRouteImport } from './routes/journal/index'
 import { Route as JournalSlugRouteImport } from './routes/journal/$slug'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
+import { Route as ProjectsIdRouteImport } from './routes/projects/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -120,6 +121,11 @@ const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
   path: '/projects/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectsIdRoute = ProjectsIdRouteImport.update({
+  id: '/projects/$id',
+  path: '/projects/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -137,6 +143,7 @@ export interface FileRoutesByFullPath {
   '/web-design-roofing-contractors': typeof WebDesignRoofingContractorsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
+  '/projects/$id': typeof ProjectsIdRoute
   '/blog/': typeof BlogIndexRoute
   '/journal/': typeof JournalIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -157,6 +164,7 @@ export interface FileRoutesByTo {
   '/web-design-roofing-contractors': typeof WebDesignRoofingContractorsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
+  '/projects/$id': typeof ProjectsIdRoute
   '/blog': typeof BlogIndexRoute
   '/journal': typeof JournalIndexRoute
   '/projects': typeof ProjectsIndexRoute
@@ -178,6 +186,7 @@ export interface FileRoutesById {
   '/web-design-roofing-contractors': typeof WebDesignRoofingContractorsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
+  '/projects/$id': typeof ProjectsIdRoute
   '/blog/': typeof BlogIndexRoute
   '/journal/': typeof JournalIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -200,6 +209,7 @@ export interface FileRouteTypes {
     | '/web-design-roofing-contractors'
     | '/blog/$slug'
     | '/journal/$slug'
+    | '/projects/$id'
     | '/blog/'
     | '/journal/'
     | '/projects/'
@@ -220,6 +230,7 @@ export interface FileRouteTypes {
     | '/web-design-roofing-contractors'
     | '/blog/$slug'
     | '/journal/$slug'
+    | '/projects/$id'
     | '/blog'
     | '/journal'
     | '/projects'
@@ -240,6 +251,7 @@ export interface FileRouteTypes {
     | '/web-design-roofing-contractors'
     | '/blog/$slug'
     | '/journal/$slug'
+    | '/projects/$id'
     | '/blog/'
     | '/journal/'
     | '/projects/'
@@ -261,6 +273,7 @@ export interface RootRouteChildren {
   WebDesignRoofingContractorsRoute: typeof WebDesignRoofingContractorsRoute
   BlogSlugRoute: typeof BlogSlugRoute
   JournalSlugRoute: typeof JournalSlugRoute
+  ProjectsIdRoute: typeof ProjectsIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
   JournalIndexRoute: typeof JournalIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
@@ -394,6 +407,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projects/$id': {
+      id: '/projects/$id'
+      path: '/projects/$id'
+      fullPath: '/projects/$id'
+      preLoaderRoute: typeof ProjectsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -413,6 +433,7 @@ const rootRouteChildren: RootRouteChildren = {
   WebDesignRoofingContractorsRoute: WebDesignRoofingContractorsRoute,
   BlogSlugRoute: BlogSlugRoute,
   JournalSlugRoute: JournalSlugRoute,
+  ProjectsIdRoute: ProjectsIdRoute,
   BlogIndexRoute: BlogIndexRoute,
   JournalIndexRoute: JournalIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,

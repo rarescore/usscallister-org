@@ -4,9 +4,9 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "USSCALLISTER — Studio";
+const APP_NAME = "Los Angeles Web Design Studio | USSCALLISTER";
 const APP_DESCRIPTION =
-  "USSCALLISTER is an independent creative studio in Los Angeles for websites, branding, development, and film.";
+  "Web design in Los Angeles for clinics, roofing, plumbing, and cleaning companies. Conversion sites, branding, and film from USSCALLISTER.";
 
 function matchIsNotFound(match: { status?: string; error?: unknown; _notFound?: boolean }) {
   if (match.status === "notFound" || match._notFound === true) return true;

@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { FolioBar } from "@/components/article";
 import { CoverflowCarousel } from "@/components/coverflow-carousel";
+import { PROJECTS } from "@/content/projects";
 import { pageCanonicalHead } from "@/lib/site-seo";
 
 export const Route = createFileRoute("/projects/")({
@@ -36,6 +38,13 @@ function ProjectsIndex() {
     <main className="folio">
       <FolioBar here="Projects" />
       <CoverflowCarousel showCaption />
+      <nav className="project-index" aria-label="All projects">
+        {PROJECTS.map((project) => (
+          <Link key={project.id} to="/projects/$id" params={{ id: project.id }}>
+            {project.name}
+          </Link>
+        ))}
+      </nav>
     </main>
   );
 }
