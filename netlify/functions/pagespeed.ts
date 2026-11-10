@@ -70,7 +70,7 @@ export default async (req: Request) => {
   }
 
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 5_000);
+  const timer = setTimeout(() => controller.abort(), 50_000);
   try {
     const response = await fetch(endpoint, { signal: controller.signal });
     const payload = await response.json().catch(() => null);
