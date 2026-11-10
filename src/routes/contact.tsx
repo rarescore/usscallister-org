@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import { FolioBar } from "@/components/article";
 import { pageCanonicalHead } from "@/lib/site-seo";
 import { sendStudioNote } from "@/lib/send-note";
+import { useParallax } from "@/lib/parallax";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -29,6 +30,7 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [note, setNote] = useState("");
+  const card = useParallax<HTMLFormElement>(0.03);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -55,7 +57,7 @@ function ContactPage() {
   return (
     <main className="folio">
       <FolioBar here="Contact" />
-      <article className="folio-article">
+      <article className="folio-article contact-sheet">
         <p className="kicker-label">Contact</p>
         <h1>Start a project.</h1>
         <div className="folio-prose folio-prose-solo">
@@ -63,16 +65,24 @@ function ContactPage() {
             Tell us what you're building — a website, a brand, a film, or something that doesn't have a name yet.
             We read every message and reply within one business day.
           </p>
-          <form className="news-form contact-form" onSubmit={onSubmit}>
+          <form ref={card.ref} className="news-form contact-form" style={card.style} onSubmit={onSubmit}>
             <input className="trap" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-            <label htmlFor="contact-name">Name</label>
-            <input id="contact-name" name="name" type="text" required autoComplete="name" placeholder="Name" />
-            <label htmlFor="contact-email">Email</label>
-            <input id="contact-email" name="email" type="email" required autoComplete="email" placeholder="Email" />
-            <label htmlFor="contact-phone">Phone</label>
-            <input id="contact-phone" name="phone" type="tel" autoComplete="tel" placeholder="Phone (optional)" />
-            <label htmlFor="contact-brief">Project brief</label>
-            <textarea id="contact-brief" name="brief" rows={5} placeholder="What are you making?" />
+            <div className="contact-field">
+              <label htmlFor="contact-name">Name</label>
+              <input id="contact-name" name="name" type="text" required autoComplete="name" placeholder="Name" />
+            </div>
+            <div className="contact-field">
+              <label htmlFor="contact-email">Email</label>
+              <input id="contact-email" name="email" type="email" required autoComplete="email" placeholder="Email" />
+            </div>
+            <div className="contact-field">
+              <label htmlFor="contact-phone">Phone</label>
+              <input id="contact-phone" name="phone" type="tel" autoComplete="tel" placeholder="Phone (optional)" />
+            </div>
+            <div className="contact-field">
+              <label htmlFor="contact-brief">Project brief</label>
+              <textarea id="contact-brief" name="brief" rows={5} placeholder="What are you making?" />
+            </div>
             <button type="submit">Send</button>
           </form>
           <p className="form-note">{note}</p>

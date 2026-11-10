@@ -7,3 +7,6 @@ dist/
 .netlify/
 .vercel/
 .output/
+attachments/
+screenshots/
+artifacts/

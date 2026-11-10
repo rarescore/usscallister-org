@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type AnimationEvent, type KeyboardEvent, t
 import { journal as allJournal } from "@/content/journal";
 import type { JournalEntry } from "@/content/journal-types";
 import { imageSrcSet, readingMinutes } from "@/lib/journal-seo";
+import { useParallax } from "@/lib/parallax";
 
 type JournalRosterProps = {
   entries?: JournalEntry[];
@@ -36,6 +37,15 @@ function RollText({ text, on }: { text: string; on: boolean }) {
   );
 }
 
+function Thumb({ src }: { src: string }) {
+  const shot = useParallax<HTMLImageElement>(0.03);
+  return (
+    <span className="roster-thumb">
+      <img ref={shot.ref} style={shot.style} src={src} alt="" width={1200} height={800} />
+    </span>
+  );
+}
+
 function RowBody({
   entry,
   number,
@@ -58,6 +68,7 @@ function RowBody({
           {entry.category ?? "Journal"} · {minutes} min
         </span>
       </span>
+      <Thumb src={entry.image} />
     </>
   );
 }
@@ -70,6 +81,7 @@ export function JournalRoster({ entries = allJournal }: JournalRosterProps) {
   const [cover, setCover] = useState<string | null>(null);
   const [play, setPlay] = useState(false);
   const [reduce, setReduce] = useState(false);
+  const plate = useParallax<HTMLDivElement>(0.02);
   const token = useRef(0);
   const coverRef = useRef<string | null>(null);
   coverRef.current = cover;
@@ -203,6 +215,7 @@ export function JournalRoster({ entries = allJournal }: JournalRosterProps) {
           })}
         </ul>
         <aside className="roster-visual">
+          <div ref={plate.ref} className="roster-plate-drift" style={plate.style}>
           <Link
             className="roster-plate"
             to="/journal/$slug"
@@ -238,6 +251,7 @@ export function JournalRoster({ entries = allJournal }: JournalRosterProps) {
               );
             })}
           </Link>
+          </div>
           <p className="roster-dek">{current.description}</p>
           <Link className="roster-read" to="/journal/$slug" params={{ slug: current.slug }}>
             Read article

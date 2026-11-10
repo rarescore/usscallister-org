@@ -31,17 +31,13 @@ export const Route = createRootRoute({
           },
           { name: "theme-color", content: "#0a0a0a" },
           { name: "robots", content: "noindex, follow" },
-          { property: "og:title", content: "Page not found | USSCALLISTER" },
-          { property: "og:description", content: "This page is not on the USSCALLISTER site." },
-          { property: "og:type", content: "website" },
-          { property: "og:site_name", content: "USSCALLISTER" },
         ],
         links: [
           { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
           { rel: "stylesheet", href: appCss },
           {
             rel: "stylesheet",
-            href: "https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fragment+Mono&display=swap",
+            href: "https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:wght@500;600&family=Fragment+Mono&family=Inter:wght@400;500&display=swap",
           },
           { rel: "manifest", href: "/__grok/manifest.webmanifest" },
           { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
@@ -66,7 +62,7 @@ export const Route = createRootRoute({
         { rel: "stylesheet", href: appCss },
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fragment+Mono&display=swap",
+          href: "https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:wght@500;600&family=Fragment+Mono&family=Inter:wght@400;500&display=swap",
         },
         { rel: "manifest", href: "/__grok/manifest.webmanifest" },
         { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },

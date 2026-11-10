@@ -30,6 +30,49 @@ function hasGlobbedMigrations(root: string): boolean {
  * migrations — no schema to apply — skips it entirely rather than paying for a
  * PGLite instance it never queries.
  */
+function pageSpeedDevPlugin(): Plugin {
+  return {
+    name: "pagespeed-dev",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        const pathOnly = (req.url ?? "").split("?", 1)[0] ?? "";
+        if (pathOnly !== "/.netlify/functions/pagespeed") {
+          next();
+          return;
+        }
+        try {
+          const chunks: Buffer[] = [];
+          for await (const chunk of req) chunks.push(Buffer.from(chunk));
+          const request = new Request("http://127.0.0.1/.netlify/functions/pagespeed", {
+            method: req.method ?? "GET",
+            headers: { "content-type": req.headers["content-type"] ?? "application/json" },
+            body: req.method === "GET" || req.method === "HEAD" ? undefined : Buffer.concat(chunks),
+          });
+          const mod = (await server.ssrLoadModule("/netlify/functions/pagespeed.ts")) as {
+            default: (request: Request) => Promise<Response>;
+          };
+          const response = await mod.default(request);
+          res.statusCode = response.status;
+          response.headers.forEach((value, key) => res.setHeader(key, value));
+          res.end(Buffer.from(await response.arrayBuffer()));
+        } catch (err) {
+          res.statusCode = 500;
+          res.setHeader("content-type", "application/json");
+          res.end(JSON.stringify({
+            loadSpeed: null,
+            seoBasics: null,
+            mobileReadiness: null,
+            firstImpression: null,
+            overallScore: null,
+            error: err instanceof Error ? err.message : "PageSpeed failed.",
+          }));
+        }
+      });
+    },
+  };
+}
+
 function pgliteBootstrapPlugin(): Plugin {
   return {
     name: "app-builder:pglite-bootstrap",
@@ -159,6 +202,7 @@ export default defineConfig(({ command, isPreview }) => ({
   resolve: { tsconfigPaths: true },
   plugins: [
     pgliteBootstrapPlugin(),
+    pageSpeedDevPlugin(),
     // Before tanstackStart so /auth/popup never falls through to the SPA.
     authPopupPlugin(),
     // Dev-only /__app-env, read by scripts/check-auth-invariant.mjs.

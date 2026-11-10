@@ -1,4 +1,4 @@
-import type { JournalEntry } from "./";
+import type { JournalEntry } from "./journal-types";
 
 export const journal: JournalEntry[] = [
   {
@@ -8,7 +8,7 @@ export const journal: JournalEntry[] = [
     "description": "Compare what a $50,000 website proposal includes, what it excludes, ownership terms, ongoing costs, and when a smaller build makes more sense.",
     "date": "2026",
     "standfirst": "A $50,000 website is worth considering when the scope includes substantial strategy, original visual assets, complex interactions, integrations, and a maintainable content system. It is not a quality guarantee. Compare the work, ownership, and business problem behind the quote before comparing the price.",
-    "image": "/journal/hero-01-50000-website.webp",
+    "image": "/journal/covers/01-custom-website-cost.webp",
     "imageAlt": "Two people reviewing printed layouts and a project budget at a wooden table",
     "blocks": [
       { "type": "h2", "text": "What the Higher Budget Usually Buys" },
@@ -38,8 +38,8 @@ export const journal: JournalEntry[] = [
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
     "relatedSlugs": ["why-websites-look-expensive", "custom-vs-webflow-wordpress-templates", "los-angeles-web-design-guide"],
-    "imageWidth": 1600,
-    "imageHeight": 900,
+    "imageWidth": 1536,
+    "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
   },
   {
@@ -49,7 +49,7 @@ export const journal: JournalEntry[] = [
     "description": "Learn how typography, spacing, photography, layout, and responsive details make a website feel premium—and what to fix before adding animation.",
     "date": "2026",
     "standfirst": "A website feels premium when its typography, spacing, images, and interface details follow a consistent direction. The effect comes from decisions that hold together across the whole site. Before commissioning more animation, check whether those basic decisions survive on a phone and on an internal page.",
-    "image": "/journal/hero-02-expensive-vs-cheap.webp",
+    "image": "/journal/covers/02-practical-design-audit.webp",
     "imageAlt": "Designer arranging photographs and paper layouts on a sunlit studio wall",
     "blocks": [
       { "type": "h2", "text": "Rhythm and spacing" },
@@ -76,8 +76,8 @@ export const journal: JournalEntry[] = [
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
     "relatedSlugs": ["psychology-of-memorable-websites", "before-hiring-high-end-web-design-studio", "los-angeles-web-design-guide"],
-    "imageWidth": 1600,
-    "imageHeight": 900,
+    "imageWidth": 1536,
+    "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
   },
   {
@@ -87,7 +87,7 @@ export const journal: JournalEntry[] = [
     "description": "Make your website easier to recognize with a clear message, distinctive visual direction, useful interactions, and a practical visitor recall test.",
     "date": "2026",
     "standfirst": "A memorable website gives visitors something specific to recognize: a clear promise, an original visual idea, or an interaction that helps them understand the offer. Visual surprise can attract attention, but recognition is useful only when people also remember what the business does and how to return.",
-    "image": "/journal/hero-03-psychology-memory.webp",
+    "image": "/journal/covers/03-memorable-websites.webp",
     "imageAlt": "Two visitors watching a large blue projection with a warm circular light in a gallery",
     "blocks": [
       { "type": "h2", "text": "Distinctiveness without noise" },
@@ -106,8 +106,8 @@ export const journal: JournalEntry[] = [
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
     "relatedSlugs": ["why-websites-look-expensive", "before-hiring-high-end-web-design-studio", "los-angeles-web-design-guide"],
-    "imageWidth": 1600,
-    "imageHeight": 900,
+    "imageWidth": 1536,
+    "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
   },
   {
@@ -117,7 +117,7 @@ export const journal: JournalEntry[] = [
     "description": "How clinic websites convert searchers into booked appointments — patient intent, insurance clarity, mobile speed, and the Canby Community Clinic build.",
     "date": "2026-11-07",
     "standfirst": "Most clinic sites lose patients at the first screen. The ones that convert answer insurance questions, show real staff, and make booking the obvious next step on a phone.",
-    "image": "/journal/hero-04-medical-clinics.webp",
+    "image": "/journal/covers/04-medical-clinic-web-design.webp",
     "imageAlt": "Medical clinic reception area with warm lighting and a clear welcome desk",
     "blocks": [
       { "type": "h2", "text": "What patients actually search for" },
@@ -143,8 +143,8 @@ export const journal: JournalEntry[] = [
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
     "relatedSlugs": ["why-websites-look-expensive", "web-design-for-roofing-contractors-los-angeles", "los-angeles-web-design-guide"],
-    "imageWidth": 1600,
-    "imageHeight": 900,
+    "imageWidth": 1536,
+    "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
   },
   {
@@ -154,7 +154,7 @@ export const journal: JournalEntry[] = [
     "description": "How roofing contractor sites convert homeowners into booked inspections — photo galleries, emergency CTAs, review widgets, and the Citium Roofing build.",
     "date": "2026-11-07",
     "standfirst": "Roofing leads come from urgency. A homeowner with a leak does not browse — they search, they compare, and they call the first site that looks established. Your website has about four seconds to prove you are that company.",
-    "image": "/journal/hero-05-roofing.webp",
+    "image": "/journal/covers/05-roofing-website-design.webp",
     "imageAlt": "Roofing crew on a residential roof with tools and safety gear",
     "blocks": [
       { "type": "h2", "text": "The four-second test" },
@@ -180,8 +180,8 @@ export const journal: JournalEntry[] = [
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
     "relatedSlugs": ["web-design-for-medical-clinics-los-angeles", "web-design-for-airbnb-cleaning-los-angeles", "los-angeles-web-design-guide"],
-    "imageWidth": 1600,
-    "imageHeight": 900,
+    "imageWidth": 1536,
+    "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
   },
   {
@@ -191,7 +191,7 @@ export const journal: JournalEntry[] = [
     "description": "How short-term rental cleaning sites convert guests into booked turnovers — calendars, pricing, galleries, and the Extreme Quality Clean build.",
     "date": "2026-11-07",
     "standfirst": "Airbnb hosts and property managers search for cleaners the way they search for anything else: fast, on mobile, comparing three options at once. Your site either makes booking the obvious choice or it does not.",
-    "image": "/journal/hero-06-airbnb-cleaning.webp",
+    "image": "/journal/covers/06-cleaning-service-web-design.webp",
     "imageAlt": "Cleaning crew preparing a short-term rental with supplies and checklists",
     "blocks": [
       { "type": "h2", "text": "Pricing transparency kills no-shows" },
@@ -215,8 +215,8 @@ export const journal: JournalEntry[] = [
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
     "relatedSlugs": ["web-design-for-roofing-contractors-los-angeles", "web-design-for-plumbing-contractors-san-fernando-valley", "los-angeles-web-design-guide"],
-    "imageWidth": 1600,
-    "imageHeight": 900,
+    "imageWidth": 1536,
+    "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
   },
   {
@@ -226,7 +226,7 @@ export const journal: JournalEntry[] = [
     "description": "How plumbing sites capture emergency calls — above-the-fold phone buttons, service-area maps, CSLB licensing display, and the Extreme Plumbing build.",
     "date": "2026-11-07",
     "standfirst": "Plumbing is the most urgent home-service search there is. A burst pipe does not wait for a form. Your site's only job is to make the call button impossible to miss.",
-    "image": "/journal/hero-07-plumbing.webp",
+    "image": "/journal/covers/07-plumber-website-design.webp",
     "imageAlt": "Plumber's van parked outside a residential home with tools visible",
     "blocks": [
       { "type": "h2", "text": "The call button is the product" },
@@ -252,8 +252,8 @@ export const journal: JournalEntry[] = [
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
     "relatedSlugs": ["web-design-for-airbnb-cleaning-los-angeles", "web-design-for-medical-clinics-los-angeles", "los-angeles-web-design-guide"],
-    "imageWidth": 1600,
-    "imageHeight": 900,
+    "imageWidth": 1536,
+    "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
   }
 ];

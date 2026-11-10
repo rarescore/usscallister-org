@@ -11,16 +11,21 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SplatRouteImport } from './routes/$'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as InfoRouteImport } from './routes/info'
 import { Route as NewsletterRouteImport } from './routes/newsletter'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as WebDesignAirbnbCleaningRouteImport } from './routes/web-design-airbnb-cleaning'
 import { Route as WebDesignLosAngelesRouteImport } from './routes/web-design-los-angeles'
+import { Route as WebDesignMedicalClinicsRouteImport } from './routes/web-design-medical-clinics'
+import { Route as WebDesignPlumbingContractorsRouteImport } from './routes/web-design-plumbing-contractors'
+import { Route as WebDesignRoofingContractorsRouteImport } from './routes/web-design-roofing-contractors'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as JournalIndexRouteImport } from './routes/journal/index'
 import { Route as JournalSlugRouteImport } from './routes/journal/$slug'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
-import { Route as ProjectsSlugRouteImport } from './routes/projects/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,6 +35,16 @@ const IndexRoute = IndexRouteImport.update({
 const SplatRoute = SplatRouteImport.update({
   id: '/$',
   path: '/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InfoRoute = InfoRouteImport.update({
+  id: '/info',
+  path: '/info',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsletterRoute = NewsletterRouteImport.update({
@@ -47,11 +62,33 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WebDesignAirbnbCleaningRoute = WebDesignAirbnbCleaningRouteImport.update({
+  id: '/web-design-airbnb-cleaning',
+  path: '/web-design-airbnb-cleaning',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WebDesignLosAngelesRoute = WebDesignLosAngelesRouteImport.update({
   id: '/web-design-los-angeles',
   path: '/web-design-los-angeles',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WebDesignMedicalClinicsRoute = WebDesignMedicalClinicsRouteImport.update({
+  id: '/web-design-medical-clinics',
+  path: '/web-design-medical-clinics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WebDesignPlumbingContractorsRoute =
+  WebDesignPlumbingContractorsRouteImport.update({
+    id: '/web-design-plumbing-contractors',
+    path: '/web-design-plumbing-contractors',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WebDesignRoofingContractorsRoute =
+  WebDesignRoofingContractorsRouteImport.update({
+    id: '/web-design-roofing-contractors',
+    path: '/web-design-roofing-contractors',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -77,22 +114,22 @@ const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
   path: '/projects/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
-  id: '/projects/$slug',
-  path: '/projects/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/contact': typeof ContactRoute
+  '/info': typeof InfoRoute
   '/newsletter': typeof NewsletterRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/web-design-airbnb-cleaning': typeof WebDesignAirbnbCleaningRoute
   '/web-design-los-angeles': typeof WebDesignLosAngelesRoute
+  '/web-design-medical-clinics': typeof WebDesignMedicalClinicsRoute
+  '/web-design-plumbing-contractors': typeof WebDesignPlumbingContractorsRoute
+  '/web-design-roofing-contractors': typeof WebDesignRoofingContractorsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
-  '/projects/$slug': typeof ProjectsSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/journal/': typeof JournalIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -100,13 +137,18 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/contact': typeof ContactRoute
+  '/info': typeof InfoRoute
   '/newsletter': typeof NewsletterRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/web-design-airbnb-cleaning': typeof WebDesignAirbnbCleaningRoute
   '/web-design-los-angeles': typeof WebDesignLosAngelesRoute
+  '/web-design-medical-clinics': typeof WebDesignMedicalClinicsRoute
+  '/web-design-plumbing-contractors': typeof WebDesignPlumbingContractorsRoute
+  '/web-design-roofing-contractors': typeof WebDesignRoofingContractorsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
-  '/projects/$slug': typeof ProjectsSlugRoute
   '/blog': typeof BlogIndexRoute
   '/journal': typeof JournalIndexRoute
   '/projects': typeof ProjectsIndexRoute
@@ -115,13 +157,18 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/contact': typeof ContactRoute
+  '/info': typeof InfoRoute
   '/newsletter': typeof NewsletterRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/web-design-airbnb-cleaning': typeof WebDesignAirbnbCleaningRoute
   '/web-design-los-angeles': typeof WebDesignLosAngelesRoute
+  '/web-design-medical-clinics': typeof WebDesignMedicalClinicsRoute
+  '/web-design-plumbing-contractors': typeof WebDesignPlumbingContractorsRoute
+  '/web-design-roofing-contractors': typeof WebDesignRoofingContractorsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
-  '/projects/$slug': typeof ProjectsSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/journal/': typeof JournalIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -131,13 +178,18 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$'
+    | '/contact'
+    | '/info'
     | '/newsletter'
     | '/privacy'
     | '/terms'
+    | '/web-design-airbnb-cleaning'
     | '/web-design-los-angeles'
+    | '/web-design-medical-clinics'
+    | '/web-design-plumbing-contractors'
+    | '/web-design-roofing-contractors'
     | '/blog/$slug'
     | '/journal/$slug'
-    | '/projects/$slug'
     | '/blog/'
     | '/journal/'
     | '/projects/'
@@ -145,13 +197,18 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/$'
+    | '/contact'
+    | '/info'
     | '/newsletter'
     | '/privacy'
     | '/terms'
+    | '/web-design-airbnb-cleaning'
     | '/web-design-los-angeles'
+    | '/web-design-medical-clinics'
+    | '/web-design-plumbing-contractors'
+    | '/web-design-roofing-contractors'
     | '/blog/$slug'
     | '/journal/$slug'
-    | '/projects/$slug'
     | '/blog'
     | '/journal'
     | '/projects'
@@ -159,13 +216,18 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$'
+    | '/contact'
+    | '/info'
     | '/newsletter'
     | '/privacy'
     | '/terms'
+    | '/web-design-airbnb-cleaning'
     | '/web-design-los-angeles'
+    | '/web-design-medical-clinics'
+    | '/web-design-plumbing-contractors'
+    | '/web-design-roofing-contractors'
     | '/blog/$slug'
     | '/journal/$slug'
-    | '/projects/$slug'
     | '/blog/'
     | '/journal/'
     | '/projects/'
@@ -174,13 +236,18 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
+  ContactRoute: typeof ContactRoute
+  InfoRoute: typeof InfoRoute
   NewsletterRoute: typeof NewsletterRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  WebDesignAirbnbCleaningRoute: typeof WebDesignAirbnbCleaningRoute
   WebDesignLosAngelesRoute: typeof WebDesignLosAngelesRoute
+  WebDesignMedicalClinicsRoute: typeof WebDesignMedicalClinicsRoute
+  WebDesignPlumbingContractorsRoute: typeof WebDesignPlumbingContractorsRoute
+  WebDesignRoofingContractorsRoute: typeof WebDesignRoofingContractorsRoute
   BlogSlugRoute: typeof BlogSlugRoute
   JournalSlugRoute: typeof JournalSlugRoute
-  ProjectsSlugRoute: typeof ProjectsSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
   JournalIndexRoute: typeof JournalIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
@@ -200,6 +267,20 @@ declare module '@tanstack/react-router' {
       path: '/$'
       fullPath: '/$'
       preLoaderRoute: typeof SplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/info': {
+      id: '/info'
+      path: '/info'
+      fullPath: '/info'
+      preLoaderRoute: typeof InfoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/newsletter': {
@@ -223,11 +304,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/web-design-airbnb-cleaning': {
+      id: '/web-design-airbnb-cleaning'
+      path: '/web-design-airbnb-cleaning'
+      fullPath: '/web-design-airbnb-cleaning'
+      preLoaderRoute: typeof WebDesignAirbnbCleaningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/web-design-los-angeles': {
       id: '/web-design-los-angeles'
       path: '/web-design-los-angeles'
       fullPath: '/web-design-los-angeles'
       preLoaderRoute: typeof WebDesignLosAngelesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/web-design-medical-clinics': {
+      id: '/web-design-medical-clinics'
+      path: '/web-design-medical-clinics'
+      fullPath: '/web-design-medical-clinics'
+      preLoaderRoute: typeof WebDesignMedicalClinicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/web-design-plumbing-contractors': {
+      id: '/web-design-plumbing-contractors'
+      path: '/web-design-plumbing-contractors'
+      fullPath: '/web-design-plumbing-contractors'
+      preLoaderRoute: typeof WebDesignPlumbingContractorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/web-design-roofing-contractors': {
+      id: '/web-design-roofing-contractors'
+      path: '/web-design-roofing-contractors'
+      fullPath: '/web-design-roofing-contractors'
+      preLoaderRoute: typeof WebDesignRoofingContractorsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -265,26 +374,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/projects/$slug': {
-      id: '/projects/$slug'
-      path: '/projects/$slug'
-      fullPath: '/projects/$slug'
-      preLoaderRoute: typeof ProjectsSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
+  ContactRoute: ContactRoute,
+  InfoRoute: InfoRoute,
   NewsletterRoute: NewsletterRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  WebDesignAirbnbCleaningRoute: WebDesignAirbnbCleaningRoute,
   WebDesignLosAngelesRoute: WebDesignLosAngelesRoute,
+  WebDesignMedicalClinicsRoute: WebDesignMedicalClinicsRoute,
+  WebDesignPlumbingContractorsRoute: WebDesignPlumbingContractorsRoute,
+  WebDesignRoofingContractorsRoute: WebDesignRoofingContractorsRoute,
   BlogSlugRoute: BlogSlugRoute,
   JournalSlugRoute: JournalSlugRoute,
-  ProjectsSlugRoute: ProjectsSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
   JournalIndexRoute: JournalIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
