@@ -11,7 +11,9 @@
 }
 
 .stage-head {
-  padding: 0 7vw;
+  position: relative;
+  z-index: 30;
+  padding: 0 7vw 8px;
 }
 
 .coverflow .stage-head p {
@@ -33,7 +35,10 @@
 
 .stage-rail {
   position: relative;
-  min-height: 320px;
+  z-index: 1;
+  min-height: clamp(360px, 52vh, 640px);
+  margin-top: 8px;
+  overflow: hidden;
 }
 
 .coverflow .stage-card {

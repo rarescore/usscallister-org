@@ -58,6 +58,7 @@ export default async (req: Request) => {
   if (!target) return json(EMPTY("That URL doesn't look usable."), 400);
 
   const key = process.env.PAGESPEED_API_KEY;
+  console.log(`PAGESPEED_API_KEY ${key ? "is defined" : "is not defined"}`);
   if (!key) return json(EMPTY("PageSpeed is not configured."));
 
   const endpoint = new URL("https://www.googleapis.com/pagespeedonline/v5/runPagespeed");
@@ -68,8 +69,10 @@ export default async (req: Request) => {
     endpoint.searchParams.append("category", category);
   }
 
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 5_000);
   try {
-    const response = await fetch(endpoint, { signal: AbortSignal.timeout(10_000) });
+    const response = await fetch(endpoint, { signal: controller.signal });
     const payload = await response.json().catch(() => null);
     if (!response.ok || !payload?.lighthouseResult?.categories) {
       const message = payload?.error?.message || "PageSpeed did not return a score.";
@@ -84,7 +87,11 @@ export default async (req: Request) => {
       firstImpression: categoryScore(categories, "best-practices"),
       overallScore: loadSpeed,
     });
-  } catch {
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.log(message);
     return json(EMPTY("PageSpeed timed out."));
+  } finally {
+    clearTimeout(timer);
   }
 };

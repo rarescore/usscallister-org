@@ -22,7 +22,6 @@ export function StudioPage() {
   const [soundOn, setSoundOn] = useState(true);
   const [away, setAway] = useState(false);
   const [formNote, setFormNote] = useState("");
-  const [logoReveal, setLogoReveal] = useState(false);
 
   useEffect(() => installAudio(), []);
 
@@ -102,17 +101,6 @@ export function StudioPage() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    if (sessionStorage.getItem("ussc-logo-seen")) return;
-    sessionStorage.setItem("ussc-logo-seen", "1");
-    const id = window.setTimeout(() => setLogoReveal(true), 600);
-    const hide = window.setTimeout(() => setLogoReveal(false), 3200);
-    return () => {
-      window.clearTimeout(id);
-      window.clearTimeout(hide);
-    };
-  }, []);
-
   function replayHero() {
     const video = heroVideo.current;
     if (!video) return;
@@ -149,23 +137,6 @@ export function StudioPage() {
 
   return (
     <main>
-      {logoReveal ? (
-        <div className="logo-reveal" aria-hidden="true">
-          <svg viewBox="0 0 400 60" className="logo-draw">
-            <path
-              d="M20 48 C20 20 60 12 90 12 C130 12 150 28 150 44 C150 58 120 64 96 64 C64 64 40 52 40 32 C40 16 68 8 100 8"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              pathLength={1}
-              className="logo-path"
-            />
-            <text x="170" y="42" fill="currentColor" fontSize="28" fontFamily="Cormorant Garamond, serif" letterSpacing="0.18em">
-              USSCALLISTER
-            </text>
-          </svg>
-        </div>
-      ) : null}
       <a className="skip" href="#index">
         Skip to projects
       </a>
