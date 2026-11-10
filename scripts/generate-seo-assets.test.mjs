@@ -26,8 +26,12 @@ test("robots.txt is plaintext with Allow and absolute Sitemap", () => {
 test("sitemap.xml lists only absolute .org URLs for indexable routes", () => {
   const paths = indexablePaths();
   assert.ok(paths.includes("/"));
-  assert.ok(paths.includes("/projects/canby"));
-  assert.ok(paths.includes("/journal/los-angeles-web-design-guide"));
+  assert.ok(paths.includes("/contact"));
+  assert.ok(paths.includes("/info"));
+  assert.ok(paths.includes("/web-design-medical-clinics"));
+  assert.ok(paths.includes("/journal/what-makes-a-50000-website-worth-it"));
+  assert.equal(paths.includes("/projects/canby"), false);
+  assert.equal(paths.includes("/journal/los-angeles-web-design-guide"), false);
   assert.ok(paths.includes("/web-design-los-angeles"));
   assert.equal(paths.includes("/blog"), false);
 

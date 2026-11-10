@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { FolioBar } from "@/components/article";
 import { SiteCheck } from "@/components/site-check";
+import { pageCanonicalHead } from "@/lib/site-seo";
 
 const COPY =
   "USSCALLISTER is a Los Angeles studio built on one obsession — conversion. Before a single pixel ships, we research the audience, the psychology of the click, and the exact path from first visit to action. That research is why our sites for clinics, contractors, and home services don't just look right, they perform.";
@@ -11,6 +12,7 @@ const WORD_MS = 80;
 
 export const Route = createFileRoute("/info")({
   head: () => ({
+    ...pageCanonicalHead("/info"),
     meta: [
       { title: "Info | USSCALLISTER" },
       {
@@ -93,7 +95,7 @@ function InfoPage() {
       <div className="info-hold">
         <FolioBar here="Info" />
         <div className="center-block">
-          <p className="kicker-label">Info</p>
+          <h1 className="kicker-label">Info</h1>
           <p ref={copyRef} className="intro-copy info-type">
             {WORDS.map((word, index) => (
               <span key={`${word}-${index}`} className={index < shown ? "is-on" : undefined}>

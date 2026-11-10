@@ -4,7 +4,13 @@ import "./coverflow-carousel.css";
 
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 
-export function CoverflowCarousel({ showCaption = true }: { showCaption?: boolean }) {
+export function CoverflowCarousel({
+  showCaption = true,
+  heading = "h1",
+}: {
+  showCaption?: boolean;
+  heading?: "h1" | "h2";
+}) {
   const [index, setIndex] = useState(0);
   const rootRef = useRef<HTMLElement>(null);
   const indexRef = useRef(0);
@@ -115,7 +121,7 @@ export function CoverflowCarousel({ showCaption = true }: { showCaption?: boolea
     <section className="coverflow" id="index" ref={rootRef} aria-label="Recent projects of 2026">
       <header className="stage-head">
         <p>Selected work</p>
-        <h1>Recent projects of 2026</h1>
+        {heading === "h2" ? <h2>Recent projects of 2026</h2> : <h1>Recent projects of 2026</h1>}
       </header>
 
       <div className="stage-rail" aria-live="polite">

@@ -58,7 +58,7 @@ export function FlowTrack({ info, formNote, onSubmit }: FlowTrackProps) {
 
   return (
     <div className={simple ? "flow is-simple" : "flow"} ref={flowRef}>
-      <CoverflowCarousel showCaption />
+      <CoverflowCarousel showCaption heading="h2" />
       <section className="section info" id="info" ref={infoRef}>
         {info}
       </section>

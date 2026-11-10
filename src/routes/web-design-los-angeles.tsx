@@ -41,19 +41,17 @@ function LosAngelesPage() {
             Read the{" "}
             <Link to="/journal/$slug" params={{ slug: "what-makes-a-50000-website-worth-it" }}>
               website cost note
-            </Link>{" "}
-            and the{" "}
-            <Link to="/journal/$slug" params={{ slug: "why-redesign-website-that-works" }}>
-              redesign note
+            </Link>
+            , and{" "}
+            <Link to="/journal/$slug" params={{ slug: "why-websites-look-expensive" }}>
+              why a site looks expensive
             </Link>
             . A new site does not guarantee local rankings.
           </p>
           <aside className="folio-next">
             <p>Start a project</p>
             <a href="/#contact">Send a brief</a>
-            <Link to="/journal/$slug" params={{ slug: "los-angeles-web-design-guide" }}>
-              Los Angeles planning note
-            </Link>
+            <Link to="/journal">Journal</Link>
           </aside>
         </div>
       </article>

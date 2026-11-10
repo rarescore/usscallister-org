@@ -15,23 +15,23 @@ function journalSlugs() {
   return [...src.matchAll(/"slug"\s*:\s*"([^"]+)"/g)].map((m) => m[1]);
 }
 
-function projectIds() {
-  const src = readFileSync(join(root, "src/content/projects.ts"), "utf8");
-  return [...src.matchAll(/^\s*id:\s*"([^"]+)"/gm)].map((m) => m[1]);
-}
-
 /** Indexable HTML routes that exist as real pages (robots index,follow or home). */
 export function indexablePaths() {
   const paths = new Set([
     "/",
     "/projects",
     "/journal",
+    "/contact",
+    "/info",
     "/privacy",
     "/terms",
     "/newsletter",
     "/web-design-los-angeles",
+    "/web-design-medical-clinics",
+    "/web-design-plumbing-contractors",
+    "/web-design-roofing-contractors",
+    "/web-design-airbnb-cleaning",
   ]);
-  for (const id of projectIds()) paths.add(`/projects/${id}`);
   for (const slug of journalSlugs()) paths.add(`/journal/${slug}`);
   return [...paths].sort((a, b) => a.localeCompare(b));
 }

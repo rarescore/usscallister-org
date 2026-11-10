@@ -4,6 +4,12 @@
     <loc>https://usscallister.org/</loc>
   </url>
   <url>
+    <loc>https://usscallister.org/contact</loc>
+  </url>
+  <url>
+    <loc>https://usscallister.org/info</loc>
+  </url>
+  <url>
     <loc>https://usscallister.org/journal</loc>
   </url>
   <url>
@@ -37,27 +43,21 @@
     <loc>https://usscallister.org/projects</loc>
   </url>
   <url>
-    <loc>https://usscallister.org/projects/canby</loc>
-  </url>
-  <url>
-    <loc>https://usscallister.org/projects/citium</loc>
-  </url>
-  <url>
-    <loc>https://usscallister.org/projects/clean</loc>
-  </url>
-  <url>
-    <loc>https://usscallister.org/projects/plumbing</loc>
-  </url>
-  <url>
-    <loc>https://usscallister.org/projects/rarescore</loc>
-  </url>
-  <url>
-    <loc>https://usscallister.org/projects/rooter</loc>
-  </url>
-  <url>
     <loc>https://usscallister.org/terms</loc>
   </url>
   <url>
+    <loc>https://usscallister.org/web-design-airbnb-cleaning</loc>
+  </url>
+  <url>
     <loc>https://usscallister.org/web-design-los-angeles</loc>
+  </url>
+  <url>
+    <loc>https://usscallister.org/web-design-medical-clinics</loc>
+  </url>
+  <url>
+    <loc>https://usscallister.org/web-design-plumbing-contractors</loc>
+  </url>
+  <url>
+    <loc>https://usscallister.org/web-design-roofing-contractors</loc>
   </url>
 </urlset>

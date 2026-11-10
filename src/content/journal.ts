@@ -37,7 +37,7 @@ export const journal: JournalEntry[] = [
     "category": "Budget and planning",
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
-    "relatedSlugs": ["why-websites-look-expensive", "custom-vs-webflow-wordpress-templates", "los-angeles-web-design-guide"],
+    "relatedSlugs": ["why-websites-look-expensive", "psychology-of-memorable-websites", "web-design-for-medical-clinics-los-angeles"],
     "imageWidth": 1536,
     "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
@@ -75,7 +75,7 @@ export const journal: JournalEntry[] = [
     "category": "Design and experience",
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
-    "relatedSlugs": ["psychology-of-memorable-websites", "before-hiring-high-end-web-design-studio", "los-angeles-web-design-guide"],
+    "relatedSlugs": ["psychology-of-memorable-websites", "what-makes-a-50000-website-worth-it", "web-design-for-roofing-contractors-los-angeles"],
     "imageWidth": 1536,
     "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
@@ -105,7 +105,7 @@ export const journal: JournalEntry[] = [
     "category": "Psychology and branding",
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
-    "relatedSlugs": ["why-websites-look-expensive", "before-hiring-high-end-web-design-studio", "los-angeles-web-design-guide"],
+    "relatedSlugs": ["why-websites-look-expensive", "what-makes-a-50000-website-worth-it", "web-design-for-medical-clinics-los-angeles"],
     "imageWidth": 1536,
     "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
@@ -142,7 +142,7 @@ export const journal: JournalEntry[] = [
     "category": "Healthcare",
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
-    "relatedSlugs": ["why-websites-look-expensive", "web-design-for-roofing-contractors-los-angeles", "los-angeles-web-design-guide"],
+    "relatedSlugs": ["why-websites-look-expensive", "web-design-for-roofing-contractors-los-angeles", "web-design-for-plumbing-contractors-san-fernando-valley"],
     "imageWidth": 1536,
     "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
@@ -179,7 +179,7 @@ export const journal: JournalEntry[] = [
     "category": "Home services",
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
-    "relatedSlugs": ["web-design-for-medical-clinics-los-angeles", "web-design-for-airbnb-cleaning-los-angeles", "los-angeles-web-design-guide"],
+    "relatedSlugs": ["web-design-for-medical-clinics-los-angeles", "web-design-for-airbnb-cleaning-los-angeles", "web-design-for-plumbing-contractors-san-fernando-valley"],
     "imageWidth": 1536,
     "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
@@ -214,7 +214,7 @@ export const journal: JournalEntry[] = [
     "category": "Home services",
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
-    "relatedSlugs": ["web-design-for-roofing-contractors-los-angeles", "web-design-for-plumbing-contractors-san-fernando-valley", "los-angeles-web-design-guide"],
+    "relatedSlugs": ["web-design-for-roofing-contractors-los-angeles", "web-design-for-plumbing-contractors-san-fernando-valley", "what-makes-a-50000-website-worth-it"],
     "imageWidth": 1536,
     "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
@@ -251,7 +251,7 @@ export const journal: JournalEntry[] = [
     "category": "Home services",
     "author": "USSCALLISTER",
     "dateModified": "2026-11-07",
-    "relatedSlugs": ["web-design-for-airbnb-cleaning-los-angeles", "web-design-for-medical-clinics-los-angeles", "los-angeles-web-design-guide"],
+    "relatedSlugs": ["web-design-for-airbnb-cleaning-los-angeles", "web-design-for-medical-clinics-los-angeles", "why-websites-look-expensive"],
     "imageWidth": 1536,
     "imageHeight": 1024,
     "imageCaption": "Illustrative editorial image created for this guide."
