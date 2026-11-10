@@ -592,6 +592,7 @@
   justify-content: flex-end;
   padding: 24px;
   background: rgba(0, 0, 0, 0.28);
+  pointer-events: none;
 }
 .news-card {
   position: relative;
@@ -600,6 +601,7 @@
   background: #f6f3ec;
   color: #161616;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+  pointer-events: auto;
 }
 .news-card > p {
   margin: 0 0 10px;
