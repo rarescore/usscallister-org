@@ -1,30 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import "./landing.css";
 
-const WORK = [
-  {
-    label: "Healthcare",
-    href: "https://puravidacc.org",
-    image: "/sites/canby.jpg?v=2",
-  },
-  {
-    label: "Plumbing",
-    href: "https://rooter-plumber.com",
-    image: "/sites/rooter.jpg?v=2",
-  },
-  {
-    label: "Roofing",
-    href: "https://citiumroofing.com",
-    image: "/sites/citium.jpg?v=2",
-  },
-] as const;
+const TRADES = ["Clinic", "Roofing", "Plumbing", "Cleaning", "Other"] as const;
+const TEXT_US = "sms:+18189136158?&body=I%20want%20to%20grow!";
 
 export const Route = createFileRoute("/landing")({
   head: () => ({
     meta: [
-      { title: "Your website's new | USSCALLISTER" },
+      { title: "Speak with us | USSCALLISTER" },
       {
         name: "description",
-        content: "Most sites look finished and still lose the call. Tell us your name and phone.",
+        content: "Fill this form out to speak with USSCALLISTER. It's free.",
       },
       { name: "robots", content: "noindex, follow" },
     ],
@@ -33,239 +20,199 @@ export const Route = createFileRoute("/landing")({
 });
 
 function LandingPage() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [clock, setClock] = useState("");
+  const [trade, setTrade] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [note, setNote] = useState("");
+  const [bad, setBad] = useState<"name" | "phone" | "">("");
+
+  useEffect(() => {
+    const tick = () => {
+      setClock(
+        new Date().toLocaleTimeString("en-US", {
+          timeZone: "America/Los_Angeles",
+          hour12: true,
+          hour: "numeric",
+          minute: "2-digit",
+        }),
+      );
+    };
+    tick();
+    const id = window.setInterval(tick, 15000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const play = () => {
+      video.muted = true;
+      const pending = video.play();
+      if (pending) pending.catch(() => {});
+    };
+
+    const onEnded = () => {
+      video.currentTime = 0;
+      play();
+    };
+
+    play();
+    video.addEventListener("canplay", play);
+    video.addEventListener("ended", onEnded);
+    return () => {
+      video.removeEventListener("canplay", play);
+      video.removeEventListener("ended", onEnded);
+    };
+  }, []);
+
+  function replay() {
+    const video = videoRef.current;
+    if (!video) return;
+    video.currentTime = 0;
+    void video.play();
+  }
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get("name") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
+    const site = String(data.get("site") || "").trim();
+    const trap = String(data.get("company") || "").trim();
+    const digits = phone.replace(/\D/g, "");
+
+    if (trap) return;
+    if (name.length < 2) {
+      setStatus("error");
+      setBad("name");
+      setNote("Add your name.");
+      return;
+    }
+    if (digits.length < 7) {
+      setStatus("error");
+      setBad("phone");
+      setNote("Add a real phone number.");
+      return;
+    }
+
+    setBad("");
+    setStatus("sending");
+    setNote("");
+
+    const fields = new URLSearchParams();
+    fields.set("form-name", "landing-leads");
+    fields.set("name", name);
+    fields.set("phone", phone);
+    fields.set("trade", trade || "Not said");
+    fields.set("site", site || "Not given");
+
+    try {
+      const response = await fetch("/netlify-forms.html", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: fields.toString(),
+      });
+      if (!response.ok) throw new Error("send failed");
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+      setNote("Could not send. Call 818-913-6158.");
+    }
+  }
+
   return (
-    <main className="lp">
-      <style>{css}</style>
+    <main className="floor">
       <video
-        className="lp-video"
-        src="/media/soccer.mp4"
-        poster="/media/soccer-poster.jpg"
+        ref={videoRef}
+        className="floor-video"
         autoPlay
         muted
         loop
         playsInline
+        poster="/media/floor-poster.jpg?v=hd"
+        preload="auto"
+        src="/media/floor.mp4?v=hd"
       />
-      <div className="lp-shade" />
-      <div className="lp-stage">
-        <div className="lp-col">
-          <h1>Your website's new. It's still not working.</h1>
-          <p className="lp-sub">Most sites look finished and still lose the call.</p>
-          <form
-            className="lp-form"
-            name="landing-leads"
-            method="POST"
-            action="/landing-thanks.html"
-            netlify=""
-          >
-              <input type="hidden" name="form-name" value="landing-leads" />
-              <label className="lp-sr" htmlFor="lp-name">
-                Name
-              </label>
-              <input
-                id="lp-name"
-                name="name"
-                type="text"
-                autoComplete="name"
-                placeholder="your name"
-                required
-              />
-              <label className="lp-sr" htmlFor="lp-phone">
-                Phone
-              </label>
-              <input
-                id="lp-phone"
-                name="phone"
-                type="tel"
-                autoComplete="tel"
-                placeholder="your phone"
-                required
-              />
-              <label className="lp-sr" htmlFor="lp-email">
-                Email
-              </label>
-              <input
-                id="lp-email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                placeholder="your email"
-              />
-              <button type="submit">Build my website</button>
-            </form>
-          <div className="lp-work">
-            {WORK.map((item) => (
-              <a key={item.label} className="lp-card" href={item.href} target="_blank" rel="noreferrer">
-                <img src={item.image} alt={`${item.label} website`} />
-                <span>{item.label}</span>
-              </a>
-            ))}
-          </div>
-        </div>
+      <img className="floor-poster" src="/media/floor-poster.jpg?v=hd" alt="" />
+      <div className="floor-veil" aria-hidden="true" />
+
+      <div className="mark">
+        <button className="replay" type="button" onClick={replay}>
+          Replay
+        </button>
+        <time suppressHydrationWarning>{clock}</time>
       </div>
+
+      <section className="panel" aria-label="Start a call">
+        <div className="panel-top">
+          <a className="name" href="/">
+            USSCALLISTER
+          </a>
+          <p className="where">Los Angeles</p>
+        </div>
+
+        {status === "sent" ? (
+          <div className="sent">
+            <p className="ask">We’ll call you today.</p>
+            <p className="promise">
+              A person from the studio, not a sequence. If it’s faster, call 818-913-6158.
+            </p>
+            <p className="meta">
+              <a href="tel:8189136158">818-913-6158</a>
+            </p>
+          </div>
+        ) : (
+          <form className="sheet" onSubmit={onSubmit} noValidate>
+            <h1 className="ask">
+              Fill this form out to speak with us, it’s literally <span>FREE</span>
+            </h1>
+
+            <div className="trades" role="group" aria-label="What you do">
+              {TRADES.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  aria-pressed={trade === item}
+                  onClick={() => setTrade(trade === item ? "" : item)}
+                >
+                  <i aria-hidden="true" />
+                  {item}
+                </button>
+              ))}
+            </div>
+
+            <label className={bad === "name" ? "field is-bad" : "field"}>
+              <input name="name" type="text" autoComplete="name" aria-label="Name" placeholder="Your name" required />
+            </label>
+            <label className={bad === "phone" ? "field is-bad" : "field"}>
+              <input name="phone" type="tel" autoComplete="tel" inputMode="tel" aria-label="Phone" placeholder="Your number" required />
+            </label>
+            <label className="field">
+              <input name="site" type="text" inputMode="url" autoComplete="url" aria-label="Site" placeholder="yoursite.com" />
+            </label>
+
+            <label className="trap" aria-hidden="true">
+              Company
+              <input name="company" type="text" tabIndex={-1} autoComplete="off" />
+            </label>
+
+            <button className="send" type="submit" disabled={status === "sending"}>
+              {status === "sending" ? "Sending" : "Send"}
+            </button>
+            {note ? (
+              <p className="note" role="status">
+                {note}
+              </p>
+            ) : null}
+            <a className="text-us" href={TEXT_US}>
+              Text us directly
+            </a>
+          </form>
+        )}
+      </section>
     </main>
   );
 }
-
-const css = `
-.lp {
-  min-height: 100vh;
-  color: #fff;
-  font-family: Inter, sans-serif;
-  letter-spacing: 0;
-}
-.lp-video {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background: #000;
-  z-index: 0;
-}
-.lp-shade {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 1;
-  pointer-events: none;
-}
-.lp-stage {
-  position: relative;
-  z-index: 2;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 48px 20px;
-  box-sizing: border-box;
-}
-.lp-col {
-  width: min(640px, 100%);
-  text-align: center;
-}
-.lp h1 {
-  margin: 0;
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-weight: 500;
-  font-size: 40px;
-  line-height: 1.05;
-  color: #fff;
-  letter-spacing: 0;
-}
-.lp-sub {
-  margin: 16px 0 0;
-  font-family: Inter, sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.45;
-  color: #b8b8b8;
-}
-.lp-form {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 8px;
-  margin-top: 32px;
-  text-align: left;
-}
-.lp-form input {
-  width: 100%;
-  box-sizing: border-box;
-  background: #111111;
-  border: 1px solid #333333;
-  border-radius: 4px;
-  padding: 12px;
-  font-family: Inter, sans-serif;
-  font-size: 16px;
-  line-height: 1.3;
-  color: #fff;
-  letter-spacing: 0;
-  outline: none;
-  appearance: none;
-}
-.lp-form input::placeholder {
-  color: #666666;
-  opacity: 1;
-}
-.lp-form input:focus {
-  border-color: #c4a574;
-}
-.lp-form button {
-  width: 100%;
-  margin: 0;
-  background: #c4a574;
-  color: #000;
-  border: 0;
-  border-radius: 4px;
-  padding: 12px 24px;
-  font-family: Inter, sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 0;
-  cursor: pointer;
-}
-.lp-form button:disabled {
-  cursor: wait;
-  opacity: 0.7;
-}
-.lp-confirm {
-  margin: 32px 0 0;
-  font-family: Inter, sans-serif;
-  font-size: 16px;
-  line-height: 1.45;
-  color: #fff;
-}
-.lp-work {
-  display: flex;
-  gap: 12px;
-  margin-top: 48px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  text-align: left;
-}
-.lp-card {
-  flex: 0 0 72%;
-  scroll-snap-align: start;
-  color: inherit;
-  text-decoration: none;
-}
-.lp-card img {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
-  display: block;
-  background: #111;
-}
-.lp-card span {
-  display: block;
-  margin-top: 8px;
-  font-family: Inter, sans-serif;
-  font-size: 13px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #b8b8b8;
-}
-.lp-sr {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-@media (min-width: 640px) {
-  .lp h1 {
-    font-size: 64px;
-  }
-  .lp-form button {
-    width: auto;
-    align-self: center;
-  }
-  .lp-card {
-    flex-basis: 200px;
-  }
-}
-`;

@@ -1,0 +1,435 @@
+.floor {
+  --color-hot: #d0121a;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floor {
+  min-height: 100dvh;
+  position: relative;
+}
+
+.floor .floor-video, .floor .floor-poster {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  background: var(--color-ink);
+  z-index: 0;
+}
+
+.floor .floor-poster {
+  display: none;
+}
+
+.floor .floor-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgb(10 10 10 / 0.22), transparent 38%);
+}
+
+.floor .mark {
+  position: fixed;
+  z-index: 5;
+  top: 28px;
+  right: 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 10px;
+  opacity: 0.86;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.45);
+}
+
+.floor .replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: var(--color-paper);
+}
+
+.floor .panel {
+  z-index: 4;
+  position: fixed;
+  top: 50%;
+  left: 28px;
+  width: min(540px, calc(100vw - 56px));
+  max-height: calc(100dvh - 36px);
+  overflow: auto;
+  transform: translateY(-50%);
+  padding: 32px 40px 26px;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  border: 1px solid rgb(0 0 0 / 0.06);
+  box-shadow:
+    0 1px rgb(0 0 0 / 0.04),
+    0 22px 60px rgb(0 0 0 / 0.22);
+  animation: panel-in 0.9s var(--ease-out) 60ms both;
+}
+
+.floor .panel ::selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.floor .panel-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.floor .name {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  color: inherit;
+  cursor: pointer;
+}
+
+.floor .name:hover {
+  opacity: 0.55;
+}
+
+.floor .where {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-mute);
+}
+.floor .ask {
+  margin: 22px auto 0;
+  max-width: 16em;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.floor .ask span {
+  color: var(--color-hot);
+  letter-spacing: 0.04em;
+}
+
+.floor .promise {
+  margin: 12px 0 0;
+  max-width: 36ch;
+  color: var(--color-mute);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  line-height: 1.55;
+}
+
+.floor .trades {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 16px;
+}
+
+.floor .trades button {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 6px 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 13px;
+  transition: color 0.18s ease, transform 0.22s var(--ease-out);
+}
+
+.floor .trades button i {
+  width: 6px;
+  height: 6px;
+  margin-right: 0;
+  background: currentColor;
+  transform: scale(0);
+  transition:
+    transform 0.22s var(--ease-out),
+    margin-right 0.22s var(--ease-out);
+}
+
+.floor .trades button[aria-pressed="true"], .floor .trades button:hover {
+  color: var(--color-ink);
+}
+
+.floor .trades button[aria-pressed="true"] {
+  transform: translateX(4px);
+}
+
+.floor .trades button[aria-pressed="true"] i, .floor .trades button:hover i {
+  margin-right: 10px;
+  transform: scale(1);
+}
+
+.floor .sheet {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+.floor .field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+}
+
+.floor .field span {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-mute);
+  font-size: 10px;
+}
+
+.floor .field input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 0 8px;
+  border: 0;
+  border-bottom: 1px solid var(--color-line);
+  border-radius: 0;
+  background: transparent;
+  outline: none;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+}
+
+.floor .field input:focus {
+  border-bottom-color: var(--color-ink);
+}
+
+.floor .field.is-bad input {
+  border-bottom-color: var(--color-hot);
+}
+
+.floor .field input::placeholder {
+  color: var(--color-faint);
+  opacity: 1;
+}
+
+.floor .field em {
+  font-style: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+  font-size: 9px;
+}
+
+.floor .send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 18px;
+  padding: 0 16px;
+  border: 0;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.floor .text-us {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 10px;
+  border: 1px solid var(--color-ink);
+  background: transparent;
+  color: var(--color-ink);
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.floor .text-us:hover {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.floor .send:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.floor .send:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.floor .note {
+  margin: 10px 0 0;
+  color: var(--color-hot);
+  letter-spacing: 0.03em;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.floor .meta {
+  margin-top: 14px;
+  color: var(--color-mute);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+.floor .meta a {
+  color: var(--color-ink);
+  letter-spacing: 0.08em;
+}
+
+.floor .meta a:hover {
+  opacity: 0.55;
+}
+
+.floor .sent {
+  margin-top: 28px;
+}
+
+.floor .sent p {
+  margin: 12px 0 0;
+  max-width: 28ch;
+  font-size: 13px;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+}
+
+.floor .trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (min-width: 801px) {
+  .floor .panel {
+    width: min(560px, calc(100vw - 72px));
+    padding: 40px 48px 36px;
+  }
+
+  .floor .ask {
+    margin-top: 32px;
+  }
+
+  .floor .trades {
+    margin-top: 24px;
+  }
+
+  .floor .trades button {
+    min-height: 44px;
+  }
+
+  .floor .field {
+    margin-top: 14px;
+  }
+
+  .floor .field input {
+    min-height: 52px;
+  }
+
+  .floor .send {
+    margin-top: 28px;
+  }
+
+  .floor .text-us {
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 800px) {
+  .floor .mark {
+    top: max(12px, env(safe-area-inset-top));
+    right: max(14px, env(safe-area-inset-right));
+  }
+
+  .floor .floor-video, .floor .floor-poster {
+    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .floor .panel {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-height: none;
+    margin: 8vh 0 12px;
+    transform: none;
+    padding: 20px 20px 16px;
+  }
+
+  .floor {
+    display: block;
+    min-height: 100dvh;
+    padding: 0 12px max(10px, env(safe-area-inset-bottom));
+  }
+
+  .floor .ask {
+    margin-top: 16px;
+    font-size: 22px;
+  }
+
+  .floor .trades button {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floor .panel {
+    animation: none;
+  }
+
+  .floor .floor-video {
+    display: none;
+  }
+
+  .floor .floor-poster {
+    display: block;
+  }
+
+  .floor .trades button {
+    transition: none;
+  }
+}
