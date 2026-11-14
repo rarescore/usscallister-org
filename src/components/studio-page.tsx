@@ -25,8 +25,8 @@ export function StudioPage() {
   const [away, setAway] = useState(false);
   const [formNote, setFormNote] = useState("");
 
-  useFilm(heroVideo, "/media/hero.mp4?v=3", "/media/hero-m.mp4?v=3");
-  useFilm(sunsetVideo, "/media/sunset.mp4?v=3", "/media/sunset-m.mp4?v=3");
+  useFilm(heroVideo, "hero");
+  useFilm(sunsetVideo, "sunset");
   useEffect(() => installAudio(), []);
 
   useEffect(() => {
@@ -203,7 +203,7 @@ export function StudioPage() {
             muted
             loop
             playsInline
-            poster="/media/hero-poster.jpg?v=2"
+            poster="/media/hero-poster.jpg?v=4"
             preload="none"
           />
         </div>

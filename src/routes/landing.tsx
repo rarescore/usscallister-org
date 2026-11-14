@@ -16,13 +16,14 @@ export const Route = createFileRoute("/landing")({
       },
       { name: "robots", content: "noindex, follow" },
     ],
+    links: [{ rel: "preload", as: "image", href: "/media/floor-poster.jpg?v=4" }],
   }),
   component: LandingPage,
 });
 
 function LandingPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  useFilm(videoRef, "/media/floor.mp4?v=3", "/media/floor-m.mp4?v=3");
+  useFilm(videoRef, "floor");
   const [clock, setClock] = useState("");
   const [trade, setTrade] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -110,10 +111,10 @@ function LandingPage() {
         muted
         loop
         playsInline
-        poster="/media/floor-poster.jpg?v=hd"
+        poster="/media/floor-poster.jpg?v=4"
         preload="none"
       />
-      <img className="floor-poster" src="/media/floor-poster.jpg?v=hd" alt="" />
+      <img className="floor-poster" src="/media/floor-poster.jpg?v=4" alt="" />
       <div className="floor-veil" aria-hidden="true" />
 
       <div className="mark">

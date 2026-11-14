@@ -9,7 +9,7 @@ type EnterReelProps = {
 export function EnterReel({ formNote, onSubmit }: EnterReelProps) {
   const sent = formNote.startsWith("Message has been sent");
   const videoRef = useRef<HTMLVideoElement>(null);
-  useFilm(videoRef, "/media/close.mp4?v=3", "/media/close-m.mp4?v=3");
+  useFilm(videoRef, "close");
 
   return (
     <section className="close" id="reel" aria-label="Contact">
@@ -19,7 +19,7 @@ export function EnterReel({ formNote, onSubmit }: EnterReelProps) {
         muted
         loop
         playsInline
-        poster="/media/close-poster.jpg"
+        poster="/media/close-poster.jpg?v=4"
         preload="none"
         ref={videoRef}
       />

@@ -32,7 +32,7 @@ function InfoPage() {
   const buttonRef = useRef<HTMLAnchorElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [shown, setShown] = useState(0);
-  useFilm(videoRef, "/media/sunset.mp4?v=3", "/media/sunset-m.mp4?v=3");
+  useFilm(videoRef, "sunset");
 
   useEffect(() => {
     const copy = copyRef.current;
