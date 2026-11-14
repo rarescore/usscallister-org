@@ -21,9 +21,11 @@ function sourceFor(name: FilmName) {
 
   if (save || slow) return `/media/${name}-m.mp4?v=3`;
   if (hevc) {
-    if (name === "floor" && wide && !phone) return "/media/floor-4k.mp4?v=4";
+    if (name === "floor" && wide && !phone) return "/media/floor-4k.mp4?v=5";
+    if (name === "floor") return "/media/floor.h265.mp4?v=5";
     return `/media/${name}.h265.mp4?v=4`;
   }
+  if (name === "floor") return "/media/floor.mp4?v=5";
   return phone ? `/media/${name}-m.mp4?v=3` : `/media/${name}.mp4?v=3`;
 }
 
