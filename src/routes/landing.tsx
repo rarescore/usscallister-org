@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useFilm } from "@/lib/use-film";
 import "./landing.css";
 
 const TRADES = ["Clinic", "Roofing", "Plumbing", "Cleaning", "Other"] as const;
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/landing")({
 
 function LandingPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  useFilm(videoRef, "/media/floor.mp4?v=3", "/media/floor-m.mp4?v=3");
   const [clock, setClock] = useState("");
   const [trade, setTrade] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -41,30 +43,6 @@ function LandingPage() {
     tick();
     const id = window.setInterval(tick, 15000);
     return () => window.clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const play = () => {
-      video.muted = true;
-      const pending = video.play();
-      if (pending) pending.catch(() => {});
-    };
-
-    const onEnded = () => {
-      video.currentTime = 0;
-      play();
-    };
-
-    play();
-    video.addEventListener("canplay", play);
-    video.addEventListener("ended", onEnded);
-    return () => {
-      video.removeEventListener("canplay", play);
-      video.removeEventListener("ended", onEnded);
-    };
   }, []);
 
   function replay() {
@@ -133,8 +111,7 @@ function LandingPage() {
         loop
         playsInline
         poster="/media/floor-poster.jpg?v=hd"
-        preload="auto"
-        src="/media/floor.mp4?v=hd"
+        preload="none"
       />
       <img className="floor-poster" src="/media/floor-poster.jpg?v=hd" alt="" />
       <div className="floor-veil" aria-hidden="true" />

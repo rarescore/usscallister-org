@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { FolioBar } from "@/components/article";
 import { SiteCheck } from "@/components/site-check";
 import { pageCanonicalHead } from "@/lib/site-seo";
+import { useFilm } from "@/lib/use-film";
 
 const COPY =
   "USSCALLISTER is a Los Angeles studio built on one obsession — conversion. Before a single pixel ships, we research the audience, the psychology of the click, and the exact path from first visit to action. That research is why our sites for clinics, contractors, and home services don't just look right, they perform.";
@@ -29,7 +30,9 @@ export const Route = createFileRoute("/info")({
 function InfoPage() {
   const copyRef = useRef<HTMLParagraphElement>(null);
   const buttonRef = useRef<HTMLAnchorElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [shown, setShown] = useState(0);
+  useFilm(videoRef, "/media/sunset.mp4?v=3", "/media/sunset-m.mp4?v=3");
 
   useEffect(() => {
     const copy = copyRef.current;
@@ -83,12 +86,13 @@ function InfoPage() {
   return (
     <main className="info info-route">
       <video
+        ref={videoRef}
         className="info-bg"
-        src="/media/sunset.mp4"
         autoPlay
         muted
         loop
         playsInline
+        preload="none"
         aria-hidden="true"
       />
       <div className="info-shade" aria-hidden="true" />

@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { PROJECTS } from "@/content/projects";
 import "./coverflow-carousel.css";
@@ -180,9 +179,6 @@ export function CoverflowCarousel({
             <a href={active.href} target="_blank" rel="noreferrer">
               Visit site
             </a>
-            <Link to="/projects/$id" params={{ id: active.id }}>
-              Case study
-            </Link>
           </div>
         </div>
       ) : null}

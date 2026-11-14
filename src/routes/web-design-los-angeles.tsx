@@ -32,21 +32,21 @@ function LosAngelesPage() {
           <h2>Industries in Los Angeles</h2>
           <ul>
             <li>
-              <Link to="/web-design-medical-clinics">Web design for medical clinics</Link>, including the{" "}
-              <Link to="/projects/$id" params={{ id: "canby" }}>Canby Community Clinic</Link> case study.
+              <Link to="/web-design-medical-clinics">Web design for medical clinics</Link>, including{" "}
+              <a href="https://puravidacc.org">Canby Community Clinic</a>.
             </li>
             <li>
               <Link to="/web-design-roofing-contractors">Roofing website design</Link> for contractors such as{" "}
-              <Link to="/projects/$id" params={{ id: "citium" }}>Citium Roofing</Link> in Glendale and Los Angeles.
+              <a href="https://citiumroofing.com">Citium Roofing</a> in Glendale and Los Angeles.
             </li>
             <li>
               <Link to="/web-design-plumbing-contractors">Plumber website design</Link> in the San Fernando Valley, including{" "}
-              <Link to="/projects/$id" params={{ id: "plumbing" }}>My Plumbing Inc</Link> and{" "}
-              <Link to="/projects/$id" params={{ id: "rooter" }}>Extreme Plumbing & Rooter</Link>.
+              <a href="https://myplumbinginc.com">My Plumbing Inc</a> and{" "}
+              <a href="https://rooter-plumber.com">Extreme Plumbing & Rooter</a>.
             </li>
             <li>
               <Link to="/web-design-airbnb-cleaning">Airbnb cleaning websites</Link>, including{" "}
-              <Link to="/projects/$id" params={{ id: "clean" }}>Extreme Quality Clean</Link>.
+              <a href="https://extremequalityclean.com">Extreme Quality Clean</a>.
             </li>
           </ul>
           <h2>How a project starts</h2>

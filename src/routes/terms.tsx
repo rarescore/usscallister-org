@@ -39,7 +39,7 @@ function TermsPage() {
           <p>USSCALLISTER LLC, Los Angeles. These terms cover use of this site.</p>
           <h2>This site</h2>
           <p>
-            The site is a studio portfolio and a journal. A page, a case study, or an article is not a quote, not a
+            The site is a studio portfolio and a journal. A page or an article is not a quote, not a
             contract, and not a promise of a ranking, a lead count, a timeline, or a result.
           </p>
           <h2>How a project starts</h2>

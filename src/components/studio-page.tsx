@@ -5,6 +5,7 @@ import { SiteCheck } from "@/components/site-check";
 import { StudioFooter } from "@/components/studio-footer";
 import { installAudio, playNav, playOpen, setSoundEnabled } from "@/lib/hover-sound";
 import { sendStudioNote } from "@/lib/send-note";
+import { useFilm } from "@/lib/use-film";
 
 const HERO_MARK = "Los Angeles".split(" ");
 
@@ -15,6 +16,7 @@ const INFO_WORDS =
 
 export function StudioPage() {
   const heroVideo = useRef<HTMLVideoElement>(null);
+  const sunsetVideo = useRef<HTMLVideoElement>(null);
   const infoCopyRef = useRef<HTMLParagraphElement>(null);
   const infoButtonRef = useRef<HTMLAnchorElement>(null);
   const [clock, setClock] = useState("");
@@ -23,6 +25,8 @@ export function StudioPage() {
   const [away, setAway] = useState(false);
   const [formNote, setFormNote] = useState("");
 
+  useFilm(heroVideo, "/media/hero.mp4?v=3", "/media/hero-m.mp4?v=3");
+  useFilm(sunsetVideo, "/media/sunset.mp4?v=3", "/media/sunset-m.mp4?v=3");
   useEffect(() => installAudio(), []);
 
   useEffect(() => {
@@ -200,14 +204,8 @@ export function StudioPage() {
             loop
             playsInline
             poster="/media/hero-poster.jpg?v=2"
-            preload="metadata"
-            onEnded={(event) => {
-              event.currentTarget.currentTime = 0;
-              void event.currentTarget.play();
-            }}
-          >
-            <source src="/media/hero.mp4?v=2" type="video/mp4" />
-          </video>
+            preload="none"
+          />
         </div>
         <div className="hero-shade" />
         <div className="hero-mark">
@@ -246,12 +244,13 @@ export function StudioPage() {
         info={
           <>
             <video
+              ref={sunsetVideo}
               className="info-bg"
-              src="/media/sunset.mp4"
               autoPlay
               muted
               loop
               playsInline
+              preload="none"
               aria-hidden="true"
             />
             <div className="info-shade" aria-hidden="true" />

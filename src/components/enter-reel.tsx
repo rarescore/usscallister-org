@@ -1,4 +1,5 @@
-import type { FormEvent } from "react";
+import { useRef, type FormEvent } from "react";
+import { useFilm } from "@/lib/use-film";
 
 type EnterReelProps = {
   formNote: string;
@@ -7,6 +8,8 @@ type EnterReelProps = {
 
 export function EnterReel({ formNote, onSubmit }: EnterReelProps) {
   const sent = formNote.startsWith("Message has been sent");
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useFilm(videoRef, "/media/close.mp4?v=3", "/media/close-m.mp4?v=3");
 
   return (
     <section className="close" id="reel" aria-label="Contact">
@@ -17,10 +20,9 @@ export function EnterReel({ formNote, onSubmit }: EnterReelProps) {
         loop
         playsInline
         poster="/media/close-poster.jpg"
-        preload="metadata"
-      >
-        <source src="/media/close.mp4" type="video/mp4" />
-      </video>
+        preload="none"
+        ref={videoRef}
+      />
       <div className="close-shade close-shade-heavy" />
       <div className="close-grid close-grid-stacked">
         <div className="close-copy">

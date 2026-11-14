@@ -1,6 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { FolioBar } from "@/components/article";
-import { CASE_STUDIES } from "@/content/case-studies";
 import { getProject } from "@/content/projects";
 import { absoluteUrl } from "@/lib/journal-seo";
 import { pageCanonicalHead, organizationGraph } from "@/lib/site-seo";
@@ -8,9 +7,8 @@ import { pageCanonicalHead, organizationGraph } from "@/lib/site-seo";
 export const Route = createFileRoute("/projects/$id")({
   loader: ({ params }) => {
     const project = getProject(params.id);
-    const study = CASE_STUDIES[params.id];
-    if (!project || !study) throw notFound();
-    return { project, study };
+    if (!project) throw notFound();
+    return { project };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -18,7 +16,7 @@ export const Route = createFileRoute("/projects/$id")({
     }
     const { project } = loaderData;
     const title = `${project.name} | USSCALLISTER`;
-    const description = `${project.note} A ${project.year} ${project.cat.toLowerCase()} project by USSCALLISTER in Los Angeles.`;
+    const description = `${project.note} ${project.year} work by USSCALLISTER in Los Angeles.`;
     const canonical = absoluteUrl(`/projects/${project.id}`);
     const graph = {
       "@context": "https://schema.org",
@@ -54,7 +52,7 @@ export const Route = createFileRoute("/projects/$id")({
 });
 
 function ProjectPage() {
-  const { project, study } = Route.useLoaderData();
+  const { project } = Route.useLoaderData();
   return (
     <main className="folio">
       <FolioBar here="Projects" />
@@ -66,34 +64,12 @@ function ProjectPage() {
           <img src={project.detail} alt={`${project.name} website`} width={1600} height={1000} />
         </figure>
         <div className="folio-prose folio-prose-solo">
-          <h2>The problem</h2>
-          <p>{study.problem}</p>
-          <h2>The approach</h2>
-          {study.approach.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-          <h2>What shipped</h2>
-          <ul>
-            {study.shipped.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <p>
-            These are examples of work, not a promise of ranking, leads, or a specific result.
-          </p>
           <aside className="folio-next">
             <p>See it</p>
             <a href={project.href} target="_blank" rel="noreferrer">
               {project.host}
             </a>
-            {study.service ? <a href={study.service}>Related service</a> : null}
-            {study.journal ? (
-              <Link to="/journal/$slug" params={{ slug: study.journal }}>
-                Related note
-              </Link>
-            ) : null}
             <Link to="/projects">All projects</Link>
-            <Link to="/contact">Start a project</Link>
           </aside>
         </div>
       </article>

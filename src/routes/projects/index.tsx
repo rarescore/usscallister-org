@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Link } from "@tanstack/react-router";
 import { FolioBar } from "@/components/article";
 import { CoverflowCarousel } from "@/components/coverflow-carousel";
 import { PROJECTS } from "@/content/projects";
@@ -40,9 +39,9 @@ function ProjectsIndex() {
       <CoverflowCarousel showCaption />
       <nav className="project-index" aria-label="All projects">
         {PROJECTS.map((project) => (
-          <Link key={project.id} to="/projects/$id" params={{ id: project.id }}>
+          <a key={project.id} href={project.href} target="_blank" rel="noreferrer">
             {project.name}
-          </Link>
+          </a>
         ))}
       </nav>
     </main>
