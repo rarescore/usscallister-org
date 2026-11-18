@@ -61,7 +61,7 @@ export function EnterReel({ formNote, onSubmit }: EnterReelProps) {
                 Send the brief
               </button>
               <p className="form-note">
-                Same-day reply. Or call <a href="tel:8189136158">818-913-6158</a>.
+                Reply within two days. Or call <a href="tel:8189136158">818-913-6158</a>.
               </p>
               {formNote ? <p className="form-note">{formNote}</p> : null}
             </>
