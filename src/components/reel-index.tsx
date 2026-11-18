@@ -36,6 +36,8 @@ const LIVE: Record<string, string | null> = {
 export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
   const [index, setIndex] = useState(0);
   const [liveId, setLiveId] = useState(PROJECTS[0].id);
+  const [open, setOpen] = useState(false);
+  const [full, setFull] = useState(false);
   const [ready, setReady] = useState<string | null>(null);
   const active = PROJECTS[index] ?? PROJECTS[0];
   const live = LIVE[active.id];
@@ -84,6 +86,21 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
     setIndex(next);
   }
 
+  function openProject(next = index) {
+    setIndex(next);
+    setFull(false);
+    setOpen(true);
+  }
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <section
       className={underBar ? "reel-index is-under-bar" : "reel-index"}
@@ -104,7 +121,7 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
                     onPointerEnter={(event) => {
                       if (event.pointerType === "mouse") jump(i);
                     }}
-                    onClick={() => jump(i)}
+                    onClick={() => openProject(i)}
                   >
                     <span>{String(i + 1).padStart(2, "0")}</span>
                     {project.short}
@@ -134,6 +151,9 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
                     title={PROJECTS.find((project) => project.id === liveId)?.name ?? "Project"}
                   />
                 ) : null}
+                <button className="reel-open" type="button" onClick={() => openProject()}>
+                  Open
+                </button>
               </div>
             </div>
           </figure>
@@ -166,6 +186,29 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
           </footer>
         </div>
       </div>
+      {open ? (
+        <div className={full ? "project-stage is-full" : "project-stage"} role="dialog" aria-modal="true" aria-label={active.name}>
+          <div className="project-bar">
+            <button type="button" onClick={() => setOpen(false)}>
+              Close
+            </button>
+            <button type="button" onClick={() => setFull((value) => !value)}>
+              {full ? "Frame" : "Expand"}
+            </button>
+            <a href={active.href} target="_blank" rel="noreferrer">
+              Live website
+            </a>
+          </div>
+          <p className="project-edge">{active.short}</p>
+          <div className="project-screen">
+            {LIVE[active.id] ? (
+              <iframe src={LIVE[active.id] ?? undefined} title={active.name} />
+            ) : (
+              <img src={active.image.replace(".jpg", "@2x.jpg")} alt={active.name} />
+            )}
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }
