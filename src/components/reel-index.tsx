@@ -96,32 +96,38 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
     >
       <div className="reel-sticky">
         <div className="reel-stage">
-          <header className="reel-top">
+          <aside className="reel-rail">
             <p className="reel-kicker">Selected work</p>
-            <p className="reel-kicker">Los Angeles, 2026</p>
-          </header>
+            <p className="reel-kicker reel-place">Los Angeles, 2026</p>
+            <ol className="reel-list">
+              {PROJECTS.map((project, i) => (
+                <li key={project.id}>
+                  <button type="button" aria-current={i === index ? "true" : undefined} onClick={() => jump(i)}>
+                    <span>{String(i + 1).padStart(2, "0")}</span>
+                    {project.short}
+                  </button>
+                </li>
+              ))}
+            </ol>
+          </aside>
 
           <figure className="reel-frame">
-            <div className="reel-bar">
-              <span>{active.host}</span>
-              <a href={active.href} target="_blank" rel="noreferrer">
-                Visit
-              </a>
-            </div>
-            <div className="reel-window">
-              {PROJECTS.map((project, i) => (
-                <img
-                  key={project.id}
-                  className={i === index ? "is-on" : undefined}
-                  src={project.image}
-                  srcSet={`${project.image} 1440w, ${project.image.replace(".jpg", "@2x.jpg")} 2880w`}
-                  sizes="(max-width: 800px) 92vw, 1200px"
-                  alt=""
-                  width={1440}
-                  height={900}
-                  draggable={false}
-                />
-              ))}
+            <div className="reel-mat">
+              <div className="reel-window">
+                {PROJECTS.map((project, i) => (
+                  <img
+                    key={project.id}
+                    className={i === index ? "is-on" : undefined}
+                    src={project.image}
+                    srcSet={`${project.image} 1440w, ${project.image.replace(".jpg", "@2x.jpg")} 2880w`}
+                    sizes="(max-width: 800px) 92vw, 70vw"
+                    alt=""
+                    width={1440}
+                    height={900}
+                    draggable={false}
+                  />
+                ))}
+              </div>
             </div>
           </figure>
 
@@ -136,9 +142,11 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
               </h2>
               <p className="reel-note">{active.note}</p>
             </div>
-            <div className="reel-foot-side">
+            <div className="reel-links">
+              <a href={active.href} target="_blank" rel="noreferrer">
+                {active.host}
+              </a>
               <a
-                className="reel-brief"
                 href="#reel"
                 onClick={(event) => {
                   event.preventDefault();
@@ -147,15 +155,6 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
               >
                 Start one like this
               </a>
-              <ol className="reel-list">
-                {PROJECTS.map((project, i) => (
-                  <li key={project.id}>
-                    <button type="button" aria-current={i === index ? "true" : undefined} onClick={() => jump(i)}>
-                      {project.short}
-                    </button>
-                  </li>
-                ))}
-              </ol>
             </div>
           </footer>
         </div>
@@ -167,14 +166,16 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
             <p className="reel-kicker">
               {String(i + 1).padStart(2, "0")} / {String(PROJECTS.length).padStart(2, "0")}
             </p>
-            <img
-              src={project.image}
-              srcSet={`${project.image} 1440w, ${project.image.replace(".jpg", "@2x.jpg")} 2880w`}
-              sizes="92vw"
-              alt={`${project.name} website`}
-              width={1440}
-              height={900}
-            />
+            <div className="reel-mat">
+              <img
+                src={project.image}
+                srcSet={`${project.image} 1440w, ${project.image.replace(".jpg", "@2x.jpg")} 2880w`}
+                sizes="92vw"
+                alt={`${project.name} website`}
+                width={1440}
+                height={900}
+              />
+            </div>
             <h2>{project.short}</h2>
             <p>{project.note}</p>
             <div className="reel-actions">

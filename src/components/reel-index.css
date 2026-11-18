@@ -1,9 +1,10 @@
 .reel-index {
   --paper: #f4f1ea;
-  --ink: #0c0c0b;
+  --ink: #0b0b0a;
   position: relative;
   height: calc(var(--beats) * 100vh);
-  background: var(--ink);
+  background:
+    radial-gradient(120% 80% at 70% 40%, #161614 0%, var(--ink) 58%);
   color: var(--paper);
 }
 
@@ -15,71 +16,100 @@
 }
 
 .reel-stage {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 196px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 22px 40px;
   height: 100%;
-  padding: 28px 40px 26px;
+  padding: 32px 44px 28px 36px;
   box-sizing: border-box;
 }
 
-.reel-top,
-.reel-bar,
-.reel-foot {
+.reel-rail {
+  grid-row: 1 / span 2;
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 24px;
+  flex-direction: column;
+  min-height: 0;
+  padding-top: 2px;
 }
 
 .reel-kicker {
   margin: 0;
   font-family: Inter, sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 400;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(244, 241, 234, 0.5);
+  color: rgba(244, 241, 234, 0.42);
 }
 
 .reel-kicker span {
-  color: rgba(244, 241, 234, 0.32);
+  color: rgba(244, 241, 234, 0.28);
+}
+
+.reel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 28px 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.reel-place {
+  margin-top: 8px;
+}
+
+.reel-list button {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  width: 100%;
+  padding: 7px 0;
+  border: 0;
+  background: transparent;
+  color: rgba(244, 241, 234, 0.34);
+  font-family: Inter, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.reel-list button span {
+  font-variant-numeric: tabular-nums;
+  color: rgba(244, 241, 234, 0.28);
+}
+
+.reel-list button[aria-current="true"],
+.reel-list button:hover {
+  color: var(--paper);
+}
+
+.reel-list button[aria-current="true"] span {
+  color: #ff2a2a;
 }
 
 .reel-frame {
-  display: flex;
-  flex-direction: column;
-  width: min(100%, calc((100vh - 250px) * 1.6));
-  margin: 18px auto 0;
+  align-self: end;
   min-height: 0;
+  margin: 0;
 }
 
-.reel-bar {
-  align-items: center;
-  padding: 0 2px 8px;
-  font-family: Inter, sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: rgba(244, 241, 234, 0.62);
-}
-
-.reel-bar a {
-  color: var(--paper);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
-.reel-bar a:hover {
-  color: #ff2a2a;
+.reel-mat {
+  padding: 12px;
+  background: #f4f1ea;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
 }
 
 .reel-window {
   position: relative;
   aspect-ratio: 16 / 10;
+  max-height: calc(100vh - 250px);
   overflow: hidden;
   background: #111;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
 }
 
 .reel-window img {
@@ -90,7 +120,7 @@
   object-fit: contain;
   object-position: center top;
   opacity: 0;
-  transition: opacity 0.45s ease;
+  transition: opacity 0.5s ease;
 }
 
 .reel-window img.is-on {
@@ -98,37 +128,39 @@
 }
 
 .reel-foot {
-  width: min(100%, calc((100vh - 250px) * 1.6));
-  margin: 16px auto 0;
+  display: flex;
+  justify-content: space-between;
   align-items: end;
+  gap: 32px;
 }
 
 .reel-title {
-  margin: 6px 0 0;
+  margin: 8px 0 0;
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(36px, 3.2vw, 52px);
+  font-size: clamp(40px, 3.6vw, 64px);
   font-weight: 500;
-  line-height: 0.9;
+  line-height: 0.88;
   letter-spacing: -0.03em;
 }
 
 .reel-note {
-  margin: 8px 0 0;
+  margin: 10px 0 0;
   max-width: 36ch;
   font-family: Inter, sans-serif;
   font-size: 14px;
-  line-height: 1.45;
-  color: rgba(244, 241, 234, 0.7);
+  line-height: 1.5;
+  color: rgba(244, 241, 234, 0.68);
 }
 
-.reel-foot-side {
+.reel-links {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 12px;
+  gap: 8px;
+  padding-bottom: 4px;
 }
 
-.reel-brief {
+.reel-links a {
   color: var(--paper);
   font-family: Inter, sans-serif;
   font-size: 11px;
@@ -137,38 +169,8 @@
   text-decoration: none;
 }
 
-.reel-brief:hover {
+.reel-links a:hover {
   color: #ff2a2a;
-}
-
-.reel-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 6px 16px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.reel-list button {
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: rgba(244, 241, 234, 0.34);
-  font-family: Inter, sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.reel-list button[aria-current="true"] {
-  color: var(--paper);
-}
-
-.reel-list button:hover {
-  color: var(--paper);
 }
 
 .reel-index.is-under-bar .reel-sticky {
@@ -176,9 +178,8 @@
   height: calc(100vh - 53px);
 }
 
-.reel-index.is-under-bar .reel-frame,
-.reel-index.is-under-bar .reel-foot {
-  width: min(100%, calc((100vh - 300px) * 1.6));
+.reel-index.is-under-bar .reel-window {
+  max-height: calc(100vh - 310px);
 }
 
 .reel-stack {
@@ -186,23 +187,28 @@
 }
 
 .reel-shot {
-  padding: 28px 18px 48px;
+  padding: 36px 18px 48px;
 }
 
-.reel-shot img {
+.reel-shot .reel-mat {
+  padding: 8px;
+  box-shadow: none;
+}
+
+.reel-shot .reel-mat img {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 10;
   object-fit: contain;
   object-position: center top;
-  background: #161616;
+  background: #111;
 }
 
 .reel-shot h2 {
-  margin: 16px 0 0;
+  margin: 18px 0 0;
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 40px;
+  font-size: 42px;
   font-weight: 500;
   line-height: 0.9;
 }
@@ -212,17 +218,17 @@
   max-width: 36ch;
   font-family: Inter, sans-serif;
   font-size: 14px;
-  line-height: 1.45;
-  color: rgba(244, 241, 234, 0.72);
+  line-height: 1.5;
+  color: rgba(244, 241, 234, 0.7);
 }
 
 .reel-actions {
   display: flex;
-  gap: 16px;
-  align-items: center;
+  gap: 18px;
   margin-top: 16px;
 }
 
+.reel-brief,
 .reel-visit {
   color: var(--paper);
   font-family: Inter, sans-serif;
@@ -235,6 +241,7 @@
 @media (max-width: 800px), (prefers-reduced-motion: reduce) {
   .reel-index {
     height: auto;
+    background: var(--ink);
   }
 
   .reel-sticky {
@@ -247,14 +254,19 @@
 }
 
 @media (max-width: 1100px) and (min-width: 801px) {
+  .reel-stage {
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: 16px 24px;
+    padding: 24px;
+  }
+
   .reel-foot {
     align-items: start;
     flex-direction: column;
+    gap: 14px;
   }
 
-  .reel-foot-side,
-  .reel-list {
+  .reel-links {
     align-items: flex-start;
-    justify-content: flex-start;
   }
 }
