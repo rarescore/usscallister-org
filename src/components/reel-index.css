@@ -267,7 +267,7 @@
   .reel-stage {
     grid-template-columns: 1fr;
     height: auto;
-    padding: 28px 16px 36px;
+    padding: 18px 16px 28px;
   }
 
   .reel-rail {
@@ -286,6 +286,18 @@
     min-height: 40px;
     padding: 8px 0;
     font-size: 13px;
+  }
+
+  .reel-mat {
+    padding: 8px;
+  }
+
+  .reel-window iframe {
+    display: none;
+  }
+
+  .reel-window img {
+    opacity: 1;
   }
 
   .reel-window {

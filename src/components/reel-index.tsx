@@ -37,13 +37,22 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
   const [index, setIndex] = useState(0);
   const [liveId, setLiveId] = useState(PROJECTS[0].id);
   const [ready, setReady] = useState<string | null>(null);
+  const [wide, setWide] = useState(false);
   const active = PROJECTS[index] ?? PROJECTS[0];
-  const live = LIVE[active.id];
+  const live = wide ? LIVE[active.id] : null;
 
   useEffect(() => {
     const id = window.setTimeout(() => setLiveId(active.id), 160);
     return () => window.clearTimeout(id);
   }, [active.id]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 801px)");
+    const apply = () => setWide(media.matches);
+    apply();
+    media.addEventListener("change", apply);
+    return () => media.removeEventListener("change", apply);
+  }, []);
 
   const frameRef = useRef<HTMLIFrameElement>(null);
   const windowRef = useRef<HTMLDivElement>(null);
@@ -125,7 +134,7 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
                   height={1800}
                   draggable={false}
                 />
-                {LIVE[liveId] ? (
+                {live ? (
                   <iframe
                     key={liveId}
                     ref={frameRef}

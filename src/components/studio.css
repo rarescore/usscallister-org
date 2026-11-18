@@ -1752,7 +1752,7 @@
     right: 0;
     width: 100%;
     max-width: none;
-    padding: 12px 16px 8px;
+    padding: 8px 14px 6px;
     transform: none;
     border: 0;
     border-radius: 0;
@@ -1828,7 +1828,7 @@
     justify-content: flex-end;
     height: 100dvh;
     min-height: 100dvh;
-    padding: 108px 14px 14px;
+    padding: 78px 12px 12px;
     box-sizing: border-box;
     overflow: hidden;
   }
@@ -1861,19 +1861,33 @@
     line-height: 1;
   }
 
+  .hero-tagline {
+    letter-spacing: 0.12em;
+    font-size: 10px;
+  }
+
+  .hero .hero-mark time {
+    display: block;
+  }
+
   .lead-card {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 14px;
-    padding: 12px 14px 12px;
+    align-items: start;
+    column-gap: 12px;
+    padding: 8px 12px 10px;
     overflow: visible;
   }
 
   .lead-card label {
-    margin-top: 8px;
+    margin-top: 2px;
+    gap: 0;
   }
 
   .lead-card input:not(.trap) {
+    height: 28px;
+    margin: 0;
+    padding: 0 0 4px;
     font-size: 16px;
   }
 
