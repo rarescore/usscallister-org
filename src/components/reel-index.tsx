@@ -1,12 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import { PROJECTS } from "@/content/projects";
+import { getLenis } from "@/lib/use-lenis";
 import "./reel-index.css";
+
+function scrollTo(target: HTMLElement | number) {
+  const lenis = getLenis();
+  if (lenis) {
+    lenis.scrollTo(target);
+    return;
+  }
+  if (typeof target === "number") window.scrollTo({ top: target, behavior: "smooth" });
+  else target.scrollIntoView({ behavior: "smooth" });
+}
 
 function seedBrief(name: string) {
   const form = document.getElementById("contact");
   const brief = form?.querySelector<HTMLTextAreaElement>("textarea[name='brief']");
   if (brief && !brief.value.trim()) brief.value = `A site in the vein of ${name}.`;
-  document.getElementById("reel")?.scrollIntoView({ behavior: "smooth" });
+  const reel = document.getElementById("reel");
+  if (reel) scrollTo(reel);
   window.setTimeout(() => {
     form?.querySelector<HTMLInputElement>("input[name='name']")?.focus();
   }, 400);
@@ -32,7 +44,9 @@ export function ReelIndex() {
       const total = rect.height - window.innerHeight;
       if (total <= 0) return;
       const passed = Math.min(total, Math.max(0, -rect.top));
-      const next = Math.min(PROJECTS.length - 1, Math.floor((passed / total) * PROJECTS.length * 0.999));
+      const beat = (passed / total) * PROJECTS.length;
+      const next = Math.min(PROJECTS.length - 1, Math.floor(beat * 0.999));
+      root.style.setProperty("--drift", (beat - Math.floor(beat) - 0.5).toFixed(3));
       setIndex((current) => (current === next ? current : next));
     };
 
@@ -55,11 +69,12 @@ export function ReelIndex() {
     const root = rootRef.current;
     if (!root) return;
     if (window.matchMedia(SIMPLE).matches) {
-      document.getElementById(`shot-${PROJECTS[next].id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const shot = document.getElementById(`shot-${PROJECTS[next].id}`);
+      if (shot) scrollTo(shot);
       return;
     }
     const total = root.offsetHeight - window.innerHeight;
-    window.scrollTo({ top: root.offsetTop + (next / PROJECTS.length) * total + 2, behavior: "smooth" });
+    scrollTo(root.offsetTop + (next / PROJECTS.length) * total + 2);
   }
 
   return (

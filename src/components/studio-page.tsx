@@ -4,6 +4,7 @@ import { FlowTrack } from "@/components/flow-track";
 import { SiteCheck } from "@/components/site-check";
 import { StudioFooter } from "@/components/studio-footer";
 import { installAudio, playNav, playOpen, setSoundEnabled } from "@/lib/hover-sound";
+import { getLenis, useLenis } from "@/lib/use-lenis";
 import { sendStudioNote } from "@/lib/send-note";
 import { useFilm } from "@/lib/use-film";
 
@@ -15,6 +16,7 @@ const INFO_WORDS =
   );
 
 export function StudioPage() {
+  useLenis();
   const heroVideo = useRef<HTMLVideoElement>(null);
   const sunsetVideo = useRef<HTMLVideoElement>(null);
   const infoCopyRef = useRef<HTMLParagraphElement>(null);
@@ -117,7 +119,9 @@ export function StudioPage() {
 
   function go(id: string) {
     const target = document.getElementById(id === "contact" ? "reel" : id);
-    target?.scrollIntoView({ behavior: "auto" });
+    const lenis = getLenis();
+    if (lenis && target) lenis.scrollTo(target);
+    else target?.scrollIntoView({ behavior: "auto" });
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
