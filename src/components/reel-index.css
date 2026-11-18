@@ -126,6 +126,27 @@
   opacity: 1;
 }
 
+.reel-window img.is-off {
+  opacity: 0;
+}
+
+.reel-window iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1200px;
+  border: 0;
+  background: #fff;
+  opacity: 0;
+  transform: scale(var(--fit, 0.54));
+  transform-origin: top left;
+}
+
+.reel-window iframe.is-on {
+  opacity: 1;
+}
+
 .reel-foot {
   display: flex;
   justify-content: space-between;
