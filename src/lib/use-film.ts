@@ -28,6 +28,11 @@ function sourceFor(name: FilmName) {
     return HERO_4K;
   }
 
+  if (name === "close") {
+    if (save || slow || phone) return "/media/close-m.mp4?v=6";
+    return "/media/close.mp4?v=6";
+  }
+
   if (save || slow) return `/media/${name}-m.mp4?v=3`;
   if (hevc) {
     if (name === "floor" && wide && !phone) return "/media/floor-4k.mp4?v=5";
