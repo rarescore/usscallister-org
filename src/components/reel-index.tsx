@@ -53,9 +53,6 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
           onUpdate: (self) => {
             const beat = self.progress * PROJECTS.length * 0.999;
             const next = Math.min(PROJECTS.length - 1, Math.floor(beat));
-            const local = beat - Math.floor(beat);
-            root.style.setProperty("--drift", (local - 0.5).toFixed(3));
-            root.style.setProperty("--wipe", Math.min(1, local / 0.28).toFixed(3));
             setIndex((current) => (current === next ? current : next));
           },
         });
@@ -98,59 +95,69 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
       aria-label="Selected work"
     >
       <div className="reel-sticky">
-        <div className="reel-copy">
-          <p className="reel-kicker">Selected work, 2026</p>
-          <h2 className="reel-title" key={active.id}>
-            {active.short}
-          </h2>
-          <p className="reel-note">{active.note}</p>
-          <div className="reel-actions">
-            <a
-              className="reel-brief"
-              href="#reel"
-              onClick={(event) => {
-                event.preventDefault();
-                seedBrief(active.name);
-              }}
-            >
-              Start one like this
-            </a>
-            <a className="reel-visit" href={active.href} target="_blank" rel="noreferrer">
-              Visit
-            </a>
-          </div>
-          <ol className="reel-list">
-            {PROJECTS.map((project, i) => (
-              <li key={project.id}>
-                <button type="button" aria-current={i === index ? "true" : undefined} onClick={() => jump(i)}>
-                  <span>{String(i + 1).padStart(2, "0")}</span>
-                  {project.short}
-                </button>
-              </li>
-            ))}
-          </ol>
-        </div>
-        <div className="reel-frame">
-          <div className="reel-meter" style={{ ["--i" as string]: String(index) }} aria-hidden="true">
-            <span />
-          </div>
-          {PROJECTS.map((project, i) => (
-            <img
-              key={project.id}
-              className={i === index ? "is-on" : undefined}
-              src={project.image}
-              srcSet={`${project.image} 1440w, ${project.image.replace(".jpg", "@2x.jpg")} 2880w`}
-              sizes="(max-width: 800px) 92vw, 58vw"
-              alt=""
-              width={1440}
-              height={900}
-              draggable={false}
-            />
-          ))}
-          <p className="reel-count">
-            {String(index + 1).padStart(2, "0")}
-            <span> / {String(PROJECTS.length).padStart(2, "0")}</span>
-          </p>
+        <div className="reel-stage">
+          <header className="reel-top">
+            <p className="reel-kicker">Selected work</p>
+            <p className="reel-kicker">Los Angeles, 2026</p>
+          </header>
+
+          <figure className="reel-frame">
+            <div className="reel-bar">
+              <span>{active.host}</span>
+              <a href={active.href} target="_blank" rel="noreferrer">
+                Visit
+              </a>
+            </div>
+            <div className="reel-window">
+              {PROJECTS.map((project, i) => (
+                <img
+                  key={project.id}
+                  className={i === index ? "is-on" : undefined}
+                  src={project.image}
+                  srcSet={`${project.image} 1440w, ${project.image.replace(".jpg", "@2x.jpg")} 2880w`}
+                  sizes="(max-width: 800px) 92vw, 1200px"
+                  alt=""
+                  width={1440}
+                  height={900}
+                  draggable={false}
+                />
+              ))}
+            </div>
+          </figure>
+
+          <footer className="reel-foot">
+            <div>
+              <p className="reel-kicker">
+                {String(index + 1).padStart(2, "0")} / {String(PROJECTS.length).padStart(2, "0")}
+                <span> {active.cat}</span>
+              </p>
+              <h2 className="reel-title" key={active.id}>
+                {active.short}
+              </h2>
+              <p className="reel-note">{active.note}</p>
+            </div>
+            <div className="reel-foot-side">
+              <a
+                className="reel-brief"
+                href="#reel"
+                onClick={(event) => {
+                  event.preventDefault();
+                  seedBrief(active.name);
+                }}
+              >
+                Start one like this
+              </a>
+              <ol className="reel-list">
+                {PROJECTS.map((project, i) => (
+                  <li key={project.id}>
+                    <button type="button" aria-current={i === index ? "true" : undefined} onClick={() => jump(i)}>
+                      {project.short}
+                    </button>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </footer>
         </div>
       </div>
 
