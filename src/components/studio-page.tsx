@@ -39,10 +39,8 @@ export function StudioPage() {
   useEffect(() => {
     const onScroll = () => {
       const hero = document.getElementById("home");
-      const reel = document.getElementById("reel");
       const pastHero = !!hero && hero.getBoundingClientRect().bottom < 80;
-      const formOnScreen = !!reel && reel.getBoundingClientRect().top < window.innerHeight * 0.55;
-      setAway(pastHero && !formOnScreen);
+      setAway(pastHero);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
