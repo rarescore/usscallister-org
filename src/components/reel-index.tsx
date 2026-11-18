@@ -37,7 +37,6 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
   const [index, setIndex] = useState(0);
   const [liveId, setLiveId] = useState(PROJECTS[0].id);
   const [open, setOpen] = useState(false);
-  const [full, setFull] = useState(false);
   const [ready, setReady] = useState<string | null>(null);
   const active = PROJECTS[index] ?? PROJECTS[0];
   const live = LIVE[active.id];
@@ -48,6 +47,7 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
   }, [active.id]);
 
   const frameRef = useRef<HTMLIFrameElement>(null);
+  const screenRef = useRef<HTMLDivElement>(null);
   const windowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -88,9 +88,19 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
 
   function openProject(next = index) {
     setIndex(next);
-    setFull(false);
     setOpen(true);
   }
+
+  useEffect(() => {
+    if (!open) return;
+    const box = screenRef.current;
+    if (!box) return;
+    const fit = () => box.style.setProperty("--fit", String(box.clientWidth / 1440));
+    fit();
+    const observer = new ResizeObserver(fit);
+    observer.observe(box);
+    return () => observer.disconnect();
+  }, [open, active.id]);
 
   useEffect(() => {
     if (!open) return;
@@ -187,20 +197,16 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
         </div>
       </div>
       {open ? (
-        <div className={full ? "project-stage is-full" : "project-stage"} role="dialog" aria-modal="true" aria-label={active.name}>
-          <div className="project-bar">
-            <button type="button" onClick={() => setOpen(false)}>
-              Close
-            </button>
-            <button type="button" onClick={() => setFull((value) => !value)}>
-              {full ? "Frame" : "Expand"}
-            </button>
-            <a href={active.href} target="_blank" rel="noreferrer">
-              Live website
-            </a>
-          </div>
-          <p className="project-edge">{active.short}</p>
-          <div className="project-screen">
+        <div className="project-stage" role="dialog" aria-modal="true" aria-label={active.name} onClick={() => setOpen(false)}>
+          <p className="project-meta">
+            <span>2026</span>
+            <span>{active.short}</span>
+          </p>
+          <div
+            className="project-screen"
+            ref={screenRef}
+            onClick={(event) => event.stopPropagation()}
+          >
             {LIVE[active.id] ? (
               <iframe src={LIVE[active.id] ?? undefined} title={active.name} />
             ) : (
