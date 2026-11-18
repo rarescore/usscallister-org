@@ -16,6 +16,7 @@ export function StudioPage() {
   const [away, setAway] = useState(false);
   const [formNote, setFormNote] = useState("");
   const [leadNote, setLeadNote] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useFilm(heroVideo, "hero");
   useEffect(() => installAudio(), []);
@@ -119,21 +120,29 @@ export function StudioPage() {
       <a className="skip" href="#index">
         Skip to projects
       </a>
-      <aside className={away ? "panel is-away" : "panel"}>
+      <aside className={away ? "panel is-away" : menuOpen ? "panel is-menu" : "panel"}>
+        <button
+          className="menu-toggle"
+          type="button"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          {menuOpen ? "Close" : "Menu"}
+        </button>
         <div className="panel-top">
           <h1 className="name">USSCALLISTER</h1>
         </div>
         <nav className="nav" aria-label="Studio">
-          <a href="#home" onPointerEnter={playNav} onClick={() => go("home")}>
+          <a href="#home" onPointerEnter={playNav} onClick={() => { setMenuOpen(false); go("home"); }}>
             Home
           </a>
-          <a href="#index" onPointerEnter={playNav} onClick={() => go("index")}>
+          <a href="#index" onPointerEnter={playNav} onClick={() => { setMenuOpen(false); go("index"); }}>
             Projects
           </a>
-          <Link to="/journal" onPointerEnter={playNav}>
+          <Link to="/journal" onPointerEnter={playNav} onClick={() => setMenuOpen(false)}>
             Journal
           </Link>
-          <Link to="/contact" onPointerEnter={playNav}>
+          <Link to="/contact" onPointerEnter={playNav} onClick={() => setMenuOpen(false)}>
             Contact
           </Link>
         </nav>
