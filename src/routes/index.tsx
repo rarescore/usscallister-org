@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
       ...head,
       links: [
         ...(head.links ?? []),
-        { rel: "preload", as: "image", href: "/media/hero-poster.jpg?v=6", fetchPriority: "high" },
+        { rel: "preload", as: "image", href: "/media/hero-boat-poster.jpg?v=1", fetchPriority: "high" },
       ],
     };
   },

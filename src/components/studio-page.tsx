@@ -168,13 +168,13 @@ export function StudioPage() {
             muted
             loop
             playsInline
-            poster="/media/hero-poster.jpg?v=6"
+            poster="/media/hero-boat-poster.jpg?v=1"
             preload="auto"
           />
           <script
             dangerouslySetInnerHTML={{
               __html:
-                "(function(){var v=document.querySelector('.hero-video');if(!v||v.getAttribute('src')||v.currentSrc)return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var c=navigator.connection;var slow=!!(c&&(c.saveData||c.effectiveType==='slow-2g'||c.effectiveType==='2g'||c.effectiveType==='3g'||(typeof c.downlink==='number'&&c.downlink<1.5)));var phone=matchMedia('(max-width: 800px)').matches;var hevc=document.createElement('video').canPlayType('video/mp4; codecs=\"hvc1.1.6.L120.90\"')!=='';v.src=slow||phone?'/media/hero-m.mp4?v=6':(hevc?'/media/hero-4k.h265.mp4?v=7':'/media/hero-4k.mp4?v=7');})();",
+                "(function(){var v=document.querySelector('.hero-video');if(!v||v.getAttribute('src')||v.currentSrc)return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var c=navigator.connection;var slow=!!(c&&(c.saveData||c.effectiveType==='slow-2g'||c.effectiveType==='2g'||c.effectiveType==='3g'||(typeof c.downlink==='number'&&c.downlink<1.5)));var phone=matchMedia('(max-width: 800px)').matches;v.src=slow||phone?'/media/hero-boat-m.mp4?v=1':'/media/hero-boat.mp4?v=1';})();",
             }}
           />
         </div>

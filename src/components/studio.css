@@ -1862,8 +1862,15 @@
   }
 
   .hero-tagline {
-    letter-spacing: 0.12em;
-    font-size: 10px;
+    display: none;
+  }
+
+  .hero-shade {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.08) 46%, rgba(0, 0, 0, 0) 70%);
+  }
+
+  .hero-video {
+    object-position: center 42%;
   }
 
   .hero .hero-mark time {
@@ -1874,21 +1881,33 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: start;
-    column-gap: 12px;
-    padding: 8px 12px 10px;
+    column-gap: 16px;
+    row-gap: 10px;
+    padding: 14px 14px 12px;
     overflow: visible;
   }
 
   .lead-card label {
-    margin-top: 2px;
-    gap: 0;
+    display: grid;
+    grid-template-rows: auto auto;
+    align-content: start;
+    justify-content: stretch;
+    gap: 2px;
+    margin: 0;
+    min-height: 0;
   }
 
   .lead-card input:not(.trap) {
-    height: 28px;
+    display: block;
+    width: 100%;
+    height: 22px;
     margin: 0;
-    padding: 0 0 4px;
+    padding: 0;
     font-size: 16px;
+    line-height: 22px;
+    border: 0;
+    border-bottom: 1px solid rgba(26, 23, 20, 0.35);
+    border-radius: 0;
   }
 
   .lead-card button,

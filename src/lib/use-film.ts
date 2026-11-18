@@ -3,9 +3,8 @@ import { useEffect, type RefObject } from "react";
 type FilmName = "hero" | "close" | "sunset" | "floor";
 
 const HEVC = 'video/mp4; codecs="hvc1.1.6.L120.90"';
-const HERO_4K = "/media/hero-4k.mp4?v=7";
-const HERO_4K_HEVC = "/media/hero-4k.h265.mp4?v=7";
-const HERO_M = "/media/hero-m.mp4?v=6";
+const HERO = "/media/hero-boat.mp4?v=1";
+const HERO_M = "/media/hero-boat-m.mp4?v=1";
 
 function sourceFor(name: FilmName) {
   const test = document.createElement("video");
@@ -24,8 +23,7 @@ function sourceFor(name: FilmName) {
 
   if (name === "hero") {
     if (save || slow || phone) return HERO_M;
-    if (hevc) return HERO_4K_HEVC;
-    return HERO_4K;
+    return HERO;
   }
 
   if (name === "close") {
