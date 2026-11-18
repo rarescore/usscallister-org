@@ -1771,3 +1771,31 @@
     font-size: 34px;
   }
 }
+
+@property --reveal {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+.hero-cover {
+  --reveal: 0px;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: #0a0a0a url("/media/hero-poster.jpg?v=6") center / cover no-repeat;
+  -webkit-mask-image: radial-gradient(circle var(--reveal) at var(--hx, 50%) var(--hy, 42%), transparent 0 42%, #000 70%);
+  mask-image: radial-gradient(circle var(--reveal) at var(--hx, 50%) var(--hy, 42%), transparent 0 42%, #000 70%);
+  transition: --reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero.is-looking .hero-cover {
+  --reveal: 46vmin;
+}
+
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .hero-cover {
+    display: none;
+  }
+}

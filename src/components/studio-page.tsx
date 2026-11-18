@@ -159,7 +159,20 @@ export function StudioPage() {
         </div>
       </aside>
 
-      <section className="hero" id="home">
+      <section
+        className="hero"
+        id="home"
+        onPointerMove={(event) => {
+          if (event.pointerType !== "mouse") return;
+          const rect = event.currentTarget.getBoundingClientRect();
+          const x = ((event.clientX - rect.left) / rect.width) * 100;
+          const y = ((event.clientY - rect.top) / rect.height) * 100;
+          event.currentTarget.style.setProperty("--hx", `${x}%`);
+          event.currentTarget.style.setProperty("--hy", `${y}%`);
+          event.currentTarget.classList.add("is-looking");
+        }}
+        onPointerLeave={(event) => event.currentTarget.classList.remove("is-looking")}
+      >
         <div className="hero-drift">
           <video
             ref={heroVideo}
@@ -178,6 +191,7 @@ export function StudioPage() {
             }}
           />
         </div>
+        <div className="hero-cover" aria-hidden="true" />
         <div className="hero-shade" />
         <div className="hero-mark">
           <button className="hero-replay" type="button" onClick={replayHero} aria-label="Replay film">
