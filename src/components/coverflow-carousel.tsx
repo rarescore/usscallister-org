@@ -156,7 +156,19 @@ export function CoverflowCarousel({
               }
               }
             >
-              <img src={project.image} alt={`${project.name} website`} draggable={false} />
+              <img
+                src={project.image}
+                srcSet={
+                  delta === 0
+                    ? `${project.image} 1440w, ${project.image.replace(".jpg", "@2x.jpg")} 2880w`
+                    : undefined
+                }
+                sizes={delta === 0 ? "(max-width: 800px) 92vw, min(64vw, 900px)" : undefined}
+                alt={`${project.name} website`}
+                width={1440}
+                height={900}
+                draggable={false}
+              />
             </button>
           );
         })}
