@@ -36,7 +36,6 @@ const LIVE: Record<string, string | null> = {
 export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
   const [index, setIndex] = useState(0);
   const [liveId, setLiveId] = useState(PROJECTS[0].id);
-  const [open, setOpen] = useState(false);
   const [ready, setReady] = useState<string | null>(null);
   const active = PROJECTS[index] ?? PROJECTS[0];
   const live = LIVE[active.id];
@@ -47,7 +46,6 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
   }, [active.id]);
 
   const frameRef = useRef<HTMLIFrameElement>(null);
-  const screenRef = useRef<HTMLDivElement>(null);
   const windowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -86,35 +84,6 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
     setIndex(next);
   }
 
-  function openProject(next = index) {
-    setIndex(next);
-    setOpen(true);
-  }
-
-  useEffect(() => {
-    if (!open) return;
-    const box = screenRef.current;
-    if (!box) return;
-    const fit = () => {
-      const scale = box.clientWidth / 1440;
-      box.style.setProperty("--fit", String(scale));
-      box.style.height = `${2200 * scale}px`;
-    };
-    fit();
-    const observer = new ResizeObserver(fit);
-    observer.observe(box);
-    return () => observer.disconnect();
-  }, [open, active.id]);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
-
   return (
     <section
       className={underBar ? "reel-index is-under-bar" : "reel-index"}
@@ -135,7 +104,7 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
                     onPointerEnter={(event) => {
                       if (event.pointerType === "mouse") jump(i);
                     }}
-                    onClick={() => openProject(i)}
+                    onClick={() => jump(i)}
                   >
                     <span>{String(i + 1).padStart(2, "0")}</span>
                     {project.short}
@@ -165,9 +134,6 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
                     title={PROJECTS.find((project) => project.id === liveId)?.name ?? "Project"}
                   />
                 ) : null}
-                <button className="reel-open" type="button" onClick={() => openProject()}>
-                  Open
-                </button>
               </div>
             </div>
           </figure>
@@ -200,35 +166,6 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
           </footer>
         </div>
       </div>
-      {open ? (
-        <div className="montage" role="dialog" aria-modal="true" aria-label={active.name}>
-          <div className="montage-bar">
-            <button type="button" onClick={() => setOpen(false)}>
-              Close
-            </button>
-            <p>{active.short}</p>
-            <a href={active.href} target="_blank" rel="noreferrer">
-              Live website
-            </a>
-          </div>
-          <div className="montage-body">
-            <p className="montage-kicker">
-              {active.cat}
-              <span> 2026</span>
-            </p>
-            <h2>{active.name}</h2>
-            <p className="montage-note">{active.note}</p>
-            <div className="montage-shot" ref={screenRef}>
-              {LIVE[active.id] ? (
-                <iframe src={LIVE[active.id] ?? undefined} title={active.name} />
-              ) : (
-                <img src={active.image.replace(".jpg", "@2x.jpg")} alt={active.name} />
-              )}
-            </div>
-            <img className="montage-still" src={active.detail} alt="" />
-          </div>
-        </div>
-      ) : null}
     </section>
   );
 }
