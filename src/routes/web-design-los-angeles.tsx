@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FolioBar } from "@/components/article";
 import { localServiceHead } from "@/lib/journal-seo";
+import { TEXT_US } from "@/lib/text-us";
 
 export const Route = createFileRoute("/web-design-los-angeles")({
   head: () => localServiceHead(),
@@ -52,7 +53,7 @@ function LosAngelesPage() {
           <h2>How a project starts</h2>
           <p>
             We start with the audience and the action the site has to earn: a call, a booking, or a brief. Research
-            comes before layout. The phone number on this site is 818-913-6158, and new work is taken from Los Angeles.
+            comes before layout. New work is taken from Los Angeles. <a className="text-us" href={TEXT_US}>Text us</a>.
           </p>
           <h2>Projects in the city</h2>
           <p>

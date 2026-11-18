@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
+import { TEXT_US } from "@/lib/text-us";
 import { useState, type FormEvent } from "react";
 import { FolioBar } from "@/components/article";
 import { pageCanonicalHead } from "@/lib/site-seo";
@@ -90,7 +91,9 @@ function ContactPage() {
           <p className="contact-alt">
             Or email <a href="mailto:usscallisterllc@gmail.com">usscallisterllc@gmail.com</a>
             {" "}·{" "}
-            <a href="tel:8189136158">818-913-6158</a>
+            <a className="text-us" href={TEXT_US}>
+              Text us
+            </a>
           </p>
         </div>
       </article>

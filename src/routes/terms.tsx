@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FolioBar } from "@/components/article";
 import { pageCanonicalHead } from "@/lib/site-seo";
+import { TEXT_US } from "@/lib/text-us";
 
 export const Route = createFileRoute("/terms")({
   head: () => ({
@@ -73,7 +74,7 @@ function TermsPage() {
           </p>
           <h2>Contact</h2>
           <p>
-            usscallisterllc@gmail.com · 818-913-6158 · <Link to="/newsletter">Newsletter</Link>
+            usscallisterllc@gmail.com · <a className="text-us" href={TEXT_US}>Text us</a> · <Link to="/newsletter">Newsletter</Link>
           </p>
         </div>
       </article>

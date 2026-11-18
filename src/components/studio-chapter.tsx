@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { FolioBar } from "@/components/article";
 import { SiteCheck } from "@/components/site-check";
+import { TEXT_US } from "@/lib/text-us";
 import "./studio-chapter.css";
 
 const SERVICES = [
@@ -78,7 +79,9 @@ export function StudioChapter({ bar = false }: { bar?: boolean }) {
           <div>
             <dt>Phone</dt>
             <dd>
-              <a href="tel:8189136158">818-913-6158</a>
+              <a className="text-us" href={TEXT_US}>
+                Text us
+              </a>
             </dd>
           </div>
           <div>

@@ -4,6 +4,7 @@ import { FlowTrack } from "@/components/flow-track";
 import { StudioFooter } from "@/components/studio-footer";
 import { installAudio, playNav, playOpen, setSoundEnabled } from "@/lib/hover-sound";
 import { getLenis } from "@/lib/use-lenis";
+import { TEXT_US } from "@/lib/text-us";
 import { sendStudioNote } from "@/lib/send-note";
 import { useFilm } from "@/lib/use-film";
 
@@ -27,7 +28,6 @@ export function StudioPage() {
           hour12: true,
           hour: "numeric",
           minute: "2-digit",
-          second: "2-digit",
         }),
       );
     };
@@ -101,9 +101,6 @@ export function StudioPage() {
           <a href="#index" onPointerEnter={playNav} onClick={() => go("index")}>
             Projects
           </a>
-          <a href="#info" onPointerEnter={playNav} onClick={() => go("info")}>
-            Info
-          </a>
           <Link to="/journal" onPointerEnter={playNav}>
             Journal
           </Link>
@@ -113,8 +110,8 @@ export function StudioPage() {
         </nav>
         <div className="panel-foot">
           <p className="meta">
-            <a href="tel:8189136158" onPointerEnter={playNav}>
-              818-913-6158
+            <a className="text-us" href={TEXT_US} onPointerEnter={playNav}>
+              Text us
             </a>
           </p>
           <button
@@ -192,8 +189,8 @@ export function StudioPage() {
             >
               Start a brief
             </a>
-            <a className="hero-call" href="tel:8189136158">
-              818-913-6158
+            <a className="hero-call text-us" href={TEXT_US}>
+              Text us
             </a>
           </div>
         </div>
@@ -202,7 +199,9 @@ export function StudioPage() {
       <FlowTrack formNote={formNote} onSubmit={onSubmit} />
       <StudioFooter />
       <div className={away ? "convert-bar is-on" : "convert-bar"}>
-        <a href="tel:8189136158">Call</a>
+        <a className="text-us" href={TEXT_US}>
+          Text us
+        </a>
         <a
           href="#reel"
           onClick={(event) => {

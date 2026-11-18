@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useFilm } from "@/lib/use-film";
+import { TEXT_US } from "@/lib/text-us";
 import "./landing.css";
 
 const TRADES = ["Clinic", "Roofing", "Plumbing", "Cleaning", "Other"] as const;
-const TEXT_US = "sms:+18189136158?&body=I%20want%20to%20grow!";
 
 export const Route = createFileRoute("/landing")({
   head: () => ({
@@ -98,7 +98,7 @@ function LandingPage() {
       setStatus("sent");
     } catch {
       setStatus("error");
-      setNote("Could not send. Call 818-913-6158.");
+      setNote("Could not send. Text us instead.");
     }
   }
 
@@ -136,10 +136,12 @@ function LandingPage() {
           <div className="sent">
             <p className="ask">We’ll call you today.</p>
             <p className="promise">
-              A person from the studio, not a sequence. If it’s faster, call 818-913-6158.
+              A person from the studio, not a sequence. If it’s faster, text us.
             </p>
             <p className="meta">
-              <a href="tel:8189136158">818-913-6158</a>
+              <a className="text-us" href={TEXT_US}>
+                Text us
+              </a>
             </p>
           </div>
         ) : (

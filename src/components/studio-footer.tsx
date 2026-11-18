@@ -1,12 +1,12 @@
 import { useEffect, useId, useState, type FormEvent } from "react";
 import { sendStudioNote } from "@/lib/send-note";
+import { TEXT_US } from "@/lib/text-us";
 
 const HIDE_KEY = "uss-news-hide";
 
 const LINKS = [
   { href: "/#home", label: "Home" },
   { href: "/projects", label: "Projects" },
-  { href: "/#info", label: "Info" },
   { href: "/journal", label: "Journal" },
   { href: "/#contact", label: "Contact" },
 ];
@@ -139,7 +139,9 @@ export function StudioFooter() {
                   <a href="mailto:usscallisterllc@gmail.com">usscallisterllc@gmail.com</a>
                 </li>
                 <li>
-                  <a href="tel:8189136158">818-913-6158</a>
+                  <a className="text-us" href={TEXT_US}>
+                    Text us
+                  </a>
                 </li>
                 <li>Los Angeles</li>
               </ul>
@@ -148,7 +150,6 @@ export function StudioFooter() {
               <p>Hours</p>
               <ul>
                 <li>Taking new work</li>
-                <li>Replies within two days</li>
               </ul>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { useRef, type FormEvent } from "react";
 import { useFilm } from "@/lib/use-film";
+import { TEXT_US } from "@/lib/text-us";
 
 type EnterReelProps = {
   formNote: string;
@@ -61,7 +62,9 @@ export function EnterReel({ formNote, onSubmit }: EnterReelProps) {
                 Send the brief
               </button>
               <p className="form-note">
-                Reply within two days. Or call <a href="tel:8189136158">818-913-6158</a>.
+                <a className="text-us" href={TEXT_US}>
+                  Text us
+                </a>
               </p>
               {formNote ? <p className="form-note">{formNote}</p> : null}
             </>
