@@ -95,7 +95,11 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
     if (!open) return;
     const box = screenRef.current;
     if (!box) return;
-    const fit = () => box.style.setProperty("--fit", String(box.clientWidth / 1440));
+    const fit = () => {
+      const scale = box.clientWidth / 1440;
+      box.style.setProperty("--fit", String(scale));
+      box.style.height = `${2200 * scale}px`;
+    };
     fit();
     const observer = new ResizeObserver(fit);
     observer.observe(box);
@@ -197,21 +201,31 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
         </div>
       </div>
       {open ? (
-        <div className="project-stage" role="dialog" aria-modal="true" aria-label={active.name} onClick={() => setOpen(false)}>
-          <p className="project-meta">
-            <span>2026</span>
-            <span>{active.short}</span>
-          </p>
-          <div
-            className="project-screen"
-            ref={screenRef}
-            onClick={(event) => event.stopPropagation()}
-          >
-            {LIVE[active.id] ? (
-              <iframe src={LIVE[active.id] ?? undefined} title={active.name} />
-            ) : (
-              <img src={active.image.replace(".jpg", "@2x.jpg")} alt={active.name} />
-            )}
+        <div className="montage" role="dialog" aria-modal="true" aria-label={active.name}>
+          <div className="montage-bar">
+            <button type="button" onClick={() => setOpen(false)}>
+              Close
+            </button>
+            <p>{active.short}</p>
+            <a href={active.href} target="_blank" rel="noreferrer">
+              Live website
+            </a>
+          </div>
+          <div className="montage-body">
+            <p className="montage-kicker">
+              {active.cat}
+              <span> 2026</span>
+            </p>
+            <h2>{active.name}</h2>
+            <p className="montage-note">{active.note}</p>
+            <div className="montage-shot" ref={screenRef}>
+              {LIVE[active.id] ? (
+                <iframe src={LIVE[active.id] ?? undefined} title={active.name} />
+              ) : (
+                <img src={active.image.replace(".jpg", "@2x.jpg")} alt={active.name} />
+              )}
+            </div>
+            <img className="montage-still" src={active.detail} alt="" />
           </div>
         </div>
       ) : null}

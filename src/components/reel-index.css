@@ -157,58 +157,109 @@
   cursor: pointer;
 }
 
-.project-stage {
+.montage {
   position: fixed;
   inset: 0;
   z-index: 80;
-  background: #c8c0b6 url("/media/project-room.jpg") center / cover no-repeat;
+  overflow: auto;
+  background: #111;
+  color: #f4f1ea;
+}
+
+.montage-bar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 28px;
+  background: rgba(17, 17, 17, 0.92);
+}
+
+.montage-bar p,
+.montage-bar button,
+.montage-bar a {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f4f1ea;
+  font-family: Inter, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
   cursor: pointer;
 }
 
-.project-meta {
-  position: absolute;
-  z-index: 2;
-  left: 16px;
-  right: 18px;
-  top: 50%;
-  display: flex;
-  justify-content: space-between;
+.montage-bar button:hover,
+.montage-bar a:hover {
+  color: #ff2a2a;
+}
+
+.montage-body {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 36px 0 80px;
+}
+
+.montage-kicker {
   margin: 0;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: #2a2622;
   font-family: Inter, sans-serif;
   font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.5);
 }
 
-.project-screen {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: min(72vw, calc(78vh * 1.6));
-  aspect-ratio: 16 / 10;
-  transform: translate(-50%, -50%);
-  padding: 0;
-  overflow: hidden;
+.montage-kicker span {
+  color: rgba(244, 241, 234, 0.32);
+}
+
+.montage-body h2 {
+  margin: 10px 0 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+.montage-note {
+  margin: 14px 0 0;
+  max-width: 42ch;
+  font-family: Inter, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(244, 241, 234, 0.72);
+}
+
+.montage-shot,
+.montage-still {
+  width: 100%;
+  margin-top: 28px;
   background: #fff;
-  box-shadow: 0 30px 80px rgba(40, 28, 16, 0.22);
-  cursor: auto;
 }
 
-.project-screen iframe,
-.project-screen img {
+.montage-shot {
+  overflow: hidden;
+}
+
+.montage-shot iframe,
+.montage-shot img {
   display: block;
   width: 1440px;
-  height: 900px;
+  height: 2200px;
   border: 0;
-  background: #fff;
-  transform: scale(var(--fit, 0.72));
+  transform: scale(var(--fit, 0.7));
   transform-origin: top left;
-  object-fit: cover;
-  object-position: top center;
+}
+
+.montage-still {
+  display: block;
+  height: auto;
 }
 
 .reel-foot {
