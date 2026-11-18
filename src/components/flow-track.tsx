@@ -1,15 +1,15 @@
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { EnterReel } from "@/components/enter-reel";
 import { ReelIndex } from "@/components/reel-index";
+import { StudioChapter } from "@/components/studio-chapter";
 import "./flow-track.css";
 
 type FlowTrackProps = {
-  info: ReactNode;
   formNote: string;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 };
 
-export function FlowTrack({ info, formNote, onSubmit }: FlowTrackProps) {
+export function FlowTrack({ formNote, onSubmit }: FlowTrackProps) {
   const flowRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLElement>(null);
   const [simple, setSimple] = useState(false);
@@ -59,8 +59,8 @@ export function FlowTrack({ info, formNote, onSubmit }: FlowTrackProps) {
   return (
     <div className={simple ? "flow is-simple" : "flow"} ref={flowRef}>
       <ReelIndex />
-      <section className="section info" id="info" ref={infoRef}>
-        {info}
+      <section className="section" id="info" ref={infoRef}>
+        <StudioChapter />
       </section>
       <EnterReel formNote={formNote} onSubmit={onSubmit} />
     </div>

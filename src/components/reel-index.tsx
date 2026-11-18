@@ -26,7 +26,7 @@ function seedBrief(name: string) {
 
 const SIMPLE = "(max-width: 800px), (prefers-reduced-motion: reduce)";
 
-export function ReelIndex() {
+export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
   const rootRef = useRef<HTMLElement>(null);
   const [index, setIndex] = useState(0);
   const active = PROJECTS[index] ?? PROJECTS[0];
@@ -35,33 +35,45 @@ export function ReelIndex() {
     const root = rootRef.current;
     if (!root) return;
     const media = window.matchMedia(SIMPLE);
-    let frame = 0;
+    let revert: (() => void) | undefined;
+    let cancelled = false;
 
-    const measure = () => {
-      frame = 0;
-      if (media.matches) return;
-      const rect = root.getBoundingClientRect();
-      const total = rect.height - window.innerHeight;
-      if (total <= 0) return;
-      const passed = Math.min(total, Math.max(0, -rect.top));
-      const beat = (passed / total) * PROJECTS.length;
-      const next = Math.min(PROJECTS.length - 1, Math.floor(beat * 0.999));
-      root.style.setProperty("--drift", (beat - Math.floor(beat) - 0.5).toFixed(3));
-      setIndex((current) => (current === next ? current : next));
+    const start = async () => {
+      if (media.matches || cancelled) return;
+      const { gsap } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      if (cancelled) return;
+      gsap.registerPlugin(ScrollTrigger);
+      const ctx = gsap.context(() => {
+        ScrollTrigger.create({
+          trigger: root,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.45,
+          onUpdate: (self) => {
+            const beat = self.progress * PROJECTS.length * 0.999;
+            const next = Math.min(PROJECTS.length - 1, Math.floor(beat));
+            const local = beat - Math.floor(beat);
+            root.style.setProperty("--drift", (local - 0.5).toFixed(3));
+            root.style.setProperty("--wipe", Math.min(1, local / 0.28).toFixed(3));
+            setIndex((current) => (current === next ? current : next));
+          },
+        });
+      }, root);
+      revert = () => ctx.revert();
     };
 
-    const onScroll = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(measure);
+    void start();
+    const onChange = () => {
+      revert?.();
+      revert = undefined;
+      void start();
     };
-
-    measure();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    media.addEventListener("change", measure);
+    media.addEventListener("change", onChange);
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      media.removeEventListener("change", measure);
-      if (frame) window.cancelAnimationFrame(frame);
+      cancelled = true;
+      media.removeEventListener("change", onChange);
+      revert?.();
     };
   }, []);
 
@@ -79,7 +91,7 @@ export function ReelIndex() {
 
   return (
     <section
-      className="reel-index"
+      className={underBar ? "reel-index is-under-bar" : "reel-index"}
       id="index"
       ref={rootRef}
       style={{ ["--beats" as string]: String(PROJECTS.length), ["--n" as string]: String(PROJECTS.length) }}

@@ -1,34 +1,22 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 import { FlowTrack } from "@/components/flow-track";
-import { SiteCheck } from "@/components/site-check";
 import { StudioFooter } from "@/components/studio-footer";
 import { installAudio, playNav, playOpen, setSoundEnabled } from "@/lib/hover-sound";
-import { getLenis, useLenis } from "@/lib/use-lenis";
+import { getLenis } from "@/lib/use-lenis";
 import { sendStudioNote } from "@/lib/send-note";
 import { useFilm } from "@/lib/use-film";
 
 const HERO_MARK = "Los Angeles".split(" ");
 
-const INFO_WORDS =
-  "USSCALLISTER is a Los Angeles studio built on one obsession — conversion. Before a single pixel ships, we research the audience, the psychology of the click, and the exact path from first visit to action. That research is why our sites for clinics, contractors, and home services don't just look right, they perform.".split(
-    /\s+/,
-  );
-
 export function StudioPage() {
-  useLenis();
   const heroVideo = useRef<HTMLVideoElement>(null);
-  const sunsetVideo = useRef<HTMLVideoElement>(null);
-  const infoCopyRef = useRef<HTMLParagraphElement>(null);
-  const infoButtonRef = useRef<HTMLAnchorElement>(null);
   const [clock, setClock] = useState("");
-  const [infoShown, setInfoShown] = useState(0);
   const [soundOn, setSoundOn] = useState(true);
   const [away, setAway] = useState(false);
   const [formNote, setFormNote] = useState("");
 
   useFilm(heroVideo, "hero");
-  useFilm(sunsetVideo, "sunset");
   useEffect(() => installAudio(), []);
 
   useEffect(() => {
@@ -46,55 +34,6 @@ export function StudioPage() {
     tick();
     const id = window.setInterval(tick, 1000);
     return () => window.clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    const copy = infoCopyRef.current;
-    const button = infoButtonRef.current;
-    if (!copy) return;
-
-    let cancelled = false;
-    const timers: number[] = [];
-
-    const showAll = () => {
-      setInfoShown(INFO_WORDS.length);
-      button?.classList.add("is-in");
-    };
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      showAll();
-      return;
-    }
-
-    const revealFrom = (index: number) => {
-      if (cancelled) return;
-      if (index >= INFO_WORDS.length) {
-        timers.push(window.setTimeout(() => button?.classList.add("is-in"), 300));
-        return;
-      }
-      timers.push(
-        window.setTimeout(() => {
-          setInfoShown(index + 1);
-          revealFrom(index + 1);
-        }, 80),
-      );
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        observer.disconnect();
-        revealFrom(0);
-      },
-      { threshold: 0.3 },
-    );
-    observer.observe(copy);
-
-    return () => {
-      cancelled = true;
-      observer.disconnect();
-      timers.forEach((id) => window.clearTimeout(id));
-    };
   }, []);
 
   useEffect(() => {
@@ -260,49 +199,7 @@ export function StudioPage() {
         </div>
       </section>
 
-      <FlowTrack
-        formNote={formNote}
-        onSubmit={onSubmit}
-        info={
-          <>
-            <video
-              ref={sunsetVideo}
-              className="info-bg"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
-              aria-hidden="true"
-            />
-            <div className="info-shade" aria-hidden="true" />
-            <div className="info-hold">
-              <div className="center-block">
-                <p className="kicker-label">Info</p>
-                <p ref={infoCopyRef} className="intro-copy info-type">
-                  {INFO_WORDS.map((word, index) => (
-                    <span key={`${word}-${index}`} className={index < infoShown ? "is-on" : undefined}>
-                      {word}{" "}
-                    </span>
-                  ))}
-                </p>
-                <a ref={infoButtonRef} className="call-us info-reveal" href="tel:8189136158">
-                  Call us
-                </a>
-                <p className="info-services">
-                  Web design in Los Angeles for{" "}
-                  <Link to="/web-design-medical-clinics">medical clinics</Link>,{" "}
-                  <Link to="/web-design-roofing-contractors">roofing</Link>,{" "}
-                  <Link to="/web-design-plumbing-contractors">plumbing</Link>, and{" "}
-                  <Link to="/web-design-airbnb-cleaning">cleaning</Link> companies.{" "}
-                  <Link to="/projects">See the projects</Link> or <Link to="/contact">start a brief</Link>.
-                </p>
-              </div>
-              <SiteCheck />
-            </div>
-          </>
-        }
-      />
+      <FlowTrack formNote={formNote} onSubmit={onSubmit} />
       <StudioFooter />
       <div className={away ? "convert-bar is-on" : "convert-bar"}>
         <a href="tel:8189136158">Call</a>

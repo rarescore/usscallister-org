@@ -2,6 +2,7 @@ import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-r
 import { MissingPage } from "@/components/missing-page";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
+import { SmoothScroll } from "@/components/smooth-scroll";
 import appCss from "../styles.css?url";
 
 const APP_NAME = "Los Angeles Web Design Studio | USSCALLISTER";
@@ -76,6 +77,7 @@ export const Route = createRootRoute({
       </head>
       <body>
         <PreviewHostBridge />
+        <SmoothScroll />
         <AuthProvider>
           <Outlet />
         </AuthProvider>

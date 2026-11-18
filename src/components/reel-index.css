@@ -153,7 +153,13 @@
 .reel-frame img.is-on {
   opacity: 1;
   transform: scale(1.06) translate3d(0, calc(var(--drift, 0) * 28px), 0);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  clip-path: inset(0 calc((1 - var(--wipe, 1)) * 14%) 0 0);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reel-index.is-under-bar .reel-sticky {
+  top: 53px;
+  height: calc(100vh - 53px);
 }
 
 .reel-meter {
