@@ -46,7 +46,14 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
             <ol className="reel-list">
               {PROJECTS.map((project, i) => (
                 <li key={project.id}>
-                  <button type="button" aria-current={i === index ? "true" : undefined} onClick={() => jump(i)}>
+                  <button
+                    type="button"
+                    aria-current={i === index ? "true" : undefined}
+                    onPointerEnter={(event) => {
+                      if (event.pointerType === "mouse") jump(i);
+                    }}
+                    onClick={() => jump(i)}
+                  >
                     <span>{String(i + 1).padStart(2, "0")}</span>
                     {project.short}
                   </button>
