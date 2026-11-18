@@ -275,10 +275,17 @@
   }
 
   .reel-list {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 4px 16px;
-    margin: 14px 0 0;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0;
+    margin: 16px 0 8px;
+  }
+
+  .reel-list button {
+    white-space: normal;
+    min-height: 40px;
+    padding: 8px 0;
+    font-size: 13px;
   }
 
   .reel-window {
