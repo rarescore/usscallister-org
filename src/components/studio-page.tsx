@@ -203,8 +203,8 @@ export function StudioPage() {
             muted
             loop
             playsInline
-            poster="/media/hero-poster.jpg?v=4"
-            preload="none"
+            poster="/media/hero-poster.jpg?v=6"
+            preload="auto"
           />
         </div>
         <div className="hero-shade" />

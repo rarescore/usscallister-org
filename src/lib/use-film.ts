@@ -3,6 +3,8 @@ import { useEffect, type RefObject } from "react";
 type FilmName = "hero" | "close" | "sunset" | "floor";
 
 const HEVC = 'video/mp4; codecs="hvc1.1.6.L120.90"';
+const HERO_4K = "/media/hero-4k.mp4?v=6";
+const HERO_M = "/media/hero-m.mp4?v=6";
 
 function sourceFor(name: FilmName) {
   const test = document.createElement("video");
@@ -18,6 +20,11 @@ function sourceFor(name: FilmName) {
     (typeof connection?.downlink === "number" && connection.downlink < 1.5);
   const phone = window.matchMedia("(max-width: 800px)").matches;
   const wide = window.matchMedia("(min-width: 1200px)").matches;
+
+  if (name === "hero") {
+    if (save || slow || phone) return HERO_M;
+    return HERO_4K;
+  }
 
   if (save || slow) return `/media/${name}-m.mp4?v=3`;
   if (hevc) {
@@ -39,11 +46,25 @@ export function useFilm(videoRef: RefObject<HTMLVideoElement | null>, name: Film
     const start = () => {
       if (started) return;
       started = true;
-      video.src = sourceFor(name);
+      const next = sourceFor(name);
+      const current = video.currentSrc
+        ? (() => {
+            const url = new URL(video.currentSrc);
+            return url.pathname + url.search;
+          })()
+        : "";
+      if (current !== next) video.src = next;
       video.muted = true;
+      video.loop = true;
+      video.preload = "auto";
       const pending = video.play();
       if (pending) pending.catch(() => {});
     };
+
+    if (name === "hero") {
+      start();
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
