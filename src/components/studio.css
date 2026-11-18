@@ -1635,11 +1635,12 @@
   margin-top: 18px;
 }
 
-.panel .nav a {
-  font-size: 11px;
+.panel .nav a,
+.panel .nav a:hover,
+.panel .nav a:focus-visible {
   min-height: 34px;
-  letter-spacing: 0.14em;
-  opacity: 0.45;
+  padding: 7px 0;
+  transform: none;
 }
 
 .panel .nav a:hover,
