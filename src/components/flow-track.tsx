@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { EnterReel } from "@/components/enter-reel";
-import { CoverflowCarousel } from "@/components/coverflow-carousel";
+import { ReelIndex } from "@/components/reel-index";
 import "./flow-track.css";
 
 type FlowTrackProps = {
@@ -58,7 +58,7 @@ export function FlowTrack({ info, formNote, onSubmit }: FlowTrackProps) {
 
   return (
     <div className={simple ? "flow is-simple" : "flow"} ref={flowRef}>
-      <CoverflowCarousel showCaption heading="h2" />
+      <ReelIndex />
       <section className="section info" id="info" ref={infoRef}>
         {info}
       </section>

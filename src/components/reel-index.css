@@ -1,0 +1,259 @@
+.reel-index {
+  --paper: #f7f1e8;
+  --ink: #0c0c0b;
+  position: relative;
+  height: calc(var(--beats) * 100vh);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.reel-sticky {
+  position: sticky;
+  top: 0;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.84fr) minmax(0, 1.16fr);
+  gap: 36px;
+  align-items: center;
+  height: 100vh;
+  padding: 28px 36px 32px 40px;
+  box-sizing: border-box;
+}
+
+.reel-copy {
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+}
+
+.reel-kicker {
+  margin: 0 0 16px;
+  font-family: Inter, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(247, 241, 232, 0.58);
+}
+
+.reel-title {
+  margin: 0;
+  max-width: 8em;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(52px, 5.6vw, 88px);
+  font-weight: 500;
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  animation: reel-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.reel-note {
+  margin: 16px 0 0;
+  max-width: 32ch;
+  font-family: Inter, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(247, 241, 232, 0.74);
+}
+
+.reel-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.reel-brief,
+.reel-visit {
+  text-decoration: none;
+}
+
+.reel-brief {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  background: #ff2a2a;
+  color: #fff;
+  font-family: Inter, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.reel-brief:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.reel-visit {
+  color: var(--paper);
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.reel-visit:hover {
+  color: #ff2a2a;
+}
+
+.reel-list {
+  display: grid;
+  gap: 4px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reel-list button {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  min-height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(247, 241, 232, 0.38);
+  font-family: Inter, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+}
+
+.reel-list button span {
+  font-variant-numeric: tabular-nums;
+}
+
+.reel-list button[aria-current="true"],
+.reel-list button:hover {
+  color: var(--paper);
+}
+
+.reel-frame {
+  position: relative;
+  height: min(70vh, 740px);
+  overflow: hidden;
+  background: #161614;
+}
+
+.reel-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.045);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reel-frame img.is-on {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reel-meter {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background: rgba(247, 241, 232, 0.22);
+}
+
+.reel-meter span {
+  display: block;
+  width: 100%;
+  height: calc((var(--i) + 1) / var(--n) * 100%);
+  background: #ff2a2a;
+}
+
+.reel-count {
+  position: absolute;
+  z-index: 2;
+  left: 14px;
+  bottom: 12px;
+  margin: 0;
+  font-family: Inter, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--paper);
+}
+
+.reel-count span {
+  color: rgba(247, 241, 232, 0.5);
+}
+
+.reel-stack {
+  display: none;
+}
+
+.reel-shot {
+  padding: 28px 18px 40px;
+  border-top: 1px solid rgba(247, 241, 232, 0.14);
+}
+
+.reel-shot img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+}
+
+.reel-shot h2 {
+  margin: 16px 0 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+.reel-shot p {
+  margin: 10px 0 0;
+  max-width: 36ch;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(247, 241, 232, 0.74);
+}
+
+@keyframes reel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 800px), (prefers-reduced-motion: reduce) {
+  .reel-index {
+    height: auto;
+  }
+
+  .reel-sticky {
+    display: none;
+  }
+
+  .reel-stack {
+    display: block;
+  }
+
+  .reel-title {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reel-frame img {
+    transition: none;
+  }
+}
