@@ -188,6 +188,23 @@ export function CoverflowCarousel({
             </p>
           </div>
           <div className="stage-links">
+            <a
+              href="#reel"
+              onClick={(event) => {
+                event.preventDefault();
+                const form = document.getElementById("contact");
+                const brief = form?.querySelector<HTMLTextAreaElement>("textarea[name='brief']");
+                if (brief && !brief.value.trim()) {
+                  brief.value = `A site in the vein of ${active.name}.`;
+                }
+                document.getElementById("reel")?.scrollIntoView({ behavior: "smooth" });
+                window.setTimeout(() => {
+                  form?.querySelector<HTMLInputElement>("input[name='name']")?.focus();
+                }, 400);
+              }}
+            >
+              Start one like this
+            </a>
             <a href={active.href} target="_blank" rel="noreferrer">
               Visit site
             </a>

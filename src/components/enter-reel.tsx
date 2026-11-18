@@ -55,11 +55,14 @@ export function EnterReel({ formNote, onSubmit }: EnterReelProps) {
               </label>
               <label>
                 Notes
-                <textarea name="brief" rows={4} suppressHydrationWarning />
+                <textarea name="brief" rows={4} placeholder="What should the site do?" suppressHydrationWarning />
               </label>
               <button className="send" type="submit">
-                Send
+                Send the brief
               </button>
+              <p className="form-note">
+                Same-day reply. Or call <a href="tel:8189136158">818-913-6158</a>.
+              </p>
               {formNote ? <p className="form-note">{formNote}</p> : null}
             </>
           )}

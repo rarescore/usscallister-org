@@ -98,7 +98,10 @@ export function StudioPage() {
   useEffect(() => {
     const onScroll = () => {
       const hero = document.getElementById("home");
-      setAway(!!hero && hero.getBoundingClientRect().bottom < 80);
+      const reel = document.getElementById("reel");
+      const pastHero = !!hero && hero.getBoundingClientRect().bottom < 80;
+      const formOnScreen = !!reel && reel.getBoundingClientRect().top < window.innerHeight * 0.55;
+      setAway(pastHero && !formOnScreen);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -174,6 +177,9 @@ export function StudioPage() {
           </Link>
         </nav>
         <p className="meta">
+          <a href="tel:8189136158" onPointerEnter={playNav}>
+            818-913-6158
+          </a>
           <a href="mailto:usscallisterllc@gmail.com" onPointerEnter={playNav}>
             usscallisterllc@gmail.com
           </a>
@@ -241,6 +247,21 @@ export function StudioPage() {
         <div className="hero-bottom">
           <p className="hero-tagline">Independent creative studio</p>
           <p className="hero-support">we build websites.</p>
+          <div className="hero-actions">
+            <a
+              className="hero-brief"
+              href="#reel"
+              onClick={(event) => {
+                event.preventDefault();
+                go("contact");
+              }}
+            >
+              Start a brief
+            </a>
+            <a className="hero-call" href="tel:8189136158">
+              818-913-6158
+            </a>
+          </div>
         </div>
       </section>
 
@@ -288,6 +309,18 @@ export function StudioPage() {
         }
       />
       <StudioFooter />
+      <div className={away ? "convert-bar is-on" : "convert-bar"}>
+        <a href="tel:8189136158">Call</a>
+        <a
+          href="#reel"
+          onClick={(event) => {
+            event.preventDefault();
+            go("contact");
+          }}
+        >
+          Start a brief
+        </a>
+      </div>
     </main>
   );
 }
