@@ -1604,3 +1604,169 @@
     gap: 28px 48px;
   }
 }
+
+.panel,
+.panel.is-open {
+  top: 38%;
+  left: 28px;
+  width: min(280px, calc(100vw - 56px));
+  max-width: none;
+  padding: 28px 32px 22px;
+  transform: translateY(-50%);
+}
+
+.panel.is-away {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(calc(-50% + 16px));
+}
+
+.panel .name {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+}
+
+.panel .nav {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  column-gap: 0;
+  row-gap: 0;
+  margin-top: 18px;
+}
+
+.panel .nav a {
+  font-size: 11px;
+  min-height: 34px;
+  letter-spacing: 0.14em;
+  opacity: 0.45;
+}
+
+.panel .nav a:hover,
+.panel .nav a:focus-visible {
+  opacity: 1;
+}
+
+.panel-foot {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.panel .meta,
+.panel .meta a {
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.35;
+  border: 0;
+  min-height: 0;
+  padding: 0;
+}
+
+.hero-support {
+  font-size: clamp(32px, 4vw, 54px);
+}
+
+.lead-card {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  right: 28px;
+  width: min(280px, calc(100vw - 56px));
+  transform: translateY(-50%);
+  background: #f7f1e8;
+  color: #1a1714;
+  border: 1px solid rgba(26, 23, 20, 0.1);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+  padding: 28px 32px 22px;
+}
+
+.lead-card label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 14px;
+  font-family: Inter, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8a7f72;
+}
+
+.lead-card input:not(.trap) {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(26, 23, 20, 0.22);
+  border-radius: 0;
+  background: transparent;
+  color: #1a1714;
+  font-family: Inter, sans-serif;
+  font-size: 15px;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 4px 0 7px;
+}
+
+.lead-card input:focus {
+  outline: none;
+  border-bottom-color: #1a1714;
+}
+
+.lead-card button {
+  margin-top: 18px;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 0;
+  background: #1a1714;
+  color: #f7f1e8;
+  font-family: Inter, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.lead-card button:hover {
+  background: #ff2a2a;
+}
+
+.lead-note {
+  margin: 10px 0 0;
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #1a1714;
+}
+
+@media (max-width: 800px) {
+  .panel,
+  .panel.is-open {
+    top: max(12px, env(safe-area-inset-top));
+    left: 12px;
+    width: min(210px, 62vw);
+    padding: 16px 16px 12px;
+    transform: none;
+  }
+
+  .panel.is-away {
+    transform: none;
+  }
+
+  .lead-card {
+    top: auto;
+    right: 12px;
+    bottom: 96px;
+    width: min(200px, 54vw);
+    transform: none;
+    padding: 14px 14px 12px;
+    max-height: 46vh;
+    overflow: auto;
+  }
+
+  .hero-support {
+    font-size: 34px;
+  }
+}

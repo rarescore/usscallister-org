@@ -4,7 +4,6 @@ import { FlowTrack } from "@/components/flow-track";
 import { StudioFooter } from "@/components/studio-footer";
 import { installAudio, playNav, playOpen, setSoundEnabled } from "@/lib/hover-sound";
 import { getLenis } from "@/lib/use-lenis";
-import { TEXT_US } from "@/lib/text-us";
 import { sendStudioNote } from "@/lib/send-note";
 import { useFilm } from "@/lib/use-film";
 
@@ -16,6 +15,7 @@ export function StudioPage() {
   const [soundOn, setSoundOn] = useState(true);
   const [away, setAway] = useState(false);
   const [formNote, setFormNote] = useState("");
+  const [leadNote, setLeadNote] = useState("");
 
   useFilm(heroVideo, "hero");
   useEffect(() => installAudio(), []);
@@ -61,6 +61,36 @@ export function StudioPage() {
     const lenis = getLenis();
     if (lenis && target) lenis.scrollTo(target);
     else target?.scrollIntoView({ behavior: "auto" });
+  }
+
+  async function onLead(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    playOpen();
+    const data = new FormData(event.currentTarget);
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
+    const companyName = String(data.get("companyName") || "").trim();
+    const trap = String(data.get("company") || "").trim();
+    if (!name || !email.includes("@")) {
+      setLeadNote("Name and email.");
+      return;
+    }
+    setLeadNote("Sending.");
+    try {
+      await sendStudioNote({
+        kind: "project",
+        name,
+        email,
+        phone,
+        brief: companyName ? `Company: ${companyName}` : "",
+        trap,
+      });
+      setLeadNote("Message has been sent.");
+      event.currentTarget.reset();
+    } catch {
+      setLeadNote("Could not send. Write to usscallisterllc@gmail.com.");
+    }
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -110,8 +140,8 @@ export function StudioPage() {
         </nav>
         <div className="panel-foot">
           <p className="meta">
-            <a className="text-us" href={TEXT_US} onPointerEnter={playNav}>
-              Text us
+            <a href="mailto:usscallisterllc@gmail.com" onPointerEnter={playNav}>
+              usscallisterllc@gmail.com
             </a>
           </p>
           <button
@@ -178,40 +208,32 @@ export function StudioPage() {
         <div className="hero-bottom">
           <p className="hero-tagline">Independent creative studio</p>
           <p className="hero-support">We build websites.</p>
-          <div className="hero-actions">
-            <a
-              className="hero-brief"
-              href="#reel"
-              onClick={(event) => {
-                event.preventDefault();
-                go("contact");
-              }}
-            >
-              Start a brief
-            </a>
-            <a className="hero-call text-us" href={TEXT_US}>
-              Text us
-            </a>
-          </div>
         </div>
+        <form className="lead-card" onSubmit={onLead}>
+          <input className="trap" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+          <label>
+            Name
+            <input name="name" type="text" autoComplete="name" required />
+          </label>
+          <label>
+            Company
+            <input name="companyName" type="text" autoComplete="organization" />
+          </label>
+          <label>
+            Number
+            <input name="phone" type="tel" autoComplete="tel" />
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" autoComplete="email" required />
+          </label>
+          <button type="submit">Send</button>
+          {leadNote ? <p className="lead-note">{leadNote}</p> : null}
+        </form>
       </section>
 
       <FlowTrack formNote={formNote} onSubmit={onSubmit} />
       <StudioFooter />
-      <div className={away ? "convert-bar is-on" : "convert-bar"}>
-        <a className="text-us" href={TEXT_US}>
-          Text us
-        </a>
-        <a
-          href="#reel"
-          onClick={(event) => {
-            event.preventDefault();
-            go("contact");
-          }}
-        >
-          Start a brief
-        </a>
-      </div>
     </main>
   );
 }

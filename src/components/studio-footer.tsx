@@ -90,8 +90,19 @@ export function StudioFooter() {
     } catch {
       return;
     }
-    const id = window.setTimeout(() => setOpen(true), 6000);
-    return () => window.clearTimeout(id);
+    const show = () => setOpen(true);
+    const footer = document.querySelector(".site-foot-legal");
+    if (!footer) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        show();
+      },
+      { threshold: 0.8 },
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
