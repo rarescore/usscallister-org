@@ -147,15 +147,7 @@ export function StudioPage() {
       <a className="skip" href="#index">
         Skip to projects
       </a>
-      <aside
-        className={away ? "panel is-away" : "panel"}
-        style={
-          {
-            WebkitBackdropFilter: "blur(24px) saturate(1.4)",
-            backdropFilter: "blur(24px) saturate(1.4)",
-          } as CSSProperties
-        }
-      >
+      <aside className={away ? "panel is-away" : "panel"}>
         <div className="panel-top">
           <h1 className="name">USSCALLISTER</h1>
         </div>
@@ -179,9 +171,6 @@ export function StudioPage() {
         <p className="meta">
           <a href="tel:8189136158" onPointerEnter={playNav}>
             818-913-6158
-          </a>
-          <a href="mailto:usscallisterllc@gmail.com" onPointerEnter={playNav}>
-            usscallisterllc@gmail.com
           </a>
         </p>
         <button
@@ -246,7 +235,7 @@ export function StudioPage() {
         </div>
         <div className="hero-bottom">
           <p className="hero-tagline">Independent creative studio</p>
-          <p className="hero-support">we build websites.</p>
+          <p className="hero-support">We build websites.</p>
           <div className="hero-actions">
             <a
               className="hero-brief"
