@@ -168,25 +168,27 @@ export function StudioPage() {
             Contact
           </Link>
         </nav>
-        <p className="meta">
-          <a href="tel:8189136158" onPointerEnter={playNav}>
-            818-913-6158
-          </a>
-        </p>
-        <button
-          className="sound"
-          type="button"
-          aria-pressed={soundOn}
-          onClick={() => {
-            const next = !soundOn;
-            setSoundOn(next);
-            setSoundEnabled(next);
-            if (next) playOpen();
-          }}
-        >
-          <i aria-hidden="true" />
-          {soundOn ? "Sound on" : "Sound off"}
-        </button>
+        <div className="panel-foot">
+          <p className="meta">
+            <a href="tel:8189136158" onPointerEnter={playNav}>
+              818-913-6158
+            </a>
+          </p>
+          <button
+            className="sound"
+            type="button"
+            aria-pressed={soundOn}
+            onClick={() => {
+              const next = !soundOn;
+              setSoundOn(next);
+              setSoundEnabled(next);
+              if (next) playOpen();
+            }}
+          >
+            <i aria-hidden="true" />
+            {soundOn ? "Sound on" : "Sound off"}
+          </button>
+        </div>
       </aside>
 
       <section className="hero" id="home">
