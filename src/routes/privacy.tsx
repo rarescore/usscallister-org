@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FolioBar } from "@/components/article";
 import { pageCanonicalHead } from "@/lib/site-seo";
-import { TEXT_US } from "@/lib/text-us";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -40,8 +39,7 @@ function PrivacyPage() {
           <p>USSCALLISTER LLC, Los Angeles. This policy covers usscallister.org and this studio site.</p>
           <h2>What we collect</h2>
           <p>
-            If you write through the contact form, we receive the name, email, phone number, and project note you send. If you use <a className="text-us" href={TEXT_US}>Text us</a>, we receive the number you text from and whatever you choose to say. If you sign up for the
-            newsletter, we receive the email address you submit.
+            If you write through the contact form, we receive the name, email, phone number, and project note you send. If you sign up for the newsletter, we receive the email address you submit.
           </p>
           <h2>How we use it</h2>
           <p>
