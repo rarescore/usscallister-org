@@ -669,6 +669,9 @@
 }
 
 @media (max-width: 800px) {
+  .close-still {
+    object-position: center center;
+  }
   .close-grid,
   .site-foot-top,
   .site-foot-grid,

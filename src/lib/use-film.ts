@@ -27,7 +27,8 @@ function sourceFor(name: FilmName) {
   }
 
   if (name === "close") {
-    if (save || slow || phone) return "/media/close-m.mp4?v=6";
+    if (phone) return "/media/close-pool-m.mp4?v=1";
+    if (save || slow) return "/media/close-m.mp4?v=6";
     return "/media/close.mp4?v=6";
   }
 
@@ -59,6 +60,9 @@ export function useFilm(videoRef: RefObject<HTMLVideoElement | null>, name: Film
           })()
         : "";
       if (current !== next) video.src = next;
+      if (name === "close" && window.matchMedia("(max-width: 800px)").matches) {
+        video.poster = "/media/close-pool-poster.jpg?v=1";
+      }
       video.muted = true;
       video.loop = true;
       video.preload = "auto";
