@@ -71,7 +71,7 @@ export function useFilm(videoRef: RefObject<HTMLVideoElement | null>, name: Film
     };
 
     if (name === "hero") {
-      start();
+      if (window.matchMedia("(max-width: 800px)").matches) start();
       return;
     }
 

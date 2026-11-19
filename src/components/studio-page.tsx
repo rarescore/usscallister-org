@@ -5,6 +5,7 @@ import { StudioFooter } from "@/components/studio-footer";
 import { installAudio, playNav, playOpen, setSoundEnabled } from "@/lib/hover-sound";
 import { getLenis } from "@/lib/use-lenis";
 import { sendStudioNote } from "@/lib/send-note";
+import { DistortHero } from "@/components/distort-hero";
 import { useFilm } from "@/lib/use-film";
 
 const HERO_MARK = "Los Angeles".split(" ");
@@ -116,7 +117,7 @@ export function StudioPage() {
   }
 
   return (
-    <main>
+    <main className="studio-home">
       <a className="skip" href="#index">
         Skip to projects
       </a>
@@ -169,7 +170,9 @@ export function StudioPage() {
         </div>
       </aside>
 
-      <section className="hero" id="home">
+      <div className="home-slot" id="home">
+      <DistortHero />
+      <section className="hero">
         <div className="hero-drift">
           <video
             ref={heroVideo}
@@ -184,7 +187,7 @@ export function StudioPage() {
           <script
             dangerouslySetInnerHTML={{
               __html:
-                "(function(){var v=document.querySelector('.hero-video');if(!v||v.getAttribute('src')||v.currentSrc)return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var c=navigator.connection;var slow=!!(c&&(c.saveData||c.effectiveType==='slow-2g'||c.effectiveType==='2g'||c.effectiveType==='3g'||(typeof c.downlink==='number'&&c.downlink<1.5)));var phone=matchMedia('(max-width: 800px)').matches;v.src=slow||phone?'/media/hero-boat-m.mp4?v=1':'/media/hero-boat.mp4?v=1';})();",
+                "(function(){var v=document.querySelector('.hero-video');if(!v||v.getAttribute('src')||v.currentSrc)return;if(!matchMedia('(max-width: 800px)').matches)return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;v.src='/media/hero-boat-m.mp4?v=1';})();",
             }}
           />
         </div>
@@ -239,6 +242,7 @@ export function StudioPage() {
           {leadNote ? <p className="lead-note">{leadNote}</p> : null}
         </form>
       </section>
+      </div>
 
       <FlowTrack formNote={formNote} onSubmit={onSubmit} />
       <StudioFooter />
