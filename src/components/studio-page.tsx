@@ -5,13 +5,15 @@ import { StudioFooter } from "@/components/studio-footer";
 import { installAudio, playNav, playOpen, setSoundEnabled } from "@/lib/hover-sound";
 import { getLenis } from "@/lib/use-lenis";
 import { sendStudioNote } from "@/lib/send-note";
-import { DistortHero } from "@/components/distort-hero";
+import { DistortHero, BendWords } from "@/components/distort-hero";
 import { useFilm } from "@/lib/use-film";
+import { attachBend } from "@/lib/bend-film";
 
 const HERO_MARK = "Los Angeles".split(" ");
 
 export function StudioPage() {
   const heroVideo = useRef<HTMLVideoElement>(null);
+  const boatHold = useRef<HTMLButtonElement>(null);
   const [clock, setClock] = useState("");
   const [soundOn, setSoundOn] = useState(true);
   const [away, setAway] = useState(false);
@@ -21,6 +23,26 @@ export function StudioPage() {
 
   useFilm(heroVideo, "hero");
   useEffect(() => installAudio(), []);
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 800px)");
+    let stop = () => {};
+    const arm = () => {
+      stop();
+      stop = () => {};
+      const video = heroVideo.current;
+      const hold = boatHold.current;
+      const track = video?.closest(".hero");
+      const parent = track?.querySelector(".hero-drift");
+      if (!media.matches || !video || !hold || !(track instanceof HTMLElement) || !(parent instanceof HTMLElement)) return;
+      stop = attachBend({ video, parent, track, hold });
+    };
+    arm();
+    media.addEventListener("change", arm);
+    return () => {
+      media.removeEventListener("change", arm);
+      stop();
+    };
+  }, []);
 
   useEffect(() => {
     const tick = () => {
@@ -192,6 +214,20 @@ export function StudioPage() {
           />
         </div>
         <div className="hero-shade" />
+        <div className="bend-title" aria-hidden="true">
+          <h2>
+            <span className="bend-line">
+              <BendWords text="MAKE IT" />
+            </span>
+            <span className="bend-line bend-outline">
+              <BendWords text="UNREAL." />
+            </span>
+          </h2>
+        </div>
+        <button ref={boatHold} className="bend-hold" type="button" aria-label="Hold to distort the film">
+          <span className="x-press-icon">◎</span>
+          <span>Hold to bend reality</span>
+        </button>
         <div className="hero-mark">
           <button className="hero-replay" type="button" onClick={replayHero} aria-label="Replay film">
             <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">
