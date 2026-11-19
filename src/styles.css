@@ -3,13 +3,14 @@
 
 @theme {
   --font-mono: "Fragment Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --color-ink: #0a0a0a;
-  --color-ink-2: #111111;
-  --color-paper: #fafafa;
-  --color-mute: #666666;
-  --color-faint: #8a8a8a;
-  --color-line: #e4e4e4;
-  --color-line-dark: #242424;
+  --color-ink: #000000;
+  --color-ink-2: #141414;
+  --color-paper: #efe6dd;
+  --color-cola: #9a0002;
+  --color-mute: #6d534c;
+  --color-faint: #8a736c;
+  --color-line: #e4d5c8;
+  --color-line-dark: #2a1212;
 }
 
 @layer base {

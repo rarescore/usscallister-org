@@ -1,5 +1,5 @@
 .studio-chapter {
-  background: #f7f1e8;
+  background: #efe6dd;
   color: #1a1714;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .studio-facts a:hover {
-  color: #ff2a2a;
+  color: #9a0002;
 }
 
 .studio-rows {
@@ -96,14 +96,14 @@
 }
 
 .studio-row a:hover {
-  color: #ff2a2a;
+  color: #9a0002;
 }
 
 .studio-score {
   margin-top: 48px;
   padding: 64px 24px 72px;
   background: #0c0c0b;
-  color: #f7f1e8;
+  color: #efe6dd;
 }
 
 .studio-brief {
@@ -112,7 +112,7 @@
   min-height: 44px;
   margin: 28px auto 0;
   padding: 0 18px;
-  background: #ff2a2a;
+  background: #9a0002;
   color: #fff;
   font-family: Inter, sans-serif;
   font-size: 11px;
@@ -129,7 +129,7 @@
 }
 
 .studio-brief:hover {
-  background: #f7f1e8;
+  background: #efe6dd;
   color: #1a1714;
 }
 

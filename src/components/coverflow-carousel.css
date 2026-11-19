@@ -18,7 +18,7 @@
 
 .coverflow .stage-head p {
   margin: 0;
-  color: #ff2a2a;
+  color: #9a0002;
   font-size: 11px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -145,7 +145,7 @@
 }
 
 .coverflow .stage-links a:hover {
-  border-color: #ff2a2a;
+  border-color: #9a0002;
 }
 
 @media (max-width: 800px) {

@@ -1,6 +1,6 @@
 .reel-index {
-  --paper: #f4f1ea;
-  --ink: #0b0b0a;
+  --paper: #efe6dd;
+  --ink: #000000;
   position: relative;
   min-height: 100vh;
   background:
@@ -88,7 +88,7 @@
 }
 
 .reel-list button[aria-current="true"] span {
-  color: #ff2a2a;
+  color: #9a0002;
 }
 
 .reel-frame {
@@ -190,7 +190,7 @@
 }
 
 .reel-links a:hover {
-  color: #ff2a2a;
+  color: #9a0002;
 }
 
 .reel-index.is-under-bar .reel-sticky {
