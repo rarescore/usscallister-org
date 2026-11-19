@@ -1,5 +1,5 @@
 const vertex = `attribute vec2 position;varying vec2 uv;void main(){uv=position*.5+.5;gl_Position=vec4(position,0.,1.);}`;
-const fragment = `precision mediump float;varying vec2 uv;uniform sampler2D film;uniform vec2 screen;uniform vec2 source;uniform vec2 pointer;uniform float power;uniform float time;vec2 cover(vec2 p){float a=screen.x/screen.y;float b=source.x/source.y;if(a>b)p.y=(p.y-.5)*b/a+.5;else p.x=(p.x-.5)*a/b+.5;return p;}void main(){vec2 p=uv;vec2 d=p-pointer;d.x*=screen.x/screen.y;float r=length(d);float wave=sin(r*18.-time*3.)*exp(-r*2.8)*power*.045;p+=normalize(d+vec2(.0001))*wave;p.x+=sin(p.y*8.+time)*power*.018;vec2 c=cover(p);float shift=power*.013*exp(-r);float red=texture2D(film,c+vec2(shift,0.)).r;float green=texture2D(film,c).g;float blue=texture2D(film,c-vec2(shift,0.)).b;gl_FragColor=vec4(red,green,blue,1.);}`;
+const fragment = `precision mediump float;varying vec2 uv;uniform sampler2D film;uniform vec2 screen;uniform vec2 source;uniform vec2 pointer;uniform float power;uniform float time;vec2 cover(vec2 p){float a=screen.x/screen.y;float b=source.x/source.y;if(a>b)p.y=(p.y-.5)*b/a+.5;else p.x=(p.x-.5)*a/b+.5;return p;}void main(){vec2 p=uv;vec2 d=p-pointer;d.x*=screen.x/screen.y;float r=length(d);float wave=sin(r*26.-time*6.)*exp(-r*1.6)*power*.16;p+=normalize(d+vec2(.0001))*wave;p.x+=sin(p.y*14.+time*2.2)*power*.055;vec2 c=cover(p);float shift=power*.045*exp(-r*0.6);float red=texture2D(film,c+vec2(shift,0.)).r;float green=texture2D(film,c).g;float blue=texture2D(film,c-vec2(shift,0.)).b;gl_FragColor=vec4(red,green,blue,1.);}`;
 
 type BendOptions = {
   video: HTMLVideoElement;
@@ -126,7 +126,7 @@ export function attachBend({ video, parent, track, hold }: BendOptions) {
         if (dead || lost || !canvas) return;
         frame = requestAnimationFrame(draw);
         if (document.hidden) return;
-        strength += (Number(active) - strength) * 0.09;
+        strength += (Number(active) - strength) * 0.22;
         if (strength < 0.002) {
           canvas.style.opacity = "0";
           return;
