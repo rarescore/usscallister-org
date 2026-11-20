@@ -180,6 +180,7 @@
 .distort-hero .is-pressed .x-hero-title {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
   transform: translate(var(--mx, 0px), calc(-50% + var(--my, 0px))) scale(1.08);
 }
 .distort-hero .x-hero h1 {
@@ -198,6 +199,12 @@
   display: inline-block;
   opacity: 0;
   transform: translateY(0.7em);
+  margin-inline: 0;
+  transition: margin 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.x-hero-title:hover .ch,
+.bend-title:hover .ch {
+  margin-inline: 0.07em;
 }
 .ch-gap { display: inline-block; width: 0.28em; }
 .is-pressed .ch {
@@ -257,6 +264,15 @@
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+.distort-hero .x-distort span:last-child,
+.hero .bend-hold span:last-child {
+  letter-spacing: 0.16em;
+  transition: letter-spacing 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.distort-hero .x-distort:hover span:last-child,
+.hero .bend-hold:hover span:last-child {
+  letter-spacing: 0.42em;
 }
 .distort-hero .x-press-icon,
 .hero .x-press-icon {

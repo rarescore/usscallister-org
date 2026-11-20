@@ -1690,11 +1690,13 @@
   min-height: 34px;
   padding: 7px 0;
   transform: none;
+  transition: letter-spacing 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease;
 }
 
 .panel .nav a:hover,
 .panel .nav a:focus-visible {
   opacity: 1;
+  letter-spacing: 0.46em;
 }
 
 .panel-foot {
