@@ -129,8 +129,10 @@ export function attachBend({ video, parent, track, hold }: BendOptions) {
         strength += (Number(active) - strength) * 0.22;
         if (strength < 0.002) {
           canvas.style.opacity = "0";
+          canvas.style.visibility = "hidden";
           return;
         }
+        canvas.style.visibility = "visible";
         if (video.readyState < 2) return;
         try {
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, video);

@@ -256,10 +256,6 @@
   from { transform: scale(1.08) translate3d(0, 0, 0); }
   to { transform: scale(1.14) translate3d(-2.4%, -1.6%, 0); }
 }
-@keyframes hero-push {
-  from { transform: scale(1.12) translate3d(0, 3%, 0); }
-  to { transform: scale(1.28) translate3d(0, -5%, 0); }
-}
 .hero-dust {
   position: absolute; inset: -18%; z-index: 2; pointer-events: none;
   background-image: radial-gradient(circle, rgba(255,255,255,.7) 0 .6px, transparent 1.4px), radial-gradient(circle, rgba(255,255,255,.28) 0 .8px, transparent 1.6px);
@@ -2014,7 +2010,8 @@
 
   .hero-video {
     object-position: center 42%;
-    animation: hero-push 12s ease-in-out infinite alternate;
+    animation: none;
+    transform: none;
   }
 
   .lead-card {

@@ -71,8 +71,8 @@ export function useFilm(videoRef: RefObject<HTMLVideoElement | null>, name: Film
       video.loop = true;
       video.playsInline = true;
       video.preload = "auto";
-      if (name === "hero" && phone) video.playbackRate = 1.2;
       kick = () => {
+        if (!video.paused && video.readyState >= 2) return;
         const pending = video.play();
         if (pending) pending.catch(() => {});
       };
