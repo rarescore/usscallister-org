@@ -256,7 +256,9 @@ export function StudioPage() {
           <p className="hero-tagline">Independent creative studio</p>
           <p className="hero-support">We build websites.</p>
         </div>
-        <form className="lead-card" onSubmit={onLead}>
+      </section>
+      </div>
+      <form className={away ? "lead-card is-away" : "lead-card"} onSubmit={onLead}>
           <input className="trap" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" />
           <label>
             Name
@@ -277,8 +279,6 @@ export function StudioPage() {
           <button type="submit">Send</button>
           {leadNote ? <p className="lead-note">{leadNote}</p> : null}
         </form>
-      </section>
-      </div>
 
       <FlowTrack formNote={formNote} onSubmit={onSubmit} />
       <StudioFooter />
