@@ -37,8 +37,8 @@ export function attachBend({ video, parent, track, hold }: BendOptions) {
     }
   };
   const onDown = (event: PointerEvent) => {
-    hold.setPointerCapture(event.pointerId);
     start();
+    void event;
   };
   const onKeyDown = (event: KeyboardEvent) => {
     if (event.key === " " || event.key === "Enter") {

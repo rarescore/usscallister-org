@@ -177,11 +177,42 @@
   visibility: hidden;
   pointer-events: none;
 }
-.distort-hero .is-pressed .x-hero-title {
+.distort-hero .is-pressed .x-hero-title,
+.distort-hero .is-live .x-hero-title {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translate(var(--mx, 0px), calc(-50% + var(--my, 0px))) scale(1.08);
+  transform: none;
+  top: 22%;
+  left: 8%;
+  right: 8%;
+}
+.x-hero,
+.hero { perspective: 1600px; }
+.x-hero-title.is-scattered .ch,
+.bend-title.is-scattered .ch {
+  animation: none !important;
+  opacity: 1 !important;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  text-shadow: 0 24px 28px rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+}
+.studio-home:has(.is-pressed) .panel,
+.studio-home:has(.is-live) .panel,
+.studio-home:has(.is-pressed) .hero-mark,
+.studio-home:has(.is-live) .hero-mark,
+.studio-home:has(.is-pressed) .menu-toggle,
+.studio-home:has(.is-live) .menu-toggle,
+.studio-home:has(.is-pressed) .x-hero-top,
+.studio-home:has(.is-live) .x-hero-top,
+.studio-home:has(.is-pressed) .x-edge-label,
+.studio-home:has(.is-live) .x-edge-label,
+.studio-home:has(.is-pressed) .x-film-pause,
+.studio-home:has(.is-live) .x-film-pause {
+  animation: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 .distort-hero .x-hero h1 {
   font: clamp(92px, 12vw, 220px) / 0.8 Archivo, sans-serif;
@@ -199,13 +230,10 @@
   display: inline-block;
   opacity: 0;
   transform: translateY(0.7em);
-  margin-inline: 0;
-  transition: margin 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  cursor: grab;
 }
-.x-hero-title:hover .ch,
-.bend-title:hover .ch {
-  margin-inline: 0.07em;
-}
+.ch:active { cursor: grabbing; }
 .ch-gap { display: inline-block; width: 0.28em; }
 .is-pressed .ch {
   animation:
@@ -235,17 +263,6 @@
   right: 0;
   border: 0;
   padding: 10px;
-}
-.studio-home:has(.is-pressed) .panel,
-.studio-home:has(.is-pressed) .hero-mark,
-.studio-home:has(.is-pressed) .menu-toggle,
-.studio-home:has(.is-pressed) .x-hero-top,
-.studio-home:has(.is-pressed) .x-edge-label,
-.studio-home:has(.is-pressed) .x-film-pause {
-  animation: none;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
 }
 .distort-hero .x-distort {
   border: 0;
@@ -360,9 +377,11 @@
     pointer-events: none;
     color: #fff;
   }
-  .hero.is-pressed .bend-title {
+  .hero.is-pressed .bend-title,
+  .hero.is-live .bend-title {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
   }
   .hero .bend-title h2 {
     margin: 0;
