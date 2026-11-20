@@ -116,7 +116,7 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
                     onClick={() => jump(i)}
                   >
                     <span>{String(i + 1).padStart(2, "0")}</span>
-                    {project.short}
+                    {project.cat}
                   </button>
                 </li>
               ))}
@@ -151,22 +151,21 @@ export function ReelIndex({ underBar = false }: { underBar?: boolean }) {
             <div>
               <p className="reel-kicker">
                 {String(index + 1).padStart(2, "0")} / {String(PROJECTS.length).padStart(2, "0")}
-                <span> {active.cat}</span>
               </p>
               <h2 className="reel-title" key={active.id}>
-                {active.short}
+                {active.cat}
               </h2>
               <p className="reel-note">{active.note}</p>
             </div>
             <div className="reel-links">
               <a href={active.href} target="_blank" rel="noreferrer">
-                {active.host}
+                Visit the site
               </a>
               <a
                 href="#reel"
                 onClick={(event) => {
                   event.preventDefault();
-                  seedBrief(active.name);
+                  seedBrief(active.cat);
                 }}
               >
                 Start one like this

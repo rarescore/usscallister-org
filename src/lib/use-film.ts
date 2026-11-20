@@ -1,14 +1,12 @@
 import { useEffect, type RefObject } from "react";
 
-type FilmName = "hero" | "close" | "sunset" | "floor";
+type FilmName = "hero" | "close" | "floor";
 
-const HEVC = 'video/mp4; codecs="hvc1.1.6.L120.90"';
-const HERO = "/media/hero-boat.mp4?v=1";
 const HERO_M = "/media/hero-boat-m.mp4?v=1";
 
 function sourceFor(name: FilmName) {
   const test = document.createElement("video");
-  const hevc = test.canPlayType(HEVC) !== "";
+  const hevc = test.canPlayType('video/mp4; codecs="hvc1.1.6.L120.90"') !== "";
   const connection = (navigator as Navigator & {
     connection?: { saveData?: boolean; effectiveType?: string; downlink?: number };
   }).connection;
@@ -19,12 +17,8 @@ function sourceFor(name: FilmName) {
     connection?.effectiveType === "3g" ||
     (typeof connection?.downlink === "number" && connection.downlink < 1.5);
   const phone = window.matchMedia("(max-width: 800px)").matches;
-  const wide = window.matchMedia("(min-width: 1200px)").matches;
 
-  if (name === "hero") {
-    if (save || slow || phone) return HERO_M;
-    return HERO;
-  }
+  if (name === "hero") return HERO_M;
 
   if (name === "close") {
     if (phone) return "/media/close-pool-m.mp4?v=1";
@@ -32,14 +26,9 @@ function sourceFor(name: FilmName) {
     return "/media/close.mp4?v=6";
   }
 
-  if (save || slow) return `/media/${name}-m.mp4?v=3`;
-  if (hevc) {
-    if (name === "floor" && wide && !phone) return "/media/floor-4k.mp4?v=5";
-    if (name === "floor") return "/media/floor.h265.mp4?v=5";
-    return `/media/${name}.h265.mp4?v=4`;
-  }
-  if (name === "floor") return "/media/floor.mp4?v=5";
-  return phone ? `/media/${name}-m.mp4?v=3` : `/media/${name}.mp4?v=3`;
+  if (save || slow || phone) return "/media/floor-m.mp4?v=3";
+  if (hevc) return "/media/floor.h265.mp4?v=5";
+  return "/media/floor.mp4?v=5";
 }
 
 export function useFilm(videoRef: RefObject<HTMLVideoElement | null>, name: FilmName) {
