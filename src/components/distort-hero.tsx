@@ -1,15 +1,6 @@
 import { useEffect, useRef, type CSSProperties } from "react";
 import { attachBend } from "@/lib/bend-film";
-import { getLenis } from "@/lib/use-lenis";
 import "./distort-hero.css";
-
-function enterWork(event: { preventDefault: () => void }) {
-  event.preventDefault();
-  const target = document.getElementById("index");
-  const lenis = getLenis();
-  if (lenis && target) lenis.scrollTo(target);
-  else target?.scrollIntoView({ behavior: "auto" });
-}
 
 export function BendWords({ text }: { text: string }) {
   let index = 0;
@@ -117,14 +108,6 @@ export function DistortHero() {
           </h1>
         </div>
         <div className="x-hero-bottom">
-          <a className="x-explore" href="#index" onClick={enterWork}>
-            <span className="x-orbit-arrow">↙</span>
-            <span>
-              Explore the work
-              <br />
-              <small>Scroll to enter</small>
-            </span>
-          </a>
           <button ref={holdRef} className="x-distort" type="button" aria-label="Hold to distort the film">
             <span className="x-press-icon" aria-hidden="true" />
             <span>Hold to bend reality</span>
