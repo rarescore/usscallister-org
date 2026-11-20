@@ -244,10 +244,6 @@ export function DistortHero() {
           />
           <div className="x-film-shade" />
         </div>
-        <div className="x-hero-top">
-          <span>DESIGN + CODE + MOTION</span>
-          <span className="x-live-dot">Independent. Unconventional.</span>
-        </div>
         <div className="x-hero-title">
           <h1>
             <span className="bend-line">
@@ -258,6 +254,7 @@ export function DistortHero() {
             </span>
           </h1>
         </div>
+        <p className="x-build">We build websites.</p>
         <div className="x-hero-bottom">
           <button ref={holdRef} className="x-distort" type="button" aria-label="Hold to distort the film">
             <span className="x-press-icon" aria-hidden="true" />

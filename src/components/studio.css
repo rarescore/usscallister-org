@@ -577,13 +577,30 @@
 }
 .site-foot .news-form,
 .news-card .news-form {
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 10px 12px;
   margin: 0;
+  max-width: 100%;
 }
-.site-foot .news-form input,
-.news-card .news-form input {
+.news-form input.trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  min-width: 0;
+  min-height: 0;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.site-foot .news-form input:not(.trap),
+.news-card .news-form input:not(.trap) {
+  min-width: 0;
+  width: 100%;
   min-height: 48px;
   padding: 0 14px;
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -648,12 +665,16 @@
   align-items: flex-end;
   justify-content: flex-end;
   padding: 24px;
+  box-sizing: border-box;
   background: rgba(0, 0, 0, 0.28);
   pointer-events: none;
 }
 .news-card {
   position: relative;
-  width: min(420px, 100%);
+  width: min(380px, calc(100vw - 48px));
+  max-width: calc(100vw - 48px);
+  box-sizing: border-box;
+  overflow: hidden;
   padding: 28px 26px 22px;
   background: #f6f3ec;
   color: #161616;

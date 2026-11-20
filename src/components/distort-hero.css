@@ -208,7 +208,9 @@
 .studio-home:has(.is-pressed) .x-edge-label,
 .studio-home:has(.is-live) .x-edge-label,
 .studio-home:has(.is-pressed) .x-film-pause,
-.studio-home:has(.is-live) .x-film-pause {
+.studio-home:has(.is-live) .x-film-pause,
+.studio-home:has(.is-pressed) .x-build,
+.studio-home:has(.is-live) .x-build {
   animation: none;
   opacity: 0;
   visibility: hidden;
@@ -248,6 +250,21 @@
 @keyframes ch-wave {
   0%, 100% { transform: translateY(0) rotate(0); }
   50% { transform: translateY(-0.18em) rotate(-3deg); }
+}
+.distort-hero .x-build {
+  position: absolute;
+  z-index: 5;
+  left: 28px;
+  bottom: 36px;
+  margin: 0;
+  max-width: 8em;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 500;
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  color: #efe6dd;
+  pointer-events: none;
 }
 .distort-hero .x-hero-bottom {
   position: absolute;

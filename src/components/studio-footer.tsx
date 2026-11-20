@@ -3,6 +3,7 @@ import { sendStudioNote } from "@/lib/send-note";
 import { TEXT_US } from "@/lib/text-us";
 
 const HIDE_KEY = "uss-news-hide";
+const START_KEY = "uss-news-start";
 
 const LINKS = [
   { href: "/#home", label: "Home" },
@@ -90,19 +91,17 @@ export function StudioFooter() {
     } catch {
       return;
     }
-    const show = () => setOpen(true);
-    const footer = document.querySelector(".site-foot-legal");
-    if (!footer) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        observer.disconnect();
-        show();
-      },
-      { threshold: 0.8 },
-    );
-    observer.observe(footer);
-    return () => observer.disconnect();
+    let start = Date.now();
+    try {
+      const saved = sessionStorage.getItem(START_KEY);
+      if (saved) start = Number(saved) || start;
+      else sessionStorage.setItem(START_KEY, String(start));
+    } catch {
+      /* session storage can be blocked */
+    }
+    const wait = Math.max(0, 60_000 - (Date.now() - start));
+    const timer = window.setTimeout(() => setOpen(true), wait);
+    return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
