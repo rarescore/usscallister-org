@@ -260,6 +260,7 @@ export function StudioPage() {
       </div>
       <form className={away ? "lead-card is-away" : "lead-card"} onSubmit={onLead}>
           <input className="trap" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+          <p className="lead-kicker">Inquiry</p>
           <label>
             Name
             <input name="name" type="text" autoComplete="name" required />
@@ -276,7 +277,10 @@ export function StudioPage() {
             Email
             <input name="email" type="email" autoComplete="email" required />
           </label>
-          <button type="submit">Send</button>
+          <button type="submit">
+            <span aria-hidden="true" />
+            Send
+          </button>
           {leadNote ? <p className="lead-note">{leadNote}</p> : null}
         </form>
 
