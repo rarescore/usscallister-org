@@ -49,6 +49,9 @@ export function useFilm(videoRef: RefObject<HTMLVideoElement | null>, name: Film
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let started = false;
+    let retry = 0;
+    let kick = () => {};
+    const onGesture = () => kick();
     const start = () => {
       if (started) return;
       started = true;
@@ -60,19 +63,34 @@ export function useFilm(videoRef: RefObject<HTMLVideoElement | null>, name: Film
           })()
         : "";
       if (current !== next) video.src = next;
-      if (name === "close" && window.matchMedia("(max-width: 800px)").matches) {
+      const phone = window.matchMedia("(max-width: 800px)").matches;
+      if (name === "close" && phone) {
         video.poster = "/media/close-pool-poster.jpg?v=1";
       }
       video.muted = true;
       video.loop = true;
+      video.playsInline = true;
       video.preload = "auto";
-      const pending = video.play();
-      if (pending) pending.catch(() => {});
+      if (name === "hero" && phone) video.playbackRate = 1.2;
+      kick = () => {
+        const pending = video.play();
+        if (pending) pending.catch(() => {});
+      };
+      kick();
+      video.addEventListener("canplay", kick);
+      video.addEventListener("loadeddata", kick);
+      window.addEventListener("pointerdown", onGesture, { once: true });
+      retry = window.setTimeout(kick, 700);
     };
 
     if (name === "hero") {
       if (window.matchMedia("(max-width: 800px)").matches) start();
-      return;
+      return () => {
+        window.clearTimeout(retry);
+        video.removeEventListener("canplay", kick);
+        video.removeEventListener("loadeddata", kick);
+        window.removeEventListener("pointerdown", onGesture);
+      };
     }
 
     const observer = new IntersectionObserver(
