@@ -225,7 +225,7 @@ export function StudioPage() {
           </h2>
         </div>
         <button ref={boatHold} className="bend-hold" type="button" aria-label="Hold to distort the film">
-          <span className="x-press-icon">◎</span>
+          <span className="x-press-icon" aria-hidden="true" />
           <span>Hold to bend reality</span>
         </button>
         <div className="hero-mark">

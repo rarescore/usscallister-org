@@ -126,7 +126,7 @@ export function DistortHero() {
             </span>
           </a>
           <button ref={holdRef} className="x-distort" type="button" aria-label="Hold to distort the film">
-            <span className="x-press-icon">◎</span>
+            <span className="x-press-icon" aria-hidden="true" />
             <span>Hold to bend reality</span>
           </button>
           <button ref={pauseRef} className="x-film-pause" type="button" aria-label="Pause background film">

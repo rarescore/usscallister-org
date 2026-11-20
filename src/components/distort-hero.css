@@ -243,26 +243,35 @@
 }
 .distort-hero .x-explore:hover .x-orbit-arrow { transform: rotate(-45deg); }
 .distort-hero .x-distort {
-  border: 1px solid #ffffff66;
-  border-radius: 40px;
-  background: #ffffff12;
-  backdrop-filter: blur(12px);
-  padding: 13px 20px;
+  border: 0;
+  border-radius: 0;
+  background: #111;
+  color: #efe6dd;
+  padding: 0 22px 0 0;
+  height: 54px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   touch-action: none;
   user-select: none;
   font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
-.distort-hero .x-press-icon { font: 26px Arial, sans-serif; }
+.distort-hero .x-press-icon,
+.hero .x-press-icon {
+  width: 54px;
+  height: 54px;
+  background: #9a0002;
+  flex: none;
+}
 .distort-hero .is-pressed .x-distort {
   background: #9a0002;
   color: #efe6dd;
-  border-color: #efe6dd;
-  transform: scale(1.14);
-  box-shadow: 0 0 0 8px rgba(154, 0, 2, 0.45), 0 18px 40px rgba(0, 0, 0, 0.45);
+  transform: scale(1.06);
+  box-shadow: 12px 12px 0 #000;
 }
+.distort-hero .is-pressed .x-press-icon { background: #efe6dd; }
 .distort-hero .is-pressed .x-film-shade {
   background: rgba(0, 0, 0, 0.42);
 }
@@ -297,26 +306,28 @@
     left: 50%;
     bottom: 108px;
     transform: translateX(-50%);
-    border: 1px solid #ffffff66;
-    border-radius: 40px;
-    background: #ffffff12;
-    backdrop-filter: blur(12px);
-    padding: 10px 14px;
+    border: 0;
+    border-radius: 0;
+    background: #111;
+    color: #efe6dd;
+    height: 44px;
+    padding: 0 14px 0 0;
     align-items: center;
-    gap: 8px;
-    color: #fff;
+    gap: 10px;
     font-size: 10px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     white-space: nowrap;
     touch-action: none;
   }
+  .hero .bend-hold .x-press-icon { width: 44px; height: 44px; }
   .hero.is-pressed .bend-hold {
     background: #9a0002;
     color: #efe6dd;
-    border-color: #efe6dd;
-    transform: translateX(-50%) scale(1.08);
-    box-shadow: 0 0 0 7px rgba(154, 0, 2, 0.4);
+    transform: translateX(-50%) scale(1.04);
+    box-shadow: 8px 8px 0 #000;
   }
+  .hero.is-pressed .bend-hold .x-press-icon { background: #efe6dd; }
   .hero.is-pressed .hero-shade {
     background: rgba(0, 0, 0, 0.45);
   }
