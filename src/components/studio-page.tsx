@@ -88,8 +88,9 @@ export function StudioPage() {
 
   async function onLead(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = event.currentTarget;
     playOpen();
-    const data = new FormData(event.currentTarget);
+    const data = new FormData(form);
     const name = String(data.get("name") || "").trim();
     const email = String(data.get("email") || "").trim();
     const phone = String(data.get("phone") || "").trim();
@@ -110,7 +111,7 @@ export function StudioPage() {
         trap,
       });
       setLeadNote("Message has been sent.");
-      event.currentTarget.reset();
+      form.reset();
     } catch {
       setLeadNote("Could not send. Write to usscallisterllc@gmail.com.");
     }
