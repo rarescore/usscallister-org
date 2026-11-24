@@ -33,10 +33,13 @@ export function EnterReel({ formNote, onSubmit }: EnterReelProps) {
       const width = t >= 0.985 ? 0 : 100 * (1 - t);
       root.style.setProperty("--gap", width.toFixed(2));
       const band = (width / 100) * window.innerWidth;
-      const writing = (copy?.offsetWidth ?? 420) + 28;
-      root.classList.toggle("is-lit", band < writing);
-      const onStage = rect.top < window.innerHeight * 0.2 && rect.bottom > 80;
-      document.body.classList.toggle("close-live", onStage && !reduced.matches);
+      const title = copy?.querySelector("h2");
+      const titleWidth = title?.getBoundingClientRect().width ?? 260;
+      root.classList.toggle("is-lit", band < Math.min(72, titleWidth * 0.34));
+      const phone = window.matchMedia("(max-width: 800px)").matches;
+      const onStage = rect.top < window.innerHeight * 0.85 && rect.bottom > 80;
+      document.body.classList.toggle("close-stage", onStage);
+      document.body.classList.toggle("close-live", onStage && !reduced.matches && !phone);
     };
 
     apply();
@@ -52,6 +55,7 @@ export function EnterReel({ formNote, onSubmit }: EnterReelProps) {
       lenis?.off("scroll", onScroll);
       reduced.removeEventListener("change", apply);
       document.body.classList.remove("close-live");
+      document.body.classList.remove("close-stage");
     };
   }, []);
 

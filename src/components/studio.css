@@ -39,7 +39,7 @@
 .sketch-label{--p:clamp(0,(var(--write) - var(--start,0)) / var(--span,1),1);font-family:"Caveat",cursive;font-size:28px;fill:currentColor;opacity:var(--p)}
 
 @media (max-width: 800px) {
-  html, body { overflow-x: hidden; }
+  html, body { overflow-x: clip; }
   .hero { height: 100dvh; min-height: 100dvh; }
   .panel {
     width: min(248px, calc(100vw - 48px));
@@ -744,10 +744,19 @@
     overflow: visible;
     align-items: stretch;
   }
-  .close-pin { height: 100dvh; }
-  .close-center { gap: 18px; width: min(100% - 32px, 520px); }
-  .close-copy h2 { font-size: 68px; }
-  .close-form textarea { min-height: 64px; }
+  .close-pin { height: 100dvh; overflow: hidden; }
+  .close-center {
+    gap: 12px;
+    width: min(100% - 28px, 520px);
+    justify-content: center;
+    padding: 18px 0 12px;
+  }
+  .close-copy h2 { font-size: 58px; }
+  .close-lead { margin-top: 8px; font-size: 15px; }
+  .close-form { gap: 8px; }
+  .close-form input,
+  .close-form textarea { padding: 9px 10px; }
+  .close-form textarea { min-height: 52px; }
   .close-row { grid-template-columns: 1fr; }
   .site-foot-grid,
   .site-foot-news { grid-template-columns: 1fr; }
@@ -1711,12 +1720,14 @@
   opacity: 0;
   pointer-events: none;
 }
-.panel.is-away {
-  animation: none;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translateY(calc(-50% + 16px));
+@media (min-width: 801px) {
+  .panel.is-away {
+    animation: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(calc(-50% + 16px));
+  }
 }
 body.close-live .panel,
 body.close-live .lead-card {
@@ -1913,6 +1924,22 @@ body.close-live .lead-card {
     border-radius: 0;
     box-shadow: none;
     background: transparent;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    animation: none;
+  }
+
+  body.close-stage .menu-toggle {
+    color: #111;
+    border-color: rgba(17, 17, 17, 0.45);
+    background: rgba(239, 230, 221, 0.92);
+  }
+
+  body.close-stage:has(.close.is-lit) .menu-toggle {
+    color: #efe6dd;
+    border-color: rgba(239, 230, 221, 0.75);
+    background: rgba(0, 0, 0, 0.28);
   }
 
   .panel:not(.is-menu) .panel-top,
