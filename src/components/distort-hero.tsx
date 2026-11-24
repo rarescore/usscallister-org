@@ -178,11 +178,20 @@ export function DistortHero() {
     const film = hero?.querySelector(".x-film");
     if (!hero || !video || !hold || !pause || !(film instanceof HTMLElement)) return;
 
+    const narrow = window.matchMedia("(max-width: 800px)");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     let userPaused = reduced.matches;
     const play = () => {
+      if (narrow.matches || reduced.matches) return;
       if (!video.getAttribute("src")) video.src = "/media/distort-hero.mp4";
       void video.play().catch(() => {});
+    };
+    const silence = () => {
+      video.pause();
+      if (video.getAttribute("src")) {
+        video.removeAttribute("src");
+        video.load();
+      }
     };
     const onPlay = () => {
       pause.textContent = "Pause film Ⅱ";
@@ -198,8 +207,13 @@ export function DistortHero() {
       else video.pause();
     };
     const onVisible = () => {
+      if (narrow.matches) return;
       if (document.hidden) video.pause();
       else if (!userPaused && !reduced.matches) play();
+    };
+    const onMode = () => {
+      if (narrow.matches) silence();
+      else if (!userPaused) play();
     };
 
     video.muted = true;
@@ -209,7 +223,9 @@ export function DistortHero() {
     video.addEventListener("pause", onPause);
     pause.addEventListener("click", onPauseClick);
     document.addEventListener("visibilitychange", onVisible);
-    if (!reduced.matches) play();
+    narrow.addEventListener("change", onMode);
+    if (narrow.matches) silence();
+    else if (!reduced.matches) play();
     else pause.textContent = "Play film ▷";
     const stopBend = attachBend({ video, parent: film, track: hero, hold });
     const stopScatter = bindScatter(hero.querySelector(".x-hero-title"), hero);
@@ -226,6 +242,7 @@ export function DistortHero() {
       video.removeEventListener("pause", onPause);
       pause.removeEventListener("click", onPauseClick);
       document.removeEventListener("visibilitychange", onVisible);
+      narrow.removeEventListener("change", onMode);
     };
   }, []);
 
