@@ -1,12 +1,10 @@
 import { useEffect, type RefObject } from "react";
 
-type FilmName = "hero" | "close" | "floor";
+type FilmName = "hero" | "close";
 
 const HERO_M = "/media/hero-boat-m.mp4?v=1";
 
 function sourceFor(name: FilmName) {
-  const test = document.createElement("video");
-  const hevc = test.canPlayType('video/mp4; codecs="hvc1.1.6.L120.90"') !== "";
   const connection = (navigator as Navigator & {
     connection?: { saveData?: boolean; effectiveType?: string; downlink?: number };
   }).connection;
@@ -19,16 +17,9 @@ function sourceFor(name: FilmName) {
   const phone = window.matchMedia("(max-width: 800px)").matches;
 
   if (name === "hero") return HERO_M;
-
-  if (name === "close") {
-    if (phone) return "/media/close-pool-m.mp4?v=1";
-    if (save || slow) return "/media/close-m.mp4?v=6";
-    return "/media/close.mp4?v=6";
-  }
-
-  if (save || slow || phone) return "/media/floor-m.mp4?v=3";
-  if (hevc) return "/media/floor.h265.mp4?v=5";
-  return "/media/floor.mp4?v=5";
+  if (phone) return "/media/close-pool-m.mp4?v=1";
+  if (save || slow) return "/media/close-m.mp4?v=6";
+  return "/media/close.mp4?v=6";
 }
 
 export function useFilm(videoRef: RefObject<HTMLVideoElement | null>, name: FilmName) {

@@ -13,7 +13,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as InfoRouteImport } from './routes/info'
-import { Route as LandingRouteImport } from './routes/landing'
 import { Route as NewsletterRouteImport } from './routes/newsletter'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
@@ -47,11 +46,6 @@ const ContactRoute = ContactRouteImport.update({
 const InfoRoute = InfoRouteImport.update({
   id: '/info',
   path: '/info',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LandingRoute = LandingRouteImport.update({
-  id: '/landing',
-  path: '/landing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsletterRoute = NewsletterRouteImport.update({
@@ -132,7 +126,6 @@ export interface FileRoutesByFullPath {
   '/$': typeof SplatRoute
   '/contact': typeof ContactRoute
   '/info': typeof InfoRoute
-  '/landing': typeof LandingRoute
   '/newsletter': typeof NewsletterRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
@@ -153,7 +146,6 @@ export interface FileRoutesByTo {
   '/$': typeof SplatRoute
   '/contact': typeof ContactRoute
   '/info': typeof InfoRoute
-  '/landing': typeof LandingRoute
   '/newsletter': typeof NewsletterRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
@@ -175,7 +167,6 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/contact': typeof ContactRoute
   '/info': typeof InfoRoute
-  '/landing': typeof LandingRoute
   '/newsletter': typeof NewsletterRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
@@ -198,7 +189,6 @@ export interface FileRouteTypes {
     | '/$'
     | '/contact'
     | '/info'
-    | '/landing'
     | '/newsletter'
     | '/privacy'
     | '/terms'
@@ -219,7 +209,6 @@ export interface FileRouteTypes {
     | '/$'
     | '/contact'
     | '/info'
-    | '/landing'
     | '/newsletter'
     | '/privacy'
     | '/terms'
@@ -240,7 +229,6 @@ export interface FileRouteTypes {
     | '/$'
     | '/contact'
     | '/info'
-    | '/landing'
     | '/newsletter'
     | '/privacy'
     | '/terms'
@@ -262,7 +250,6 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   ContactRoute: typeof ContactRoute
   InfoRoute: typeof InfoRoute
-  LandingRoute: typeof LandingRoute
   NewsletterRoute: typeof NewsletterRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
@@ -307,13 +294,6 @@ declare module '@tanstack/react-router' {
       path: '/info'
       fullPath: '/info'
       preLoaderRoute: typeof InfoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/landing': {
-      id: '/landing'
-      path: '/landing'
-      fullPath: '/landing'
-      preLoaderRoute: typeof LandingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/newsletter': {
@@ -422,7 +402,6 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   ContactRoute: ContactRoute,
   InfoRoute: InfoRoute,
-  LandingRoute: LandingRoute,
   NewsletterRoute: NewsletterRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
