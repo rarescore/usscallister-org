@@ -920,8 +920,21 @@
   color: #fff;
 }
 
-.close-form .form-note a {
-  color: inherit;
+.close-form .form-note a.text-us {
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 2px;
+  padding: 0 22px;
+  border: 0;
+  background: #9a0002;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+}
+.close-form .form-note a.text-us:hover {
+  background: #111;
+  color: #efe6dd;
 }
 
 .hero-drift {
